@@ -222,6 +222,10 @@ provision:
        echo "vm.min_free_kbytes=65536" >> /etc/sysctl.d/99-extra.conf
        echo "vm.vfs_cache_pressure=90" >> /etc/sysctl.d/99-extra.conf
        sysctl --system
+  - mode: user
+    script: |
+       docker buildx create --name multiarch --driver docker-container --use
+       docker buildx inspect --bootstrap
 
 # Modify ~/.ssh/config automatically to include a SSH config for the virtual machine.
 # SSH config will still be generated in $COLIMA_HOME/ssh_config regardless.
