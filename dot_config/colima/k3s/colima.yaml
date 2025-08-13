@@ -221,6 +221,7 @@ provision:
        echo "vm.dirty_writeback_centisecs=300" >> /etc/sysctl.d/99-extra.conf
        echo "vm.min_free_kbytes=65536" >> /etc/sysctl.d/99-extra.conf
        echo "vm.vfs_cache_pressure=90" >> /etc/sysctl.d/99-extra.conf
+       sysctl --system
 
 # Modify ~/.ssh/config automatically to include a SSH config for the virtual machine.
 # SSH config will still be generated in $COLIMA_HOME/ssh_config regardless.
