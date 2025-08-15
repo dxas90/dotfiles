@@ -100,9 +100,24 @@ new_lab() {
 
 mylab() {
   mkdir -p ~/C0D3/Python
-  cd ~/C0D3/Python
+  cd ~/C0D3/Python || return
+  # Save current directory to restore later
+  local old_dir="$OLDPWD"
+  # Define a cleanup function for CTRL+C
+  cleanup() {
+    echo "Returning to $old_dir"
+    cd "$old_dir" || exit
+  }
+  # Set trap for SIGINT (CTRL+C)
+  trap cleanup INT
+  # Run your extra function
   new_lab
+  # Cleanup even if exited normally
+  cleanup
+  # Remove trap so it doesn't affect the rest of the shell
+  trap - INT
 }
+
 
 xlab() {
   if [ -f ~/C0D3/Python/.venv/bin/activate ]; then
