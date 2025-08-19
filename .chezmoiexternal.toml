@@ -353,5 +353,10 @@ url = "https://github.com/pyenv/pyenv.git"
 {{ $vaultVersion := trimPrefix "v" $vaultVersionRaw }}
   url = 'https://releases.hashicorp.com/vault/{{ $vaultVersion }}/vault_{{ $vaultVersion }}_{{ .chezmoi.os }}_{{ .chezmoi.arch }}.zip'
   path = "vault"
-
+{{ if eq .chezmoi.os "linux" -}}
+[".local/opt"]
+  type = "archive"
+  url = "https://code.visualstudio.com/sha/download?build=stable&os=linux-x64"
+  exact = false
+{{ end -}}
 # ex: ts=4 sw=4 et filetype=toml
