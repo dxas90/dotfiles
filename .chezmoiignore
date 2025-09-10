@@ -6,6 +6,7 @@ LICENSE
 test/
 login-with-password-manager
 Brewfile
+renovate.json
 # https://www.chezmoi.io/user-guide/manage-machine-to-machine-differences/#use-completely-different-dotfiles-on-different-machines
 {{ if ne .chezmoi.os "darwin" -}}
 private_Library/*
