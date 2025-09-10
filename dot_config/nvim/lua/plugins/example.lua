@@ -42,7 +42,7 @@ if true then
       end)
     end,
   },
-  { "YannickFricke/codestats.nvim" },
+  { "Freed-Wu/code-stats.nvim", lazy = true },
   { "nvim-lua/plenary.nvim", lazy = true },
   {
     "glepnir/template.nvim",
