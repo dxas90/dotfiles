@@ -1,5 +1,21 @@
 {
-  "extends": ["config:base"],
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":automergeAll"
+  ],
+  "dependencyDashboard": true,
+  "dependencyDashboardTitle": "Renovate Dashboard 🤖",
+  "suppressNotifications": [
+    "prEditedNotification",
+    "prIgnoreNotification"
+  ],
+  "rebaseWhen": "conflicted",
+  "schedule": ["before 5:30am"],
+  "automerge": true,
+  "automergeType": "pr",
+  "pruneStaleBranches": true,
+
   "regexManagers": [
     {
       "fileMatch": ["(^|/)\\.chezmoidata\\.toml$"],
@@ -10,7 +26,13 @@
       "depNameTemplate": "{{depName}}"
     }
   ],
+
   "packageRules": [
+    {
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true,
+      "automergeType": "pr"
+    },
     {
       "matchPackageNames": ["go"],
       "datasource": "golang-version"
