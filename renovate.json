@@ -1,0 +1,87 @@
+{
+  "extends": ["config:base"],
+  "regexManagers": [
+    {
+      "fileMatch": ["(^|/)\\.chezmoidata\\.toml$"],
+      "matchStrings": [
+        "\\[tools\\.(?<depName>[a-zA-Z0-9_\\-]+)\\][\\s\\S]*?version\\s*=\\s*\"(?<currentValue>[^\"]+)\""
+      ],
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "{{depName}}"
+    }
+  ],
+  "packageRules": [
+    {
+      "matchPackageNames": ["go"],
+      "datasource": "golang-version"
+    },
+    {
+      "matchPackageNames": ["terraform"],
+      "datasource": "terraform-version"
+    },
+    {
+      "matchPackageNames": ["kubectl"],
+      "datasource": "github-releases",
+      "depNameTemplate": "kubernetes/kubectl"
+    },
+    {
+      "matchPackageNames": ["flux"],
+      "datasource": "github-releases",
+      "depNameTemplate": "fluxcd/flux2"
+    },
+    {
+      "matchPackageNames": ["linkerd2"],
+      "datasource": "github-releases",
+      "depNameTemplate": "linkerd/linkerd2"
+    },
+    {
+      "matchPackageNames": ["helm"],
+      "datasource": "helm"
+    },
+    {
+      "matchPackageNames": ["rclone"],
+      "datasource": "github-releases",
+      "depNameTemplate": "rclone/rclone"
+    },
+    {
+      "matchPackageNames": ["kopia"],
+      "datasource": "github-releases",
+      "depNameTemplate": "kopia/kopia"
+    },
+    {
+      "matchPackageNames": ["cloudflared"],
+      "datasource": "github-releases",
+      "depNameTemplate": "cloudflare/cloudflared"
+    },
+    {
+      "matchPackageNames": ["direnv"],
+      "datasource": "github-releases",
+      "depNameTemplate": "direnv/direnv"
+    },
+    {
+      "matchPackageNames": ["go_task"],
+      "datasource": "github-releases",
+      "depNameTemplate": "go-task/task"
+    },
+    {
+      "matchPackageNames": ["vagrant"],
+      "datasource": "github-releases",
+      "depNameTemplate": "hashicorp/vagrant"
+    },
+    {
+      "matchPackageNames": ["age"],
+      "datasource": "github-releases",
+      "depNameTemplate": "FiloSottile/age"
+    },
+    {
+      "matchPackageNames": ["bw"],
+      "datasource": "github-releases",
+      "depNameTemplate": "bitwarden/clients"
+    },
+    {
+      "matchPackageNames": ["bws"],
+      "datasource": "github-releases",
+      "depNameTemplate": "bitwarden/sdk"
+    }
+  ]
+}
