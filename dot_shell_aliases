@@ -149,4 +149,8 @@ prepend_path() {
   export PATH
 }
 
+ef() {
+  env | sort | grep -i -e $1
+}
+
 # ex: ts=4 sw=4 et filetype=sh
