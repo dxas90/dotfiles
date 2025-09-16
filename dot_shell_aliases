@@ -6,7 +6,7 @@ alias docwget='/usr/bin/wget -U "5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHT
 alias fix-ssh='killall ssh-agent; SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"; export SSH_AUTH_SOCK; ssh-agent -a $SSH_AUTH_SOCK; ssh-add'
 # alias ssh-agent='SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"; ssh-agent -a $SSH_AUTH_SOCK'
 
-fixgpu() {
+function fixgpu() {
   echo "Clearing GPU/Shader caches..."
   rm -rf ~/.config/google-chrome/GrShaderCache/* \
          ~/.config/google-chrome/ShaderCache/* \
@@ -39,7 +39,7 @@ alias new_ssh='ssh-keygen -t ed25519 -b 4096 -P "" -f '
 alias newtemp='cd $(mktemp -d)'
 alias now_='date +%Y%m%d_%H%M%S'
 alias owget='/usr/bin/wget -U "5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36" -c -k -r -nd -l 4'
-pip-upgrade-all() {
+function pip-upgrade-all() {
   pip list --outdated --format=freeze | grep -v "^\-e" | cut -d= -f1 | xargs -n1 pip install -U
 }
 alias chzrl='curl -sL https://raw.githubusercontent.com/dxas90/dotfiles/refs/heads/main/dot_local/bin/executable_custom-bw-login | bash -s -- alt ; [ -f ~/.bw_session ] && source ~/.bw_session ; chezmoi init --apply dxas90'
