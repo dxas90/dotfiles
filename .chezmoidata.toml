@@ -11,7 +11,7 @@
 [tools.age]
     version = "1.2.1"
 [tools.cloudflared]
-    version = "2025.7.0"
+    version = "2025.9.1"
 [tools.go_task]
     version = "3.41.0"
 [tools.vagrant]
