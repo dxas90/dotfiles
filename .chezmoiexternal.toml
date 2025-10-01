@@ -134,7 +134,11 @@
   executable = true
 [".local/bin/mise"]
   type = "file"
+{{ if eq .chezmoi.os "darwin" -}}
+  url = '{{ gitHubLatestReleaseAssetURL "jdx/mise" (printf "mise-*-macos-%s" .chezmoi.arch ) }}'
+{{ else if eq .chezmoi.os "linux" -}}
   url = '{{ gitHubLatestReleaseAssetURL "jdx/mise" (printf "mise-*-%s-%s" .chezmoi.os .chezmoi.arch ) }}'
+{{ end -}}
   executable = true
 {{ if eq .chezmoi.os "linux" -}}
 [".local/bin/rclone"]
