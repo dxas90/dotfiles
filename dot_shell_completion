@@ -7,6 +7,8 @@ type task >/dev/null 2>&1 && eval "$(task --completion $MY_SHELL)"
 # type uv >/dev/null 2>&1 && eval "$(uv generate-shell-completion $MY_SHELL)"
 # type uvx >/dev/null 2>&1 && eval "$(uvx generate-shell-completion $MY_SHELL)"
 
+type mise >/dev/null 2>&1 && eval "$(mise activate $MY_SHELL)"
+
 # Detect shell
 if [ -n "$ZSH_VERSION" ]; then
   # --- Zsh-specific completion setup ---
