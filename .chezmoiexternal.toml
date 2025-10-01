@@ -132,12 +132,11 @@
   type = "file"
   url = '{{ gitHubLatestReleaseAssetURL "mikefarah/yq" (printf "yq_%s_%s*" .chezmoi.os .chezmoi.arch ) }}'
   executable = true
-{{ if eq .chezmoi.os "linux" -}}
-[".local/bin/vagrant"]
-  type = "archive-file"
-  url = "https://releases.hashicorp.com/vagrant/{{ .tools.vagrant.version }}/vagrant_{{ .tools.vagrant.version }}_{{ .chezmoi.os }}_{{ .chezmoi.arch }}.zip"
-  path = "vagrant"
+[".local/bin/mise"]
+  type = "file"
+  url = '{{ gitHubLatestReleaseAssetURL "jdx/mise" (printf "mise-*-%s-%s" .chezmoi.os .chezmoi.arch ) }}'
   executable = true
+{{ if eq .chezmoi.os "linux" -}}
 [".local/bin/rclone"]
   type = "archive-file"
   url = "https://downloads.rclone.org/v{{ .tools.rclone.version }}/rclone-v{{ .tools.rclone.version }}-{{ .chezmoi.os }}-{{ .chezmoi.arch }}.zip"
