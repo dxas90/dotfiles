@@ -222,6 +222,8 @@ provision:
        echo "vm.min_free_kbytes=65536" >> /etc/sysctl.d/99-extra.conf
        echo "vm.vfs_cache_pressure=90" >> /etc/sysctl.d/99-extra.conf
        sysctl --system
+       modprobe br_netfilter
+       modprobe overlay
   - mode: user
     script: |
        docker buildx create --name multiarch --driver docker-container --use
