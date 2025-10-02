@@ -362,4 +362,8 @@ url = "https://github.com/pyenv/pyenv.git"
   url = "https://code.visualstudio.com/sha/download?build=stable&os=linux-x64"
   exact = false
 {{ end -}}
+[".local/bin/talosctl"]
+  type = "file"
+  executable = true
+  url = '{{ gitHubLatestReleaseAssetURL "siderolabs/talos" (printf "talosctl-%s-%s" .chezmoi.os .chezmoi.arch) }}'
 # ex: ts=4 sw=4 et filetype=toml
