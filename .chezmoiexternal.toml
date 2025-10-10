@@ -366,4 +366,7 @@ url = "https://github.com/pyenv/pyenv.git"
   type = "file"
   executable = true
   url = '{{ gitHubLatestReleaseAssetURL "siderolabs/talos" (printf "talosctl-%s-%s" .chezmoi.os .chezmoi.arch) }}'
+[".config/git/alias"]
+  type = "file"
+  url = "https://raw.githubusercontent.com/GitAlias/gitalias/main/gitalias.txt"
 # ex: ts=4 sw=4 et filetype=toml
