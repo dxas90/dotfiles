@@ -20,6 +20,8 @@
   pln-release = "!'f() { git log '$1' --format=format:'%aE * [ ] %C(auto)%h %Creset%s' | sed 's/[0-9]\\{6,\\}+//g' | sed 's/users.noreply.github.com/quickbase.com/g' | sort | python3 ~/bin/email_sort.py; }; f'"
   ps = "!git push origin $(git rev-parse --abbrev-ref HEAD)"
   st = "status"
+[include]
+  path = alias
 
 [branch]
   autosetuprebase = "always"
