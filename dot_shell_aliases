@@ -150,14 +150,14 @@ xlab() {
 
 new_kustomize() {
   xlab
-  $UV_IS_HERE pip install pipx
-  pipx run cookiecutter gh:dxas90/cookiecutter-templates --directory=k8s/kustomize $@
+  $UV_IS_HERE pip install pipx cookiecutter
+  cookiecutter gh:dxas90/cookiecutter-templates --directory=k8s/kustomize $@
 }
 
 new_helm_chart() {
   xlab
-  $UV_IS_HERE pip install pipx
-  pipx run cookiecutter gh:dxas90/cookiecutter-templates --directory=k8s/chart $@
+  $UV_IS_HERE pip install pipx cookiecutter
+  cookiecutter gh:dxas90/cookiecutter-templates --directory=k8s/chart $@
 }
 
 new_ansible_role() {
