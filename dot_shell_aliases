@@ -137,7 +137,6 @@ mylab() {
   trap - INT
 }
 
-
 xlab() {
   if [ -f ~/C0D3/Python/.venv/bin/activate ]; then
     source ~/C0D3/Python/.venv/bin/activate
@@ -147,6 +146,18 @@ xlab() {
     new_venv
     cd -
   fi
+}
+
+new_helm_chart() {
+  xlab
+  $UV_IS_HERE pip install pipx
+  pipx run cookiecutter gh:dxas90/cookiecutter-templates --directory=k8s/kustomize $@
+}
+
+new_kustomize() {
+  xlab
+  $UV_IS_HERE pip install pipx
+  pipx run cookiecutter gh:dxas90/cookiecutter-templates --directory=k8s/chart $@
 }
 
 new_ansible_role() {
