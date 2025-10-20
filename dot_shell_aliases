@@ -113,7 +113,7 @@ new_venv() {
 
 new_lab() {
   new_venv &&
-    $UV_IS_HERE pip install -U numpy pandas matplotlib scikit-learn requests jupyterlab &&
+    $UV_IS_HERE pip install -U numpy pandas matplotlib scikit-learn requests pipx jupyterlab &&
     jupyter lab --browser any
 }
 
@@ -149,15 +149,21 @@ xlab() {
 }
 
 new_kustomize() {
-  xlab
-  $UV_IS_HERE pip install pipx cookiecutter
-  cookiecutter gh:dxas90/cookiecutter-templates --directory=k8s/kustomize $@
+  cookie gh:dxas90/cookiecutter-templates --directory=k8s/kustomize $@
 }
 
 new_helm_chart() {
+  cookie gh:dxas90/cookiecutter-templates --directory=k8s/chart $@
+}
+
+cookie() {
   xlab
-  $UV_IS_HERE pip install pipx cookiecutter
-  cookiecutter gh:dxas90/cookiecutter-templates --directory=k8s/chart $@
+  if command -v cookiecutter >/dev/null 2>&1; then
+    cookiecutter "$@"
+  else
+    echo "cookiecutter not found — installing temporarily..."
+    $UV_IS_HERE pip install cookiecutter && cookiecutter "$@"
+  fi
 }
 
 new_ansible_role() {
