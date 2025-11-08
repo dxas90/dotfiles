@@ -1,0 +1,25 @@
+[tools]
+age = "latest"
+chezmoi = "latest"
+python = { version='3' }
+sops = "latest"
+uv = "latest"
+
+[settings]
+experimental = true
+python.uv_venv_auto = true
+
+[env]
+# Use the project name derived from the current directory
+PROJECT_NAME = "{{ config_root | basename }}"
+
+# Automatic virtualenv activation
+_.python.venv = { path = "/tmp/.venv-{{ env.PROJECT_NAME }}" , create = true }
+LC_ALL = "en_US.UTF-8"
+LC_CTYPE = "en_US.UTF-8"
+
+[tasks."ca"]
+description = "Apply chezmoi configuration"
+run = [
+    "chezmoi apply"
+]

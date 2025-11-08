@@ -181,7 +181,7 @@
 
 [".local/bin/flux"]
   type = "archive-file"
-  url = "https://github.com/fluxcd/flux2/releases/download/v{{ .tools.flux.version }}/flux_{{ .tools.flux.version }}_{{ .chezmoi.os }}_{{ .chezmoi.arch }}.tar.gz"
+  url = '{{ gitHubLatestReleaseAssetURL "fluxcd/flux2" (printf "flux_*_%s_%s.tar.gz" .chezmoi.os .chezmoi.arch) }}'
   path = "flux"
   executable = true
 [".local/bin/bat"]
@@ -307,19 +307,8 @@
   url = "https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-x86_64.tar.gz"
 {{ end -}}
 [".pyenv"]
-type = "git-repo"
-url = "https://github.com/pyenv/pyenv.git"
-[".local/bin/k6"]
-  type = "archive-file"
-  executable = true
-{{ $k6sVersion := (gitHubLatestRelease "grafana/k6").TagName }}
-{{ if eq .chezmoi.os "darwin" -}}
-  url = '{{ gitHubLatestReleaseAssetURL "grafana/k6" (printf "k6-*-macos-%s.zip" .chezmoi.arch) }}'
-  path = "k6-{{ $k6sVersion }}-macos-{{ .chezmoi.arch }}/k6"
-{{ else if eq .chezmoi.os "linux" -}}
-  url = '{{ gitHubLatestReleaseAssetURL "grafana/k6" (printf "k6-*-%s-%s.tar.gz" .chezmoi.os .chezmoi.arch) }}'
-  path = "k6-{{ $k6sVersion }}-{{ .chezmoi.os }}-{{ .chezmoi.arch }}/k6"
-{{ end -}}
+  type = "git-repo"
+  url = "https://github.com/pyenv/pyenv.git"
 [".local/bin/kubectl-krew"]
   type = "archive-file"
   executable = true

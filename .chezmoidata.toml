@@ -6,8 +6,6 @@
     version = "2.32.3"
 [tools.kubectl]
     version = "1.33.2"
-[tools.flux]
-    version = "2.4.0"
 [tools.age]
     version = "1.2.1"
 [tools.cloudflared]
