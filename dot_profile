@@ -49,6 +49,7 @@ export GS_OPTIONS="-sPAPERSIZE=a4"
 export MY_SHELL="$(ps -p $$ -o comm= | sed 's/^-//')" # old only linux basename $(readlink /proc/$$/exe)
 export TMUX_TMPDIR="${XDG_RUNTIME_DIR:-"/run/user/$(id -u)"}"
 export PYENV_ROOT="$HOME/.pyenv"
+export UV_VENV_CLEAR=1
 
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 [[ -d /opt/homebrew/bin ]] && export PATH="/opt/homebrew/bin:$PATH"
