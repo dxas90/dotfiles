@@ -3,6 +3,7 @@ key.txt.age
 .github/*
 *.md
 LICENSE
+mise.toml
 test/
 login-with-password-manager
 Brewfile
