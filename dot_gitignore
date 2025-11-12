@@ -477,7 +477,7 @@ gradle-app.setting
 /.config
 /coverage/
 /InstalledFiles
-/pkg/
+# /pkg/ #common used in go and python
 /spec/reports/
 /spec/examples.txt
 /test/tmp/
