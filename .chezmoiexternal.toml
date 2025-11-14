@@ -346,10 +346,29 @@
   url = 'https://releases.hashicorp.com/vault/{{ $vaultVersion }}/vault_{{ $vaultVersion }}_{{ .chezmoi.os }}_{{ .chezmoi.arch }}.zip'
   path = "vault"
 {{ if eq .chezmoi.os "linux" -}}
-[".local/opt"]
+[".local/opt/VSCode-linux-x64"]
   type = "archive"
+  stripComponents = 1
   url = "https://code.visualstudio.com/sha/download?build=stable&os=linux-x64"
   exact = false
+# [".local/opt/podman-desktop"]
+#   type = "archive"
+#   stripComponents = 1
+#   url = '{{ $release := gitHubLatestRelease "podman-desktop/podman-desktop" }}{{ range $release.Assets }}{{ if regexMatch "^podman-desktop-[0-9.]+\\.tar\\.gz$" .Name }}{{ .BrowserDownloadURL }}{{ end }}{{ end }}'
+#   exact = false
+# [".local/bin/podman"]
+#     type = "archive-file"
+#     executable = true
+#     path = "bin/podman-remote-static-linux_amd64"
+#     url = {{ gitHubLatestReleaseAssetURL "containers/podman" "podman-remote-static-linux_amd64.tar.gz" | quote }}
+# [".local/bin/gvproxy"]
+#   type = "file"
+#   executable = true
+#   url = '{{ gitHubLatestReleaseAssetURL "containers/gvisor-tap-vsock" (printf "gvproxy-%s-%s" .chezmoi.os .chezmoi.arch) }}'
+# [".local/bin/virtiofsd"]
+#   type = "archive-file"
+#   url = 'https://gitlab.com/virtio-fs/virtiofsd/-/jobs/artifacts/main/download?job=publish'
+#   path = "target/x86_64-unknown-{{ .chezmoi.os }}-musl/release/virtiofsd"
 {{ end -}}
 [".local/bin/talosctl"]
   type = "file"
