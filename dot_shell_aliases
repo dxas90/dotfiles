@@ -158,6 +158,10 @@ new_helm_chart() {
   cookie gh:dxas90/cookiecutter-templates --directory=k8s/chart $@
 }
 
+new_godot_project() {
+  mkdir -p {scenes,scripts,assets/{sprites,tiles,ui,audio},levels,addons,exports}
+}
+
 cookie() {
   xlab
   if command -v cookiecutter >/dev/null 2>&1; then
