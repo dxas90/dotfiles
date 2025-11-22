@@ -158,8 +158,12 @@ new_helm_chart() {
   cookie gh:dxas90/cookiecutter-templates --directory=k8s/chart $@
 }
 
-new_godot_project() {
+new_godot_standard_project() {
   mkdir -p {scenes,scripts,assets/{sprites,tiles,ui,audio},levels,addons,exports}
+}
+
+new_godot_feature_project() {
+  mkdir -p {features/{player,enemy,levels/ui,levels/maps},core/{input,utils},assets/{sprites,tiles,ui,audio},addons,exports}
 }
 
 cookie() {
