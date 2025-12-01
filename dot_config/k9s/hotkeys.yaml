@@ -1,0 +1,31 @@
+# https://k9scli.io/topics/hotkeys/
+hotKeys:
+  # Hitting Shift-0 navigates to your pods
+  shift-0:
+    shortCut:    Shift-0
+    description: Viewing pods
+    command:     pods
+
+  # Hitting Shift-1 navigates to your deployments
+  shift-1:
+    shortCut:    Shift-1
+    description: View deployments
+    command:     dp
+
+  # Hitting Shift-2 navigates to your services
+  shift-2:
+    shortCut:    Shift-2
+    description: View services
+    command:     svc
+
+  # Hitting Shift-3 navigates secret resources
+  shift-3:
+    shortCut:    Shift-3
+    description: View secrets
+    command:     sec
+
+  # Hitting Shift-4 navigates to your configmaps
+  shift-4:
+    shortCut:    Shift-4
+    description: View configmaps
+    command:     cm

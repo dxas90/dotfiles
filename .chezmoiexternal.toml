@@ -377,4 +377,9 @@
 [".config/git/alias"]
   type = "file"
   url = "https://raw.githubusercontent.com/GitAlias/gitalias/main/gitalias.txt"
+# [".local/bin/popeye"]
+#     type = "archive-file"
+#     executable = true
+#     path = "popeye"
+#     url = {{ gitHubLatestReleaseAssetURL "derailed/popeye" (printf "popeye_%s_%s.tar.gz" .chezmoi.os .chezmoi.arch) | quote }}
 # ex: ts=4 sw=4 et filetype=toml

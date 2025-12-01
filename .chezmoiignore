@@ -10,8 +10,8 @@ Brewfile
 renovate.json
 # https://www.chezmoi.io/user-guide/manage-machine-to-machine-differences/#use-completely-different-dotfiles-on-different-machines
 {{ if ne .chezmoi.os "darwin" -}}
-private_Library/*
-Library/*
+private_Library
+Library
 {{ end -}}
 {{- if not (stat (joinPath (env "HOME") ".config/chezmoi/key.txt")) -}}
 .config/sops/age/keys.txt.age
