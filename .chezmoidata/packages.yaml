@@ -56,3 +56,15 @@ packages:
     - 'python3-pip'
     - 'python3-venv'
     - 'tk-dev'
+  fedora:
+    dnf:
+    - 'bash-completion'
+    - 'coreutils'
+    - 'git'
+    - 'keepassxc'
+    - 'moreutils'
+    - 'pinentry-tty'
+    - 'pipx'
+    - 'python3-pip'
+    - 'python3-virtualenv'
+    - 'tk-devel'

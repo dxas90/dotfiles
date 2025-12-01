@@ -23,4 +23,8 @@ yay -Syu --needed --noconfirm --noprogressbar {{ .packages.arch.yay | join " " }
 sudo apt update
 sudo apt install -y --no-install-recommends {{ .packages.ubuntu.apt | join " " }}
   {{   end -}}
+  {{ if (.chezmoi.osRelease.id | lower | contains "fedora") -}}
+sudo dnf update
+sudo dnf install -y {{ .packages.fedora.dnf | join " " }}
+  {{   end -}}
 {{ end -}}
