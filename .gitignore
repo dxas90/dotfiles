@@ -14,3 +14,5 @@ kubeconfig
 .env
 .vscode
 key.txt.age
+!scripts
+![Bb]in

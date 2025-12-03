@@ -14,6 +14,7 @@ python.uv_venv_auto = true
 PROJECT_NAME = "{{ config_root | basename }}"
 SOPS_AGE_KEY_FILE="{{ env.HOME }}/.config/chezmoi/key.txt"
 SAFE_FOLDER="{{ env.HOME }}/Vaults/Safe"
+SOPS_AGE_RECIPIENTS="{{ exec(command='cat .sops.pub.asc') }}"
 
 # Automatic virtualenv activation
 _.python.venv = { path = "/tmp/.venv-{{ env.PROJECT_NAME }}" , create = true }
