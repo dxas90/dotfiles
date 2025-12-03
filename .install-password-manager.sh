@@ -2,6 +2,8 @@
 
 USER_BIN_DIR="${HOME:-/home/daniel}/.local/bin"
 OS_TYPE="$(uname -s)"
+BW_VERSION="2025.11.0"
+RBW_VERSION="1.14.1"
 
 set -euo pipefail
 IFS=$'\n\t'
@@ -17,21 +19,21 @@ trap finish EXIT
 function install_password_manager_linux() {
   type bw >/dev/null 2>&1 && exit
   mkdir -p "${USER_BIN_DIR}"
-  curl -sL "https://github.com/bitwarden/clients/releases/download/cli-v2025.6.1/bw-linux-2025.6.1.zip" | funzip > bw
+  curl -sL "https://github.com/bitwarden/clients/releases/download/cli-v${BW_VERSION}/bw-linux-${BW_VERSION}.zip" | funzip > bw
   install -m 0755 bw "${USER_BIN_DIR}/bw"
 }
 
 function install_password_manager_macos() {
   type bw >/dev/null 2>&1 && exit
   mkdir -p "${USER_BIN_DIR}"
-  curl -sL "https://github.com/bitwarden/clients/releases/download/cli-v2025.6.1/bw-macos-2025.6.1.zip" | funzip > bw
+  curl -sL "https://github.com/bitwarden/clients/releases/download/cli-v${BW_VERSION}/bw-macos-${BW_VERSION}.zip" | funzip > bw
   install -m 0755 bw "${USER_BIN_DIR}/bw"
 }
 
 function install_password_manager_backup_linux() {
   type rbw >/dev/null 2>&1 && exit
   mkdir -p "${USER_BIN_DIR}"
-  curl -sLo rbw.tar.gz "https://github.com/doy/rbw/releases/download/1.13.2/rbw_1.13.2_linux_amd64.tar.gz"
+  curl -sLo rbw.tar.gz "https://github.com/doy/rbw/releases/download/${RBW_VERSION}/rbw_${RBW_VERSION}_linux_amd64.tar.gz"
   tar xzf rbw.tar.gz
   install -m 0755 rbw "${USER_BIN_DIR}/rbw"
   install -m 0755 rbw-agent "${USER_BIN_DIR}/rbw-agent"
