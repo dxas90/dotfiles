@@ -17,9 +17,11 @@
 --    end,
 --})
 
--- Prevent stripping EOL on save
+local grp = vim.api.nvim_create_augroup("_formatting", {})
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead", "BufWritePost" }, {
-  group = "_formatting",
+  group = grp,
   pattern = "*",
-  command = "setl fixeol"
+  callback = function()
+    vim.opt_local.fixeol = true
+  end,
 })
