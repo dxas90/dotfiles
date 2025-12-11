@@ -46,7 +46,13 @@ export GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChec
 
 export DOCKER_CLI_EXPERIMENTAL="enabled"
 export GS_OPTIONS="-sPAPERSIZE=a4"
-export MY_SHELL="$(ps -p $$ -o comm= | sed 's/^-//')" # old only linux basename $(readlink /proc/$$/exe)
+
+MY_SHELL=bash
+if [ -n "$ZSH_VERSION" ]; then
+    MY_SHELL=zsh
+fi
+export MY_SHELL
+
 export TMUX_TMPDIR="${XDG_RUNTIME_DIR:-"/run/user/$(id -u)"}"
 export PYENV_ROOT="$HOME/.pyenv"
 export UV_VENV_CLEAR=1
