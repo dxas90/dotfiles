@@ -37,7 +37,7 @@ type direnv >/dev/null 2>&1 && source <(direnv hook $MY_SHELL)
 HISTCONTROL=ignoredups:ignorespace
 HISTFILESIZE=100000
 HISTSIZE=10000
-export HISTIGNORE="ls:ps:history:htop:df:lens"
+export HISTIGNORE="ls:ps:history:htop:df:lens:source:lens-desktop"
 
 shopt -s histappend
 shopt -s checkwinsize
