@@ -121,16 +121,17 @@
   executable = true
 [".local/bin/age-plugin-yubikey"]
   type = "archive-file"
-{{ if not (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
 {{ if eq .chezmoi.os "darwin" -}}
   url = '{{ gitHubLatestReleaseAssetURL "str4d/age-plugin-yubikey" (printf "age-plugin-yubikey-*-arm64-%s.tar.gz" .chezmoi.os ) }}'
+  path = "age-plugin-yubikey/age-plugin-yubikey"
 {{ else if eq .chezmoi.os "linux" -}}
+{{ if not (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
   url = '{{ gitHubLatestReleaseAssetURL "str4d/age-plugin-yubikey" (printf "age-plugin-yubikey-*-x86_64-%s.tar.gz" .chezmoi.os ) }}'
-{{ end -}}
   path = "age-plugin-yubikey/age-plugin-yubikey"
 {{ else -}}
   url = '{{ gitHubLatestReleaseAssetURL "str4d/age-plugin-yubikey" (printf "age-plugin-yubikey-*-x86_64-windows.zip" ) }}'
   path = "age-plugin-yubikey/age-plugin-yubikey.exe"
+{{ end -}}
 {{ end -}}
   executable = true
 [".local/bin/gopass"]
