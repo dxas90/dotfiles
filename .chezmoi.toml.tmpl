@@ -10,14 +10,11 @@
 {{- if (env "EXTRA_TOOLS") -}}
 {{- $extra_tools = true -}}
 {{- end -}}
-{{- $has_age_key := not (eq (stat (joinPath (env "HOME") ".config/chezmoi/key.txt")) nil) -}}
 
-{{- if $has_age_key }}
 encryption = "age"
 [age]
-  identities = ["~/.config/chezmoi/key.txt", "~/.config/chezmoi/age-yubikey-identity-8241d673.txt"]
-  recipients = ["age1x0qs4gtfvvv9k3x0qjf93nzq7w8trh0e08l0zcntc2ul5gf04d0qnz3w3n", "age1yubikey1qtdrpsk4ccyge0us58axjv9ncrenm897540r89fm9zzj6d704vdfq2tgtmd"]
-{{- end }}
+  identities = ["~/.config/chezmoi/age-yubikey-identity-8241d673.txt"]
+  recipients = ["age1yubikey1qtdrpsk4ccyge0us58axjv9ncrenm897540r89fm9zzj6d704vdfq2tgtmd"]
 [keepassxc]
     database = "~/Sync/chezmoi.kdbx"
     mode = "open"
