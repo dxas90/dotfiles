@@ -25,4 +25,4 @@
 [tools.terraform]
     version = "1.12.2"
 [tools.go]
-    version = "1.25.1"
+    version = "1.25.5"
