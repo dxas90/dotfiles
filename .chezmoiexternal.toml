@@ -64,6 +64,10 @@
 {{ else if eq .chezmoi.os "linux" -}}
   url = '{{ gitHubLatestReleaseAssetURL "Frederick888/git-credential-keepassxc" (printf "*ubuntu*full*") }}'
 {{ end -}}
+[".local/bin/talosctl"]
+  type = "file"
+  executable = true
+  url = '{{ gitHubLatestReleaseAssetURL "siderolabs/talos" (printf "talosctl-%s-%s" .chezmoi.os .chezmoi.arch) }}'
 {{ end -}} # extra_tools
 {{ if eq .chezmoi.os "linux" -}}
 [".local/bin/jq"]
@@ -345,7 +349,7 @@
 # {{ $vaultVersion := trimPrefix "v" $vaultVersionRaw }}
 #   url = 'https://releases.hashicorp.com/vault/{{ $vaultVersion }}/vault_{{ $vaultVersion }}_{{ .chezmoi.os }}_{{ .chezmoi.arch }}.zip'
 #   path = "vault"
-{{ if eq .chezmoi.os "linux" -}}
+{{- if and (eq .chezmoi.os "linux") (env "XDG_SESSION_TYPE") -}}
 [".local/opt/VSCode-linux-x64"]
   type = "archive"
   stripComponents = 1
@@ -370,10 +374,6 @@
 #   url = 'https://gitlab.com/virtio-fs/virtiofsd/-/jobs/artifacts/main/download?job=publish'
 #   path = "target/x86_64-unknown-{{ .chezmoi.os }}-musl/release/virtiofsd"
 {{ end -}}
-[".local/bin/talosctl"]
-  type = "file"
-  executable = true
-  url = '{{ gitHubLatestReleaseAssetURL "siderolabs/talos" (printf "talosctl-%s-%s" .chezmoi.os .chezmoi.arch) }}'
 [".config/git/alias"]
   type = "file"
   url = "https://raw.githubusercontent.com/GitAlias/gitalias/main/gitalias.txt"
