@@ -22,11 +22,13 @@ packages:
   arch:
     yay:
     - 'bash-completion'
+    - 'ccid'
     - 'git'
     - 'keepassxc'
     - 'kubeconform'
     - 'moreutils'
     - 'pcscd'
+    - 'pcsclite'
     - 'pinentry'
     - 'python-pipx'
     - 'python-pipenv'

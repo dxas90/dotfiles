@@ -1,5 +1,21 @@
 #!/bin/sh
 
+yubikey_connected() {
+    # returns 0 if there is a YubiKey present
+    lsusb \
+        | grep -qi '1050:' \
+        || return 1
+    return 0
+}
+
+if yubikey_connected; then
+    echo "🔑 YubiKey present"
+    export YUBIKEY_CONNECTED=1
+else
+    echo "⚠️  No YubiKey detected"
+    unset YUBIKEY_CONNECTED
+fi
+
 {{ if stat (joinPath .chezmoi.sourceDir "key.txt.age") }}
 if [ ! -f "${HOME}/.config/chezmoi/key.txt" ]; then
   mkdir -p "${HOME}/.config/chezmoi"

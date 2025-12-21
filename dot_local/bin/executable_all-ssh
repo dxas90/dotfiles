@@ -1,5 +1,8 @@
 #!/bin/bash
 
-ssh-add -K
 ssh-add
+ssh-add -K
+ssh-add ~/.ssh/automation
 ssh-add ~/.ssh/forgejo
+ssh-add ~/.ssh/ssm
+ssh-add ~/.ssh/ssm2
