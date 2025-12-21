@@ -349,7 +349,7 @@
 # {{ $vaultVersion := trimPrefix "v" $vaultVersionRaw }}
 #   url = 'https://releases.hashicorp.com/vault/{{ $vaultVersion }}/vault_{{ $vaultVersion }}_{{ .chezmoi.os }}_{{ .chezmoi.arch }}.zip'
 #   path = "vault"
-{{- if and (eq .chezmoi.os "linux") (env "XDG_SESSION_TYPE") -}}
+{{ if and (eq .chezmoi.os "linux") (env "XDG_SESSION_TYPE") -}}
 [".local/opt/VSCode-linux-x64"]
   type = "archive"
   stripComponents = 1
