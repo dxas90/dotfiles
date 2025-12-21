@@ -10,6 +10,7 @@ cask {{ . | quote }}
 EOF
 {{ end -}}
 {{ if eq .chezmoi.os "linux" -}}
+sudo wget https://raw.githubusercontent.com/Yubico/libfido2/refs/tags/1.16.0/udev/70-u2f.rules -O /etc/udev/rules.d/70-u2f.rules
   {{ if (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
 sudo apt update
 sudo apt install -y --no-install-recommends {{ .packages.epam_wsl.apt | join " " }}
