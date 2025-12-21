@@ -119,6 +119,7 @@
   url = "https://github.com/FiloSottile/age/releases/download/v{{ .tools.age.version }}/age-v{{ .tools.age.version }}-{{ .chezmoi.os }}-{{ .chezmoi.arch }}.tar.gz"
   path = "age/age"
   executable = true
+{{ if not (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
 [".local/bin/age-plugin-yubikey"]
   type = "archive-file"
 {{ if eq .chezmoi.os "darwin" -}}
@@ -128,6 +129,7 @@
 {{ end -}}
   path = "age-plugin-yubikey/age-plugin-yubikey"
   executable = true
+{{ end -}}
 [".local/bin/gopass"]
   type = "archive-file"
   url = '{{ gitHubLatestReleaseAssetURL "gopasspw/gopass" (printf "gopass-*-%s-%s.tar.gz" .chezmoi.os .chezmoi.arch ) }}'
