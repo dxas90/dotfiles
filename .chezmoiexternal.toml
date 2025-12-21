@@ -127,10 +127,11 @@
 {{ else if eq .chezmoi.os "linux" -}}
   url = '{{ gitHubLatestReleaseAssetURL "str4d/age-plugin-yubikey" (printf "age-plugin-yubikey-*-x86_64-%s.tar.gz" .chezmoi.os ) }}'
 {{ end -}}
+  path = "age-plugin-yubikey/age-plugin-yubikey"
 {{ else -}}
   url = '{{ gitHubLatestReleaseAssetURL "str4d/age-plugin-yubikey" (printf "age-plugin-yubikey-*-x86_64-windows.zip" ) }}'
+  path = "age-plugin-yubikey/age-plugin-yubikey.exe"
 {{ end -}}
-  path = "age-plugin-yubikey/age-plugin-yubikey"
   executable = true
 [".local/bin/gopass"]
   type = "archive-file"
