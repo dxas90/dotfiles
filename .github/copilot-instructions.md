@@ -72,7 +72,7 @@ export GITHUB_TOKEN={{ (rbwFields "uuid").FORJEJO_NEW_TOKEN.value }}
 export SECRETS_OFF="off"
 export PATH="$PATH:$HOME/.local/bin"
 curl -sS https://starship.rs/install.sh | sh
-curl https://raw.githubusercontent.com/dxas90/dotfiles/refs/heads/main/.install-password-manager.sh | bash
+curl -sS https://raw.githubusercontent.com/dxas90/dotfiles/refs/heads/main/.install-password-manager.sh | bash
 sh -c "$(curl -fsLS get.chezmoi.io)" -- -b ${HOME}/.local/bin init --apply dxas90
 ```
 

@@ -10,7 +10,7 @@ cask {{ . | quote }}
 EOF
 {{ end -}}
 {{ if eq .chezmoi.os "linux" -}}
-sudo mkdir -p /etc/udev/rules.d/ && curl -L https://raw.githubusercontent.com/Yubico/libfido2/refs/tags/1.16.0/udev/70-u2f.rules -o /etc/udev/rules.d/70-u2f.rules || true
+sudo mkdir -p /etc/udev/rules.d/ && curl -sSL https://raw.githubusercontent.com/Yubico/libfido2/refs/tags/1.16.0/udev/70-u2f.rules -o /etc/udev/rules.d/70-u2f.rules || true
   {{ if (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
 sudo apt update
 sudo apt install -y --no-install-recommends {{ .packages.epam_wsl.apt | join " " }}
