@@ -18,8 +18,8 @@ My personal dotfiles managed using [chezmoi](https://github.com/twpayne/chezmoi)
 or
 
 ```shell
-curl -L https://shorturl.at/PU9Fo | bash # OR
-curl -L https://s.5rv.me/dots | bash
+curl -sSL https://shorturl.at/PU9Fo | bash # OR
+curl -sSL https://s.5rv.me/dots | bash
 ```
 
 > this [ssh key](https://github.com/dxas90/dotfiles/blob/main/private_dot_ssh/authorized_keys.tmpl#L1) will have access to the system
