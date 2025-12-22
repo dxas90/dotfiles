@@ -26,9 +26,11 @@ encryption = "age"
   ]
 [hooks.read-source-state.pre]
   command = ".local/share/chezmoi/.install-password-manager.sh"
-[hooks.apply.post]
-  command = "fc-cache"
-  args = ["-f"]
+#[hooks.apply.pre]
+#  command = ".local/share/chezmoi/.yubikey-check.sh"
+#[hooks.apply.post]
+#  command = "fc-cache"
+#  args = ["-f"]
 
 [data]
   secrets = {{ $secrets }}
