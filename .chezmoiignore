@@ -22,3 +22,7 @@ dot_config/private_baloofilerc
 .face
 .face.icon
 {{ end -}}
+# https://github.com/twpayne/chezmoi/discussions/3713#discussioncomment-9200616
+{{ .chezmoi.sourceDir }}/private_dot_ssh/config.d/.dell.txt
+
+# ex: ts=4 sw=4 et filetype=plaintext

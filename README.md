@@ -14,13 +14,16 @@ My personal dotfiles managed using [chezmoi](https://github.com/twpayne/chezmoi)
   curl https://raw.githubusercontent.com/dxas90/dotfiles/refs/heads/main/.install-password-manager.sh | bash
   sh -c "$(curl -fsLS get.chezmoi.io)" -- -b ${HOME}/.local/bin init --apply dxas90
 ```
+
 or
-```console
-curl -L https://shorturl.at/wSJRm | bash # OR
+
+```shell
+curl -L https://shorturl.at/9bBRK | bash # OR
 curl -L https://s.5rv.me/dots | bash
 ```
 
 > this [ssh key](https://github.com/dxas90/dotfiles/blob/main/private_dot_ssh/authorized_keys.tmpl#L1) will have access to the system
+
 ## 📝 License
 
 [MIT](https://github.com/dxas90/dotfiles/blob/master/LICENSE)

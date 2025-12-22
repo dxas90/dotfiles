@@ -10,6 +10,7 @@ packages:
     - 'htop'
     - 'iproute2mac'
     - 'jq'
+    - 'lsusb'
     - 'pinentry-mac'
     - 'pinentry'
     - 'tcl-tk'

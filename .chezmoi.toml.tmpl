@@ -1,15 +1,6 @@
-{{- $secrets := true -}}
-{{- $secrets_homelab := false -}}
-{{- $extra_tools := false -}}
-{{- if (env "SECRETS_OFF") -}}
-{{- $secrets = false -}}
-{{- end -}}
-{{- if (env "SECRETS_AT_HOME") -}}
-{{- $secrets_homelab = true -}}
-{{- end -}}
-{{- if (env "EXTRA_TOOLS") -}}
-{{- $extra_tools = true -}}
-{{- end -}}
+{{- $secrets := promptBool "Do you want to enable secrets" false -}}
+{{- $secrets_homelab := promptBool "Are you at home" false -}}
+{{- $extra_tools := promptBool "Do you want to enable extra tools" false -}}
 
 encryption = "age"
 [age] # yubikey 1 and backup
@@ -34,6 +25,8 @@ encryption = "age"
   ]
 [hooks.read-source-state.pre]
   command = ".local/share/chezmoi/.install-password-manager.sh"
+[hooks.apply.pre]
+  command = ".local/share/chezmoi/.yubikey-check.sh"
 [hooks.apply.post]
   command = "fc-cache"
   args = ["-f"]
@@ -42,3 +35,4 @@ encryption = "age"
   secrets = {{ $secrets }}
   secrets_homelab = {{ $secrets_homelab }}
   extra_tools = {{ $extra_tools }}
+https://gist.githubusercontent.com/dxas90/9f0369536f4eddf2bddfd12e6cdd335b/raw/d74bfabe5b0feeeb6b381af0a5f5c6ecbcbcca62/dotfiles.sh

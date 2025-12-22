@@ -1,0 +1,3 @@
+{{- if (env "YUBIKEY_CONNECTED") -}}
+{{ join .chezmoi.sourceDir "private_dot_ssh/config.d/.dell.txt" | include | decrypt -}}
+{{- end -}}

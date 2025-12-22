@@ -2,7 +2,7 @@
 
 USER_BIN_DIR="${HOME:-/home/daniel}/.local/bin"
 OS_TYPE="$(uname -s)"
-BW_VERSION="2025.11.0"
+BW_VERSION="2025.12.0"
 RBW_VERSION="1.14.1"
 
 set -euo pipefail

@@ -205,9 +205,19 @@ ef() {
 
 yubikey_connected() {
     # returns 0 if there is a YubiKey present
-    lsusb \
-        | grep -qi '1050:' \
-        || return 1
+    case "$(uname)" in
+        Linux)
+            lsusb | grep -qi '1050:' || return 1
+            ;;
+        Darwin)
+            ioreg -p IOUSB -l \
+                | grep -Eqi 'YubiKey|Yubico' \
+                || return 1
+            ;;
+        *)
+            return 1
+            ;;
+    esac
     return 0
 }
 
