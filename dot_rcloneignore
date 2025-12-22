@@ -1,0 +1,39 @@
+# --- Virtualization ---
+**/.vagrant/**
+
+# --- Package managers / envs ---
+**/node_modules/**
+**/.venv/**
+**/__pycache__/**
+**/.mypy_cache/**
+**/.pytest_cache/**
+**/.ruff_cache/**
+**/.tox/**
+
+# --- Runtime / IPC / sockets ---
+**/*.fifo
+**/*fifo*
+**/*.sock
+**/ipc-socket.*
+
+**/.XDG/**
+**/.data/.XDG/**
+**/.local/share/**
+**/netdatacache/**
+**/.netdata/**
+#
+# --- Browsers / apps runtime junk ---
+**/TorBrowser/**/lock
+**/TorBrowser/**/Cache/**
+**/TorBrowser/**/GPUCache/**
+
+# --- OS / editor junk ---
+**/.DS_Store
+**/Thumbs.db
+**/*~
+**/.swp
+**/.swo
+
+# --- Nix / build artifacts ---
+**/result
+**/.direnv/**
