@@ -18,7 +18,7 @@ My personal dotfiles managed using [chezmoi](https://github.com/twpayne/chezmoi)
 or
 
 ```shell
-curl -L https://shorturl.at/IHuHt | bash # OR
+curl -L https://shorturl.at/PU9Fo | bash # OR
 curl -L https://s.5rv.me/dots | bash
 ```
 
