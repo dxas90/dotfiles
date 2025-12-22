@@ -1,3 +1,4 @@
+{{- if .external_tools -}} # external_tools
 {{- if .extra_tools -}} # extra_tools
 [".linkerd2/bin/linkerd"]
   type = "file"
@@ -155,14 +156,6 @@
 [".local/bin/yq"]
   type = "file"
   url = '{{ gitHubLatestReleaseAssetURL "mikefarah/yq" (printf "yq_%s_%s*" .chezmoi.os .chezmoi.arch ) }}'
-  executable = true
-[".local/bin/mise"]
-  type = "file"
-{{ if eq .chezmoi.os "darwin" -}}
-  url = '{{ gitHubLatestReleaseAssetURL "jdx/mise" (printf "mise-*-macos-%s" .chezmoi.arch ) }}'
-{{ else if eq .chezmoi.os "linux" -}}
-  url = '{{ gitHubLatestReleaseAssetURL "jdx/mise" (printf "mise-*-%s-x64" .chezmoi.os ) }}'
-{{ end -}}
   executable = true
 {{ if eq .chezmoi.os "linux" -}}
 [".local/bin/rclone"]
@@ -402,4 +395,14 @@
 #     executable = true
 #     path = "popeye"
 #     url = {{ gitHubLatestReleaseAssetURL "derailed/popeye" (printf "popeye_%s_%s.tar.gz" .chezmoi.os .chezmoi.arch) | quote }}
+{{ end -}} # external_tools
+[".local/bin/mise"]
+  type = "file"
+{{ if eq .chezmoi.os "darwin" -}}
+  url = '{{ gitHubLatestReleaseAssetURL "jdx/mise" (printf "mise-*-macos-%s" .chezmoi.arch ) }}'
+{{ else if eq .chezmoi.os "linux" -}}
+  url = '{{ gitHubLatestReleaseAssetURL "jdx/mise" (printf "mise-*-%s-x64" .chezmoi.os ) }}'
+{{ end -}}
+  executable = true
+
 # ex: ts=4 sw=4 et filetype=toml
