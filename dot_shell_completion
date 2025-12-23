@@ -9,6 +9,8 @@ type task >/dev/null 2>&1 && eval "$(task --completion $MY_SHELL)"
 
 type mise >/dev/null 2>&1 && eval "$(mise activate $MY_SHELL)"
 
+type go >/dev/null 2>&1 && export PATH="$PATH:$(go env GOPATH)/bin"
+
 # Detect shell
 if [ -n "$ZSH_VERSION" ]; then
   # --- Zsh-specific completion setup ---
