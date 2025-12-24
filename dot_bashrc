@@ -39,16 +39,18 @@ for script in "$HOME/.env-secrets.d/"*.sh; do [ -f "$script" ] && source "$scrip
 
 type direnv >/dev/null 2>&1 && source <(direnv hook $MY_SHELL)
 
-HISTCONTROL=ignoredups:ignorespace
+HISTCONTROL=erasedups:ignorespace
 HISTFILESIZE=100000
 HISTSIZE=10000
-export HISTIGNORE="ls:ps:history:htop:df:lens:source:lens-desktop"
+export HISTIGNORE="ls:ps:history:htop:df:lens:source:lens-desktop:exit:bg:fg:clear"
 
-shopt -s histappend
+shopt -s histappend # Append to the history file, don't overwrite it
 shopt -s checkwinsize
 shopt -s extglob
 shopt -s globstar
 shopt -s checkjobs
+shopt -s cmdhist # Save multi-line commands as one command
+shopt -s cdable_vars
 
 alias ...='cd ../..'
 type bat >/dev/null 2>&1 && alias cat='bat -p'
