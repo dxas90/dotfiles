@@ -23,43 +23,21 @@ genpass() {
 # alias keepassxc-cli='flatpak run --command=keepassxc-cli org.keepassxc.KeePassXC "$@"'
 alias k=kubectl
 alias lg='lazygit'
+alias ols='/bin/ls -lCF'
+
 if type eza >/dev/null 2>&1; then
-  ls() {
-    local sort="name"
-    local extra=()
+  alias ls="eza --long --header --icons --git"
+  alias ll="eza --long --header --icons --git --git-ignore"
+  alias l="eza --classify"
 
-    for arg in "$@"; do
-      case "$arg" in
-        -s|-S)
-          sort="size"
-          ;;
-        -t)
-          sort="modified"
-          ;;
-        --*)
-          extra+=("$arg")
-          ;;
-        -*)
-          # unsupported flag → fallback to real ls
-          command ls "$@"
-          return
-          ;;
-        *)
-          extra+=("$arg")
-          ;;
-      esac
-    done
-
-    eza --long --header --icons --git --classify --sort="$sort" "${extra[@]}"
-  }
-
-  alias ll='ls'
-  alias l='ls'
+  # Sorting helpers
+  alias lsn="ls --sort=name"
+  alias lss="ls --sort=size"
+  alias lst="ls --sort=modified"
 else
   alias l='ls -CF'
   alias ll='ls -la'
 fi
-
 
 alias la='ls -A'
 alias lst='ls -R | grep ":$" | sed -e '"'"'s/:$//'"'"' -e '"'"'s/[^-][^\/]*\//--/g'"'"' -e '"'"'s/^/   /'"'"' -e '"'"'s/-/|/'"'"
