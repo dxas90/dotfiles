@@ -37,8 +37,6 @@ for script in "$HOME/.env-secrets.d/"*.sh; do [ -f "$script" ] && source "$scrip
 [ -f $HOME/.cargo/env ] && source $HOME/.cargo/env
 [ -f ~/Vaults/work/.key_values ] && source ~/Vaults/work/.key_values
 
-type direnv >/dev/null 2>&1 && source <(direnv hook $MY_SHELL)
-
 HISTCONTROL=erasedups:ignorespace
 HISTFILESIZE=100000
 HISTSIZE=10000
@@ -74,7 +72,7 @@ fi
 [ -f ~/.shell_aliases ] && source ~/.shell_aliases
 [ -f ~/.shell_completion ] && source ~/.shell_completion
 
-type starship >/dev/null 2>&1 && source <(starship init $MY_SHELL)
+type starship >/dev/null 2>&1 && source <(starship init bash)
 
 if [ -f ${HOME}/.local/google-cloud-sdk/path.bash.inc ]; then . ${HOME}/.local/google-cloud-sdk/path.bash.inc; fi
 

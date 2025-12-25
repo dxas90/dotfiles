@@ -1,8 +1,8 @@
 alias aliases='alias | grep'
-alias aria2c='/usr/bin/aria2c --summary-interval 0 -x 10 -c -s 10 -k 1M -j 10 -U "5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36" --save-cookies=/tmp/aria2c_cookies '
+alias aria2c='/usr/bin/aria2c --summary-interval 0 -x 10 -c -s 10 -k 1M -j 10 -U "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36" --save-cookies=/tmp/aria2c_cookies '
 alias cls="printf '\33c\e[3J'" # This is equivalent to clear && printf '\e[3J'
 alias cm="$HOME/.local/bin/chezmoi"
-alias docwget='/usr/bin/wget -U "5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36" -c -k -r '
+alias docwget='/usr/bin/wget -U "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36" -c -k -r '
 alias fix-ssh='killall ssh-agent; SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"; export SSH_AUTH_SOCK; ssh-agent -a $SSH_AUTH_SOCK; ssh-add'
 alias m='mise'
 # alias ssh-agent='SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"; ssh-agent -a $SSH_AUTH_SOCK'
@@ -24,13 +24,43 @@ genpass() {
 alias k=kubectl
 alias lg='lazygit'
 if type eza >/dev/null 2>&1; then
-  alias ls="eza --long --header --icons --git"
-  alias ll="ls --git-ignore"
-  alias l='ls -F'
+  ls() {
+    local sort="name"
+    local extra=()
+
+    for arg in "$@"; do
+      case "$arg" in
+        -s|-S)
+          sort="size"
+          ;;
+        -t)
+          sort="modified"
+          ;;
+        --*)
+          extra+=("$arg")
+          ;;
+        -*)
+          # unsupported flag → fallback to real ls
+          command ls "$@"
+          return
+          ;;
+        *)
+          extra+=("$arg")
+          ;;
+      esac
+    done
+
+    eza --long --header --icons --git --classify --sort="$sort" "${extra[@]}"
+  }
+
+  alias ll='ls'
+  alias l='ls'
 else
   alias l='ls -CF'
   alias ll='ls -la'
 fi
+
+
 alias la='ls -A'
 alias lst='ls -R | grep ":$" | sed -e '"'"'s/:$//'"'"' -e '"'"'s/[^-][^\/]*\//--/g'"'"' -e '"'"'s/^/   /'"'"' -e '"'"'s/-/|/'"'"
 alias make_pass='pwgen -N 1 -y -n -s 17 5 | awk "{print $1}"'
@@ -39,7 +69,7 @@ alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
 alias new_ssh='ssh-keygen -t ed25519 -b 4096 -P "" -f '
 alias newtemp='cd $(mktemp -d)'
 alias now_='date +%Y%m%d_%H%M%S'
-alias owget='/usr/bin/wget -U "5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36" -c -k -r -nd -l 4'
+alias owget='/usr/bin/wget -U "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36" -c -k -r -nd -l 4'
 function pip-upgrade-all() {
   $UV_IS_HERE pip list --outdated --format=freeze | grep -v "^\-e" | cut -d= -f1 | xargs -n1 $UV_IS_HERE pip install -U
 }
@@ -49,7 +79,7 @@ alias run_now='systemctl list-units --type=service --state=running'
 alias sepa='find * -maxdepth 0 -type d -exec sh -c "test -e {}.tar.bz || tar cjvf {}.tar.bz {}" \;'
 alias t=task
 alias tama='find * -maxdepth 0 -type f -exec du -sh {} \;'
-alias wget='/usr/bin/wget -U "5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36" -c '
+alias wget='/usr/bin/wget -U "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36" -c '
 alias youd="yt-dlp --no-playlist -f 'bestvideo[height<=?1080]+bestaudio/best' -o '%(title)s.%(ext)s'"
 
 curl_time() {
@@ -67,7 +97,7 @@ starttransfer:  %{time_starttransfer}s\n\
 mkcd() { mkdir -p "$1" && cd "$1" || return; }
 myrsync() {
   echo "Sync $1 en $2"
-  rsync "$1" "$2" -Pahv --prune-empty-dirs --ignore-errors --ignore-existing --exclude="*~" && echo "Todo OK" || echo "NOOO Todo esta OK"
+  rsync "$1" "$2" -Pahv --prune-empty-dirs --ignore-errors --ignore-existing --exclude="*~" && echo "All OK" || echo "NOOO All OK"
 }
 aget() {
   apt-get download $(apt-cache depends --recurse --no-recommends --no-suggests --no-conflicts --no-breaks --no-replaces --no-enhances --no-pre-depends $@ | grep "^\w")
@@ -84,7 +114,7 @@ daysago() {
   date --date="$1 day ago" +%Y-%m-%d
 }
 xscp() {
-  rsync -Pav -e "ssh $1 $2" "$3" "$4"
+  rsync -Pav -e "ssh $1 $2" "$3" "$4" # remote copy via ssh using rsync
 }
 
 new_ssh_resident_key() {

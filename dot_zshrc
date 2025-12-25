@@ -23,10 +23,6 @@ for script in "$HOME/.env-secrets.d/"*.sh(.N); do [[ -f "$script" ]] && source "
 [[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
 [[ -f ~/Vaults/work/.key_values ]] && source ~/Vaults/work/.key_values
 
-if type direnv >/dev/null 2>&1; then
-  eval "$(direnv hook zsh)"
-fi
-
 # History
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
@@ -34,15 +30,16 @@ SAVEHIST=100000
 setopt APPEND_HISTORY
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_IGNORE_SPACE
-export HISTIGNORE="ls:ps:history:htop:df:lens"
+export HISTIGNORE="ls:ps:history:htop:df:lens:source:lens-desktop:exit:bg:fg:clear"
 
 # Aliases
 alias ...='cd ../..'
 type bat >/dev/null 2>&1 && alias cat='bat -p'
 alias g='git'
-type nvim >/dev/null 2>&1 && alias vim='nvim'
+
 if type nvim >/dev/null 2>&1; then
   export MANPAGER='nvim +Man!'
+  alias vim='nvim'
 else
   export MANPAGER='less -s -M +Gg'
 fi
