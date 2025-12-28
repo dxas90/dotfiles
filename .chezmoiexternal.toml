@@ -69,26 +69,68 @@
   type = "file"
   executable = true
   url = '{{ gitHubLatestReleaseAssetURL "siderolabs/talos" (printf "talosctl-%s-%s" .chezmoi.os .chezmoi.arch) }}'
-{{ end -}} # extra_tools
+[".local/bin/direnv"]
+  type = "file"
+  url = "https://github.com/direnv/direnv/releases/download/v{{ .tools.direnv.version }}/direnv.{{ .chezmoi.os }}-{{ .chezmoi.arch }}"
+  executable = true
+[".local/bin/task"]
+  type = "archive-file"
+  url = "https://github.com/go-task/task/releases/download/v{{ .tools.go_task.version }}/task_{{ .chezmoi.os }}_{{ .chezmoi.arch }}.tar.gz"
+  path = "task"
+  executable = true
+[".local/bin/zoxide"]
+  type = "archive-file"
+  executable = true
+  path = "zoxide"
+{{ if eq .chezmoi.os "darwin" -}}
+  url = '{{ gitHubLatestReleaseAssetURL "ajeetdsouza/zoxide" (printf "*aarch64-apple-%s.tar.gz" .chezmoi.os) }}'
+{{ else if eq .chezmoi.os "linux" -}}
+  url = '{{ gitHubLatestReleaseAssetURL "ajeetdsouza/zoxide" (printf "*x86_64-unknown-%s-musl*" .chezmoi.os) }}'
+{{ end -}}
+# [".local/bin/vault"]
+#   type = "archive-file"
+#   executable = true
+# {{ $vaultVersionRaw := (gitHubLatestRelease "hashicorp/vault").TagName }}
+# {{ $vaultVersion := trimPrefix "v" $vaultVersionRaw }}
+#   url = 'https://releases.hashicorp.com/vault/{{ $vaultVersion }}/vault_{{ $vaultVersion }}_{{ .chezmoi.os }}_{{ .chezmoi.arch }}.zip'
+#   path = "vault"
+# [".local/bin/helm-operator"]
+#   type = "file"
+#   url = '{{ gitHubLatestReleaseAssetURL "operator-framework/operator-sdk" (printf "helm-operator_%s_%s*" .chezmoi.os .chezmoi.arch) }}'
+#   executable = true
+[".local/google-cloud-sdk"]
+  type = "archive"
+  exact = false
+  stripComponents = 1
+{{ if eq .chezmoi.os "darwin" -}}
+  url = "https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-darwin-arm.tar.gz"
+{{ else if eq .chezmoi.os "linux" -}}
+  url = "https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-x86_64.tar.gz"
+{{ end -}}
+{{ end -}} # HERE extra_tools
+
 {{ if eq .chezmoi.os "linux" -}}
 [".local/bin/jq"]
   type = "file"
   url = '{{ gitHubLatestReleaseAssetURL "jqlang/jq" (printf "jq-%s-%s*" .chezmoi.os .chezmoi.arch ) }}'
   executable = true
-{{ end -}}
-[".local/bin/terraform"]
+[".local/bin/rclone"]
   type = "archive-file"
-  url = "https://releases.hashicorp.com/terraform/{{ .tools.terraform.version }}/terraform_{{ .tools.terraform.version }}_{{ .chezmoi.os }}_{{ .chezmoi.arch }}.zip"
-  path = "terraform"
+  url = "https://downloads.rclone.org/v{{ .tools.rclone.version }}/rclone-v{{ .tools.rclone.version }}-{{ .chezmoi.os }}-{{ .chezmoi.arch }}.zip"
+  path = "rclone-v{{ .tools.rclone.version }}-{{ .chezmoi.os }}-{{ .chezmoi.arch }}/rclone"
   executable = true
-[".local/bin/terragrunt"]
-  type = "file"
-  url = '{{ gitHubLatestReleaseAssetURL "gruntwork-io/terragrunt" (printf "terragrunt_%s_%s*" .chezmoi.os .chezmoi.arch) }}'
+[".local/bin/speedtest"]
+  type = "archive-file"
+  url = "https://install.speedtest.net/app/cli/ookla-speedtest-1.2.0-linux-x86_64.tgz"
+  path = "speedtest"
   executable = true
-[".local/bin/direnv"]
-  type = "file"
-  url = "https://github.com/direnv/direnv/releases/download/v{{ .tools.direnv.version }}/direnv.{{ .chezmoi.os }}-{{ .chezmoi.arch }}"
+[".local/bin/eza"]
+  type = "archive-file"
+  url = '{{ gitHubLatestReleaseAssetURL "eza-community/eza" (printf "eza_x86_64-unknown-%s-gnu.zip" .chezmoi.os) }}'
+  path = "eza"
   executable = true
+{{ end -}} # linux-only tools
+
 [".local/bin/kubectl"]
   type = "file"
   url = "https://dl.k8s.io/release/v{{ .tools.kubectl.version }}/bin/{{ .chezmoi.os }}/{{ .chezmoi.arch }}/kubectl"
@@ -98,6 +140,11 @@
   url = '{{ gitHubLatestReleaseAssetURL "int128/kubelogin" (printf "kubelogin_%s_%s.zip" .chezmoi.os .chezmoi.arch) }}'
   executable = true
   path = "kubelogin"
+[".local/bin/kubectl-krew"]
+  type = "archive-file"
+  executable = true
+  url = '{{ gitHubLatestReleaseAssetURL "kubernetes-sigs/krew" (printf "krew-%s_%s.tar.gz" .chezmoi.os .chezmoi.arch) }}'
+  path = "./krew-{{ .chezmoi.os }}_{{ .chezmoi.arch }}"
 [".local/bin/k3d"]
   type = "file"
   url = '{{ gitHubLatestReleaseAssetURL "k3d-io/k3d" (printf "k3d-%s-%s*" .chezmoi.os .chezmoi.arch) }}'
@@ -144,26 +191,10 @@
   type = "file"
   url = '{{ gitHubLatestReleaseAssetURL "getsops/sops" (printf "sops-*.%s.%s*" .chezmoi.os .chezmoi.arch ) }}'
   executable = true
-[".local/bin/vcluster"]
-  type = "file"
-  url = '{{ gitHubLatestReleaseAssetURL "loft-sh/vcluster" (printf "vcluster-%s-%s*" .chezmoi.os .chezmoi.arch ) }}'
-  executable = true
-[".local/bin/task"]
-  type = "archive-file"
-  url = "https://github.com/go-task/task/releases/download/v{{ .tools.go_task.version }}/task_{{ .chezmoi.os }}_{{ .chezmoi.arch }}.tar.gz"
-  path = "task"
-  executable = true
 [".local/bin/yq"]
   type = "file"
   url = '{{ gitHubLatestReleaseAssetURL "mikefarah/yq" (printf "yq_%s_%s*" .chezmoi.os .chezmoi.arch ) }}'
   executable = true
-{{ if eq .chezmoi.os "linux" -}}
-[".local/bin/rclone"]
-  type = "archive-file"
-  url = "https://downloads.rclone.org/v{{ .tools.rclone.version }}/rclone-v{{ .tools.rclone.version }}-{{ .chezmoi.os }}-{{ .chezmoi.arch }}.zip"
-  path = "rclone-v{{ .tools.rclone.version }}-{{ .chezmoi.os }}-{{ .chezmoi.arch }}/rclone"
-  executable = true
-{{ end -}}
 [".local/bin/docker-compose"]
   type = "file"
   executable = true
@@ -171,15 +202,6 @@
   url = '{{ gitHubLatestReleaseAssetURL "docker/compose" (printf "docker-compose-%s-aarch64*" .chezmoi.os ) }}'
 {{ else if eq .chezmoi.os "linux" -}}
   url = '{{ gitHubLatestReleaseAssetURL "docker/compose" (printf "docker-compose-%s-x86_64*" .chezmoi.os ) }}'
-{{ end -}}
-[".local/bin/zoxide"]
-  type = "archive-file"
-  executable = true
-  path = "zoxide"
-{{ if eq .chezmoi.os "darwin" -}}
-  url = '{{ gitHubLatestReleaseAssetURL "ajeetdsouza/zoxide" (printf "*aarch64-apple-%s.tar.gz" .chezmoi.os) }}'
-{{ else if eq .chezmoi.os "linux" -}}
-  url = '{{ gitHubLatestReleaseAssetURL "ajeetdsouza/zoxide" (printf "*x86_64-unknown-%s-musl*" .chezmoi.os) }}'
 {{ end -}}
 [".local/bin/helm"]
   type = "archive-file"
@@ -195,7 +217,6 @@
 {{ else if eq .chezmoi.os "linux" -}}
   url = '{{ gitHubLatestReleaseAssetURL "jesseduffield/lazygit" (printf "*linux_x86_64*" ) }}'
 {{ end -}}
-
 [".local/bin/flux"]
   type = "archive-file"
   url = '{{ gitHubLatestReleaseAssetURL "fluxcd/flux2" (printf "flux_*_%s_%s.tar.gz" .chezmoi.os .chezmoi.arch) }}'
@@ -214,10 +235,12 @@
 {{ end -}}
 [".local/bin/fzf"]
   type = "archive-file"
+  executable = true
   url = '{{ gitHubLatestReleaseAssetURL "junegunn/fzf" (printf "*%s_%s*" .chezmoi.os .chezmoi.arch) }}'
   path = "fzf"
 [".local/bin/fd"]
   type = "archive-file"
+  executable = true
   {{ $fdVersion := (gitHubLatestRelease "sharkdp/fd").TagName }}
 {{ if eq .chezmoi.os "darwin" -}}
   url = '{{ gitHubLatestReleaseAssetURL "sharkdp/fd" (printf "fd-*-aarch64-apple-%s*" .chezmoi.os) }}'
@@ -228,6 +251,7 @@
 {{ end -}}
 [".local/bin/rg"]
   type = "archive-file"
+  executable = true
   {{ $rgVersion := (gitHubLatestRelease "BurntSushi/ripgrep").TagName }}
 {{ if eq .chezmoi.os "darwin" -}}
   url = '{{ gitHubLatestReleaseAssetURL "BurntSushi/ripgrep" (printf "*-aarch64-apple-%s*" .chezmoi.os ) }}'
@@ -235,28 +259,6 @@
 {{ else if eq .chezmoi.os "linux" -}}
   url = '{{ gitHubLatestReleaseAssetURL "BurntSushi/ripgrep" (printf "*x86_64-unknown-%s-musl*" .chezmoi.os ) }}'
   path = "ripgrep-{{ $rgVersion }}-x86_64-unknown-{{ .chezmoi.os }}-musl/rg"
-{{ end -}}
-{{ if eq .chezmoi.os "linux" -}}
-[".local/bin/speedtest"]
-  type = "archive-file"
-  url = "https://install.speedtest.net/app/cli/ookla-speedtest-1.2.0-linux-x86_64.tgz"
-  path = "speedtest"
-  executable = true
-[".local/bin/eza"]
-  type = "archive-file"
-  url = '{{ gitHubLatestReleaseAssetURL "eza-community/eza" (printf "eza_x86_64-unknown-%s-gnu.zip" .chezmoi.os) }}'
-  path = "eza"
-  executable = true
-{{ end -}}
-[".tmux.conf"]
-  type = "file"
-  url = 'https://raw.githubusercontent.com/gpakosz/.tmux/refs/heads/master/.tmux.conf'
-{{ if eq .chezmoi.os "linux" -}}
-[".local/share/fonts"]
-  type = "archive"
-  url = '{{ gitHubLatestReleaseAssetURL "adobe-fonts/source-code-pro" (printf "OTF-source-code-pro-*.zip") }}'
-  exact = false
-  stripComponents = 1
 {{ end -}}
 [".local/"]
   type = "archive"
@@ -305,32 +307,13 @@
   url = "https://go.dev/dl/go{{ .tools.go.version }}.{{ .chezmoi.os }}-{{ .chezmoi.arch }}.tar.gz"
   exact = false
   stripComponents = 1
-
 [".local/bin/operator-sdk"]
   type = "file"
   url = '{{ gitHubLatestReleaseAssetURL "operator-framework/operator-sdk" (printf "operator-sdk_%s_%s*" .chezmoi.os .chezmoi.arch) }}'
   executable = true
-# [".local/bin/helm-operator"]
-#   type = "file"
-#   url = '{{ gitHubLatestReleaseAssetURL "operator-framework/operator-sdk" (printf "helm-operator_%s_%s*" .chezmoi.os .chezmoi.arch) }}'
-#   executable = true
-[".local/google-cloud-sdk"]
-  type = "archive"
-  exact = false
-  stripComponents = 1
-{{ if eq .chezmoi.os "darwin" -}}
-  url = "https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-darwin-arm.tar.gz"
-{{ else if eq .chezmoi.os "linux" -}}
-  url = "https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-x86_64.tar.gz"
-{{ end -}}
 [".pyenv"]
   type = "git-repo"
   url = "https://github.com/pyenv/pyenv.git"
-[".local/bin/kubectl-krew"]
-  type = "archive-file"
-  executable = true
-  url = '{{ gitHubLatestReleaseAssetURL "kubernetes-sigs/krew" (printf "krew-%s_%s.tar.gz" .chezmoi.os .chezmoi.arch) }}'
-  path = "./krew-{{ .chezmoi.os }}_{{ .chezmoi.arch }}"
 # [".local/bin/minikube"]
 #   type = "file"
 #   executable = true
@@ -355,19 +338,17 @@
 {{ else if eq .chezmoi.os "linux" -}}
     url = {{ gitHubLatestReleaseAssetURL "charmbracelet/glow" "glow_*_Linux_x86_64.tar.gz" | quote }}
 {{ end -}}
-# [".local/bin/vault"]
-#   type = "archive-file"
-#   executable = true
-# {{ $vaultVersionRaw := (gitHubLatestRelease "hashicorp/vault").TagName }}
-# {{ $vaultVersion := trimPrefix "v" $vaultVersionRaw }}
-#   url = 'https://releases.hashicorp.com/vault/{{ $vaultVersion }}/vault_{{ $vaultVersion }}_{{ .chezmoi.os }}_{{ .chezmoi.arch }}.zip'
-#   path = "vault"
-{{ if and (eq .chezmoi.os "linux") (ne (env "XDG_SESSION_TYPE") "") -}}
+{{ if and (eq .chezmoi.os "linux") (ne (env "XDG_SESSION_TYPE") "") -}} # VSCode-linux
 [".local/opt/VSCode-linux-x64"]
   type = "archive"
   stripComponents = 1
   url = "https://code.visualstudio.com/sha/download?build=stable&os=linux-x64"
   exact = false
+[".local/share/fonts"]
+  type = "archive"
+  url = '{{ gitHubLatestReleaseAssetURL "adobe-fonts/source-code-pro" (printf "OTF-source-code-pro-*.zip") }}'
+  exact = false
+  stripComponents = 1
 # [".local/opt/podman-desktop"]
 #   type = "archive"
 #   stripComponents = 1
@@ -386,23 +367,44 @@
 #   type = "archive-file"
 #   url = 'https://gitlab.com/virtio-fs/virtiofsd/-/jobs/artifacts/main/download?job=publish'
 #   path = "target/x86_64-unknown-{{ .chezmoi.os }}-musl/release/virtiofsd"
-{{ end -}}
-[".config/git/alias"]
-  type = "file"
-  url = "https://raw.githubusercontent.com/GitAlias/gitalias/main/gitalias.txt"
+{{ end -}} # VSCode-linux
 # [".local/bin/popeye"]
 #     type = "archive-file"
 #     executable = true
 #     path = "popeye"
 #     url = {{ gitHubLatestReleaseAssetURL "derailed/popeye" (printf "popeye_%s_%s.tar.gz" .chezmoi.os .chezmoi.arch) | quote }}
+[".local/bin/terraform"]
+  type = "archive-file"
+  url = "https://releases.hashicorp.com/terraform/{{ .tools.terraform.version }}/terraform_{{ .tools.terraform.version }}_{{ .chezmoi.os }}_{{ .chezmoi.arch }}.zip"
+  path = "terraform"
+  executable = true
+[".local/bin/terragrunt"]
+  type = "file"
+  url = '{{ gitHubLatestReleaseAssetURL "gruntwork-io/terragrunt" (printf "terragrunt_%s_%s*" .chezmoi.os .chezmoi.arch) }}'
+  executable = true
+[".local/bin/vcluster"]
+  type = "file"
+  url = '{{ gitHubLatestReleaseAssetURL "loft-sh/vcluster" (printf "vcluster-%s-%s*" .chezmoi.os .chezmoi.arch ) }}'
+  executable = true
 {{ end -}} # external_tools
+
+[".tmux.conf"]
+  type = "file"
+  url = 'https://raw.githubusercontent.com/gpakosz/.tmux/refs/heads/master/.tmux.conf'
+[".config/git/alias"]
+  type = "file"
+  url = "https://raw.githubusercontent.com/GitAlias/gitalias/main/gitalias.txt"
 [".local/bin/mise"]
   type = "file"
+  executable = true
 {{ if eq .chezmoi.os "darwin" -}}
   url = '{{ gitHubLatestReleaseAssetURL "jdx/mise" (printf "mise-*-macos-%s" .chezmoi.arch ) }}'
 {{ else if eq .chezmoi.os "linux" -}}
+{{- if eq .chezmoi.arch "amd64" -}}
   url = '{{ gitHubLatestReleaseAssetURL "jdx/mise" (printf "mise-*-%s-x64" .chezmoi.os ) }}'
+{{- else if eq .chezmoi.arch "arm64" }}
+  url = '{{ gitHubLatestReleaseAssetURL "jdx/mise" (printf "mise-*-%s-arm64" .chezmoi.os ) }}'
+{{ end }}
 {{ end -}}
-  executable = true
 
 # ex: ts=4 sw=4 et filetype=toml
