@@ -211,7 +211,7 @@ ef() {
   env | sort | grep -i -e $1
 }
 
-yubikey_connected() {
+yubikey_hardware_connected() {
     # returns 0 if there is a YubiKey present
     case "$(uname)" in
         Linux)
@@ -229,10 +229,33 @@ yubikey_connected() {
     return 0
 }
 
-if yubikey_connected; then
-    export YUBIKEY_CONNECTED=1
-else
-    unset YUBIKEY_CONNECTED
+yubikey_connected() {
+  type gpg >/dev/null 2>&1 && gpg --card-status >/dev/null 2>&1 || yubikey_hardware_connected
+}
+
+update_yubikey_env() {
+    if yubikey_connected; then
+        export YUBIKEY_CONNECTED=1
+        git config --global --replace-all user.signingKey 843ED4E459C8AA1DD8F0069D1C34EFC6171B5E29
+        git config --global --replace-all gpg.format "openpgp"
+    else
+        unset YUBIKEY_CONNECTED
+        git config --global --replace-all user.signingKey "~/.ssh/id_rsa.pub"
+        git config --global --replace-all gpg.format "ssh"
+    fi
+}
+
+# Zsh: run before each prompt
+if [ -n "${ZSH_VERSION:-}" ]; then
+    autoload -Uz add-zsh-hook
+    add-zsh-hook precmd update_yubikey_env
+# Bash: run before each prompt
+elif [ -n "${BASH_VERSION:-}" ]; then
+    if [[ -z "${PROMPT_COMMAND:-}" ]]; then
+        PROMPT_COMMAND="update_yubikey_env"
+    else
+        PROMPT_COMMAND="update_yubikey_env; ${PROMPT_COMMAND}"
+    fi
 fi
 
 if gpg -k 843ED4E459C8AA1DD8F0069D1C34EFC6171B5E29 >/dev/null 2>&1 ;then

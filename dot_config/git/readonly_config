@@ -1,108 +1,105 @@
 [alias]
-  a = "!git status --short | peco | awk '{print $2}' | xargs git add"
-  amend = "commit --amend -m"
-  ba = "branch -a"
-  bm = "branch --merged"
-  bn = "branch --no-merged"
-  br = "branch"
-  ca = "commit -a"
-  ci = "commit"
-  co = "checkout"
-  d = "diff"
-  dat = "show --no-patch --no-notes --pretty='%cd'"
-  fa = "fetch --all"
-  lg = "log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''     %C(black)%s%C(reset) %C(dimwhite)- %an%C(reset)' --all"
-  llog = "log --graph --name-status --pretty=format:'%C(red)%h %C(reset)(%cd) %C(green)%an %Creset%s %C(yellow)%d%Creset' --date=relative"
-  lol = "log --graph --decorate --oneline"
-  lola = "log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --all"
-  pa = "!git remote | xargs -L1 git push --all"
-  pl = "!git pull origin $(git rev-parse --abbrev-ref HEAD)"
-  pln-release = "!'f() { git log '$1' --format=format:'%aE * [ ] %C(auto)%h %Creset%s' | sed 's/[0-9]\\{6,\\}+//g' | sed 's/users.noreply.github.com/quickbase.com/g' | sort | python3 ~/bin/email_sort.py; }; f'"
-  ps = "!git push origin $(git rev-parse --abbrev-ref HEAD)"
-  st = "status"
-  archive-branch = "!f() { \
-        : git switch; \
-        local git_branch=${1:-$(git branch --show-current)}; \
-        git co main && \
-            git tag archive/$git_branch $git_branch && \
-            git push origin archive/$git_branch && \
-            git push origin --delete $git_branch && \
-            git branch -D $git_branch; \
-    }; f"
-    # https://etc.octavore.com/2025/12/archiving-git-branches-as-tags/
+	a = "!git status --short | peco | awk '{print $2}' | xargs git add"
+	amend = "commit --amend -m"
+	ba = "branch -a"
+	bm = "branch --merged"
+	bn = "branch --no-merged"
+	br = "branch"
+	ca = "commit -a"
+	ci = "commit"
+	co = "checkout"
+	d = "diff"
+	dat = "show --no-patch --no-notes --pretty='%cd'"
+	fa = "fetch --all"
+	lg = "log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''	 %C(black)%s%C(reset) %C(dimwhite)- %an%C(reset)' --all"
+	llog = "log --graph --name-status --pretty=format:'%C(red)%h %C(reset)(%cd) %C(green)%an %Creset%s %C(yellow)%d%Creset' --date=relative"
+	lol = "log --graph --decorate --oneline"
+	lola = "log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --all"
+	pa = "!git remote | xargs -L1 git push --all"
+	pl = "!git pull origin $(git rev-parse --abbrev-ref HEAD)"
+	ps = "!git push origin $(git rev-parse --abbrev-ref HEAD)"
+	st = "status"
+	archive-branch = "!f() { \
+		: git switch; \
+		local git_branch=${1:-$(git branch --show-current)}; \
+		git co main && \
+			git tag archive/$git_branch $git_branch && \
+			git push origin archive/$git_branch && \
+			git push origin --delete $git_branch && \
+			git branch -D $git_branch; \
+	}; f"
+	# https://etc.octavore.com/2025/12/archiving-git-branches-as-tags/
 
 [include]
-  path = alias
+	path = alias
 
 [branch]
-  autosetuprebase = "always"
+	autosetuprebase = "always"
 
 [color]
-  branch = "auto"
-  status = "auto"
-  ui = true
+	branch = "auto"
+	status = "auto"
+	ui = true
 
 [commit]
-  gpgSign = true
-  gpgsign = true
-  template = "~/.git-commit.txt"
+	gpgSign = true
+	template = "~/.git-commit.txt"
 
 [core]
-  autocrlf = "input"
-  commitGraph = true
-  editor = "nvim"
-  excludesfile = "~/.gitignore"
-  ignorecase = false
-  quotepath = false
+	autocrlf = "input"
+	commitGraph = true
+	editor = "nvim"
+	excludesfile = "~/.gitignore"
+	ignorecase = false
+	quotepath = false
 
 [credential]
-  helper = "cache --timeout=57600"
+	helper = "cache --timeout=57600"
 
 [diff "sopsdiffer"]
-  textconv = "sops -d"
+	textconv = "sops -d"
 
 [fetch]
-  prune = true
+	prune = true
 
 [filter "lfs"]
-  clean = "git-lfs clean -- %f"
-  process = "git-lfs filter-process"
-  required = true
-  smudge = "git-lfs smudge -- %f"
+	clean = "git-lfs clean -- %f"
+	process = "git-lfs filter-process"
+	required = true
+	smudge = "git-lfs smudge -- %f"
 
 [gc]
-  writeCommitGraph = true
+	writeCommitGraph = true
 
 [gpg]
-  format = "openpgp"
+	format = "openpgp"
 
 [init]
-  defaultBranch = "main"
+	defaultBranch = "main"
 
 [merge]
-  conflictstyle = "diff3"
-  tool = "vimdiff"
+	conflictstyle = "diff3"
+	tool = "vimdiff"
 
 [mergetool]
-  prompt = false
+	prompt = false
 
 [push]
-  autoSetupRemote = true
-  default = "simple"
-  followTags = true
+	autoSetupRemote = true
+	default = "simple"
+	followTags = true
 
 [receive]
-  advertisePushOptions = true
-  procReceiveRefs = "refs/for"
+	advertisePushOptions = true
+	procReceiveRefs = "refs/for"
 
 [tag]
-  gpgSign = true
+	gpgSign = true
 
 [user]
-  email = "dxas90@gmail.com"
-  name = "Daniel Ramirez"
-  signingKey = 843ED4E459C8AA1DD8F0069D1C34EFC6171B5E29
-#  signingKey = "~/.ssh/id_rsa.pub"
+	email = "dxas90@gmail.com"
+	name = "Daniel Ramirez"
+	signingKey = 843ED4E459C8AA1DD8F0069D1C34EFC6171B5E29
 
 [includeIf "gitdir/i:~/C0D3/PAS/"]
-    path = ~/C0D3/PAS/.gitconfig
+	path = ~/C0D3/PAS/.gitconfig
