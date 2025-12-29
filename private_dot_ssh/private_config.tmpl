@@ -16,6 +16,8 @@ Host *
   ConnectTimeout 15                                          # Abort connection attempts after 15 seconds
   ConnectionAttempts 3                                       # Retry connection 3 times before failing
   HashKnownHosts yes                                         # Hash entries in known_hosts for privacy
+  RequestTTY yes                                             # Request a TTY for all connections
+  RemoteCommand bash -lc 'command -v tmux && tmux new -A -s %h || exec $SHELL'        # Start tmux session if available
 {{- if (env "XDG_RUNTIME_DIR") }}
   IdentityAgent {{ env "XDG_RUNTIME_DIR" }}/ssh-agent.socket              # Specify custom SSH agent socket for authentication
 {{- end }}
