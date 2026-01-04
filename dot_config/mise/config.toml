@@ -1,3 +1,4 @@
 [tools]
 node = "22"
-"ubi:sst/opencode" = "1.0.132"
+python = "3.14"
+yt-dlp = "latest"
