@@ -72,7 +72,7 @@
 	writeCommitGraph = true
 
 [gpg]
-	format = "openpgp"
+	format = ssh
 
 [init]
 	defaultBranch = "main"
@@ -99,7 +99,7 @@
 [user]
 	email = "dxas90@gmail.com"
 	name = "Daniel Ramirez"
-	signingKey = 843ED4E459C8AA1DD8F0069D1C34EFC6171B5E29
+	signingKey = ~/.ssh/id_rsa.pub
 
 [includeIf "gitdir/i:~/C0D3/PAS/"]
 	path = ~/C0D3/PAS/.gitconfig
