@@ -1,0 +1,11 @@
+AvoidDiskWrites 1
+
+ExitNodes {RO},{GR},{BG},{HU}
+StrictNodes 1
+
+HTTPTunnelPort 2080
+SocksPort 2050
+ControlPort 2051
+
+HardwareAccel 1
+
