@@ -1,10 +1,10 @@
 {{ if and (eq .chezmoi.os "linux") (ne (env "XDG_SESSION_TYPE") "") -}} # VSCode-linux
-[".local/opt/VSCode-linux-x64"]
-  type = "archive"
-  stripComponents = 1
-  refreshPeriod = "168h"
-  url = "https://code.visualstudio.com/sha/download?build=stable&os=linux-x64"
-  exact = false
+# [".local/opt/VSCode-linux-x64"]
+#   type = "archive"
+#   stripComponents = 1
+#   refreshPeriod = "168h"
+#   url = "https://code.visualstudio.com/sha/download?build=stable&os=linux-x64"
+#   exact = false
 [".local/share/fonts"]
   type = "archive"
   url = '{{ gitHubLatestReleaseAssetURL "adobe-fonts/source-code-pro" (printf "OTF-source-code-pro-*.zip") }}'
@@ -16,19 +16,6 @@
 #   stripComponents = 1
 #   url = '{{ $release := gitHubLatestRelease "podman-desktop/podman-desktop" }}{{ range $release.Assets }}{{ if regexMatch "^podman-desktop-[0-9.]+\\.tar\\.gz$" .Name }}{{ .BrowserDownloadURL }}{{ end }}{{ end }}'
 #   exact = false
-# [".local/bin/podman"]
-#     type = "archive-file"
-#     executable = true
-#     path = "bin/podman-remote-static-linux_amd64"
-#     url = {{ gitHubLatestReleaseAssetURL "containers/podman" "podman-remote-static-linux_amd64.tar.gz" | quote }}
-# [".local/bin/gvproxy"]
-#   type = "file"
-#   executable = true
-#   url = '{{ gitHubLatestReleaseAssetURL "containers/gvisor-tap-vsock" (printf "gvproxy-%s-%s" .chezmoi.os .chezmoi.arch) }}'
-# [".local/bin/virtiofsd"]
-#   type = "archive-file"
-#   url = 'https://gitlab.com/virtio-fs/virtiofsd/-/jobs/artifacts/main/download?job=publish'
-#   path = "target/x86_64-unknown-{{ .chezmoi.os }}-musl/release/virtiofsd"
 {{ end -}} # VSCode-linux
 
 # [".local/bin"]

@@ -23,20 +23,20 @@ install_dependencies_linux() {
   case "$ID" in
     debian|ubuntu)
       sudo apt update
-      sudo apt install -y curl unzip git usbutils
+      sudo apt install -y curl unzip git usbutils passt
       ;;
     fedora)
-      sudo dnf install -y curl unzip git usbutils
+      sudo dnf install -y curl unzip git usbutils passt
       ;;
     centos|rhel)
-      sudo yum install -y curl unzip git usbutils
+      sudo yum install -y curl unzip git usbutils passt
       ;;
     opensuse*|suse|sles)
       sudo zypper refresh
-      sudo zypper install -y curl unzip git usbutils
+      sudo zypper install -y curl unzip git usbutils passt
       ;;
     arch|manjaro)
-      sudo pacman -Sy --noconfirm curl unzip git usbutils
+      sudo pacman -Sy --noconfirm curl unzip git usbutils passt
       ;;
     *)
       echo "Unsupported Linux distribution: $ID"
@@ -56,7 +56,11 @@ main() {
   fi
   if ! command -v ~/.local/bin/mise &>/dev/null; then
     echo "mise not found. Installing..."
-  curl -sL https://mise.run | sh
+    curl -sL https://mise.run | sh
+  fi
+  if ! command -v ~/.local/bin/uv &>/dev/null; then
+    echo "uv not found. Installing..."
+    curl -sL https://astral.sh/uv/install.sh | sh
   fi
 }
 

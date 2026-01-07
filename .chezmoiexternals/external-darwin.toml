@@ -42,17 +42,6 @@
   exact = false
   stripComponents = 1
   url = '{{ gitHubLatestReleaseAssetURL "neovim/neovim" (printf "nvim-macos-*%s.tar.gz" .chezmoi.arch) }}'
-# curl -LsSf https://astral.sh/uv/install.sh | sh
-[".local/bin/uv"]
-  type = "archive-file"
-  executable = true
-  url = '{{ gitHubLatestReleaseAssetURL "astral-sh/uv" (printf "uv-aarch64-apple-%s.tar.gz" .chezmoi.os) }}'
-  path = "uv-aarch64-apple-{{ .chezmoi.os }}/uv"
-[".local/bin/uvx"]
-  type = "archive-file"
-  executable = true
-  url = '{{ gitHubLatestReleaseAssetURL "astral-sh/uv" (printf "uv-aarch64-apple-%s.tar.gz" .chezmoi.os) }}'
-  path = "uv-aarch64-apple-{{ .chezmoi.os }}/uvx"
 [".local/bin/croc"]
   type = "archive-file"
   executable = true

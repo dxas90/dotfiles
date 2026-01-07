@@ -84,19 +84,6 @@
   stripComponents = 1
   url = '{{ gitHubLatestReleaseAssetURL "neovim/neovim" (printf "nvim-*%s-x86_64.tar.gz" .chezmoi.os) }}'
 
-# curl -LsSf https://astral.sh/uv/install.sh | sh
-[".local/bin/uv"]
-  type = "archive-file"
-  executable = true
-  url = '{{ gitHubLatestReleaseAssetURL "astral-sh/uv" (printf "uv-x86_64-unknown-%s-gnu.tar.gz" .chezmoi.os) }}'
-  path = "uv-x86_64-unknown-{{ .chezmoi.os }}-gnu/uv"
-
-[".local/bin/uvx"]
-  type = "archive-file"
-  executable = true
-  url = '{{ gitHubLatestReleaseAssetURL "astral-sh/uv" (printf "uv-x86_64-unknown-%s-gnu.tar.gz" .chezmoi.os) }}'
-  path = "uv-x86_64-unknown-{{ .chezmoi.os }}-gnu/uvx"
-
 [".local/bin/croc"]
   type = "archive-file"
   executable = true
@@ -109,6 +96,21 @@
     stripComponents = 1
     path = "glow"
     url = {{ gitHubLatestReleaseAssetURL "charmbracelet/glow" "glow_*_Linux_x86_64.tar.gz" | quote }}
+
+[".local/bin/podman"]
+    type = "archive-file"
+    executable = true
+    path = "bin/podman-remote-static-linux_amd64"
+    url = {{ gitHubLatestReleaseAssetURL "containers/podman" "podman-remote-static-linux_amd64.tar.gz" | quote }}
+[".local/bin/gvproxy"]
+  type = "file"
+  executable = true
+  url = '{{ gitHubLatestReleaseAssetURL "containers/gvisor-tap-vsock" (printf "gvproxy-%s-%s" .chezmoi.os .chezmoi.arch) }}'
+[".local/bin/virtiofsd"]
+  type = "archive-file"
+  url = 'https://gitlab.com/virtio-fs/virtiofsd/-/jobs/artifacts/main/download?job=publish'
+  path = "target/x86_64-unknown-{{ .chezmoi.os }}-musl/release/virtiofsd"
+  executable = true
 
 {{ end -}} # linux-only tools
 {{ end -}} # external_tools
