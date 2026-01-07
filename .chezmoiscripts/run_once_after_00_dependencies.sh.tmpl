@@ -37,21 +37,21 @@ install_dependencies_linux() {
       $ROOT "apk add --no-cache curl unzip git usbutils passt sudo"
       ;;
     debian|ubuntu)
-      $ROOT "apt update"
-      $ROOT "apt install -y sudo curl unzip git usbutils passt --no-install-recommends --no-install-suggests"
+      $ROOT apt update
+      $ROOT apt install -y sudo curl unzip git usbutils passt --no-install-recommends --no-install-suggests
       ;;
     fedora)
-      $ROOT "dnf install -y sudo curl unzip git usbutils passt"
+      $ROOT dnf install -y sudo curl unzip git usbutils passt
       ;;
     centos|rhel)
       $ROOT "yum install -y sudo curl unzip git usbutils passt"
       ;;
     opensuse*|suse|sles)
-      $ROOT "zypper refresh"
-      $ROOT "zypper install -y sudo curl unzip git usbutils passt --no-recommends"
+      $ROOT zypper refresh
+      $ROOT zypper install -y sudo curl unzip git usbutils passt --no-recommends
       ;;
     arch|manjaro)
-      $ROOT "pacman -Sy --noconfirm sudo curl unzip git usbutils passt"
+      $ROOT pacman -Sy --noconfirm sudo curl unzip git usbutils passt
       ;;
     *)
       echo "Unsupported Linux distribution: $ID"
