@@ -17,26 +17,37 @@ install_dependencies_mac() {
 }
 
 install_dependencies_linux() {
-  echo "Detected Linux system"
+  echo "Installing required tools on Linux"
+
+  # Root runner
+  if command -v sudo &>/dev/null; then
+    ROOT="sudo"
+  elif command -v su &>/dev/null; then
+    ROOT='su -c'
+  else
+    echo "Error: neither sudo nor su available"
+    exit 1
+  fi
+
   . /etc/os-release
 
   case "$ID" in
     debian|ubuntu)
-      sudo apt update
-      sudo apt install -y curl unzip git usbutils passt
+      $ROOT "apt update"
+      $ROOT "apt install -y sudo curl unzip git usbutils passt"
       ;;
     fedora)
-      sudo dnf install -y curl unzip git usbutils passt
+      $ROOT "dnf install -y sudo curl unzip git usbutils passt"
       ;;
     centos|rhel)
-      sudo yum install -y curl unzip git usbutils passt
+      $ROOT "yum install -y sudo curl unzip git usbutils passt"
       ;;
     opensuse*|suse|sles)
-      sudo zypper refresh
-      sudo zypper install -y curl unzip git usbutils passt
+      $ROOT "zypper refresh"
+      $ROOT "zypper install -y sudo curl unzip git usbutils passt"
       ;;
     arch|manjaro)
-      sudo pacman -Sy --noconfirm curl unzip git usbutils passt
+      $ROOT "pacman -Sy --noconfirm sudo curl unzip git usbutils passt"
       ;;
     *)
       echo "Unsupported Linux distribution: $ID"
