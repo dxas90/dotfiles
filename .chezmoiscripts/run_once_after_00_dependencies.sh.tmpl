@@ -32,6 +32,10 @@ install_dependencies_linux() {
   . /etc/os-release
 
   case "$ID" in
+    alpine)
+      # Alpine usually runs as root; sudo is optional
+      $ROOT "apk add --no-cache curl unzip git usbutils passt sudo"
+      ;;
     debian|ubuntu)
       $ROOT "apt update"
       $ROOT "apt install -y sudo curl unzip git usbutils passt --no-install-recommends --no-install-suggests"
