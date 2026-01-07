@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# https://lima-vm.io/docs/installation/
+
+VERSION=$(curl -fsSL https://api.github.com/repos/containers/netavark/releases/latest | jq -r .tag_name)
+
+curl -fsSL https://github.com/containers/netavark/releases/download/v1.17.1/netavark.gz |  gzip -d - > ~/.local/bin/netavark
+
+chmod +x ~/.local/bin/netavark

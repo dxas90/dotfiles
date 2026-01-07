@@ -1,3 +1,5 @@
 {{ if stat (joinPath (env "HOME") "Sync/chezmoi.kdbx") -}}
+{{ if eq (lookPath "keepassxc-cli") "" -}}
 {{- keepassxcAttachment "Notes/SSH/forgejo" "forgejo" -}}
+{{ end -}}
 {{ end -}}
