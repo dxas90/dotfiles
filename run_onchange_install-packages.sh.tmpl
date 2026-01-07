@@ -29,3 +29,5 @@ sudo dnf install -y {{ .packages.fedora.dnf | join " " }}
   {{   end -}}
   {{   end -}}
 {{ end -}}
+
+echo "Package installation complete."
