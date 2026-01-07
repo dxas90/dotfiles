@@ -34,7 +34,7 @@ install_dependencies_linux() {
   case "$ID" in
     debian|ubuntu)
       $ROOT "apt update"
-      $ROOT "apt install -y sudo curl unzip git usbutils passt"
+      $ROOT "apt install -y sudo curl unzip git usbutils passt --no-install-recommends --no-install-suggests"
       ;;
     fedora)
       $ROOT "dnf install -y sudo curl unzip git usbutils passt"
@@ -44,7 +44,7 @@ install_dependencies_linux() {
       ;;
     opensuse*|suse|sles)
       $ROOT "zypper refresh"
-      $ROOT "zypper install -y sudo curl unzip git usbutils passt"
+      $ROOT "zypper install -y sudo curl unzip git usbutils passt --no-recommends"
       ;;
     arch|manjaro)
       $ROOT "pacman -Sy --noconfirm sudo curl unzip git usbutils passt"
