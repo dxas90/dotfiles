@@ -43,8 +43,7 @@ function install_or_update_rust() {
   source "$HOME/.cargo/env" >/dev/null 2>&1 || true
   if command -v rustup >/dev/null 2>&1; then
     echo "Rust is already installed. Updating..."
-    rustup self update
-    rustup update
+    rustup update 2>&1 >/dev/null
   else
     echo "Installing Rust..."
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y

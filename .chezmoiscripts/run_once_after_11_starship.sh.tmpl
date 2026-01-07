@@ -1,0 +1,4 @@
+#!/bin/sh
+{{ if eq (lookPath "starship") "" -}}
+curl -sS https://starship.rs/install.sh | STARSHIP_INSTALL=true sh -s -- -y
+{{ end -}}

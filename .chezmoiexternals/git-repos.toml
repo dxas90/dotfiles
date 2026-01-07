@@ -1,0 +1,7 @@
+# [".pyenv"]
+#   type = "git-repo"
+#   refreshPeriod = "168h"
+#   url = "https://github.com/pyenv/pyenv.git"
+#   clone.args = ["--depth", "1"]
+
+# ex: ts=4 sw=4 et filetype=toml

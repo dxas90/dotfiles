@@ -1,0 +1,80 @@
+{{- if .external_tools -}} # external_tools
+[".local/bin/kubectl"]
+  type = "file"
+  url = "https://dl.k8s.io/release/v{{ .tools.kubectl.version }}/bin/{{ .chezmoi.os }}/{{ .chezmoi.arch }}/kubectl"
+  executable = true
+[".local/bin/kubectl-oidc_login"]
+  type = "archive-file"
+  url = '{{ gitHubLatestReleaseAssetURL "int128/kubelogin" (printf "kubelogin_%s_%s.zip" .chezmoi.os .chezmoi.arch) }}'
+  executable = true
+  path = "kubelogin"
+[".local/bin/kubectl-krew"]
+  type = "archive-file"
+  executable = true
+  url = '{{ gitHubLatestReleaseAssetURL "kubernetes-sigs/krew" (printf "krew-%s_%s.tar.gz" .chezmoi.os .chezmoi.arch) }}'
+  path = "./krew-{{ .chezmoi.os }}_{{ .chezmoi.arch }}"
+[".local/bin/k3d"]
+  type = "file"
+  url = '{{ gitHubLatestReleaseAssetURL "k3d-io/k3d" (printf "k3d-%s-%s*" .chezmoi.os .chezmoi.arch) }}'
+  executable = true
+[".local/bin/kind"]
+  type = "file"
+  url = '{{ gitHubLatestReleaseAssetURL "kubernetes-sigs/kind" (printf "kind-%s-%s*" .chezmoi.os .chezmoi.arch) }}'
+  executable = true
+[".local/bin/age"]
+  type = "archive-file"
+  url = "https://github.com/FiloSottile/age/releases/download/v{{ .tools.age.version }}/age-v{{ .tools.age.version }}-{{ .chezmoi.os }}-{{ .chezmoi.arch }}.tar.gz"
+  path = "age/age"
+  executable = true
+[".local/bin/gopass"]
+  type = "archive-file"
+  url = '{{ gitHubLatestReleaseAssetURL "gopasspw/gopass" (printf "gopass-*-%s-%s.tar.gz" .chezmoi.os .chezmoi.arch ) }}'
+  path = "gopass"
+  executable = true
+[".local/bin/sops"]
+  type = "file"
+  url = '{{ gitHubLatestReleaseAssetURL "getsops/sops" (printf "sops-*.%s.%s*" .chezmoi.os .chezmoi.arch ) }}'
+  executable = true
+[".local/bin/yq"]
+  type = "file"
+  url = '{{ gitHubLatestReleaseAssetURL "mikefarah/yq" (printf "yq_%s_%s*" .chezmoi.os .chezmoi.arch ) }}'
+  executable = true
+[".local/bin/helm"]
+  type = "archive-file"
+  url = "https://get.helm.sh/helm-v{{ .tools.helm.version }}-{{ .chezmoi.os }}-{{ .chezmoi.arch }}.tar.gz"
+  executable = true
+  path = "{{ .chezmoi.os }}-{{ .chezmoi.arch }}/helm"
+[".local/bin/flux"]
+  type = "archive-file"
+  url = '{{ gitHubLatestReleaseAssetURL "fluxcd/flux2" (printf "flux_*_%s_%s.tar.gz" .chezmoi.os .chezmoi.arch) }}'
+  path = "flux"
+  executable = true
+[".local/bin/fzf"]
+  type = "archive-file"
+  executable = true
+  url = '{{ gitHubLatestReleaseAssetURL "junegunn/fzf" (printf "*%s_%s*" .chezmoi.os .chezmoi.arch) }}'
+  path = "fzf"
+[".local/go"]
+  type = "archive"
+  refreshPeriod = "168h"
+  url = "https://go.dev/dl/go{{ .tools.go.version }}.{{ .chezmoi.os }}-{{ .chezmoi.arch }}.tar.gz"
+  exact = false
+  stripComponents = 1
+[".local/bin/operator-sdk"]
+  type = "file"
+  url = '{{ gitHubLatestReleaseAssetURL "operator-framework/operator-sdk" (printf "operator-sdk_%s_%s*" .chezmoi.os .chezmoi.arch) }}'
+  executable = true
+[".local/bin/terraform"]
+  type = "archive-file"
+  url = "https://releases.hashicorp.com/terraform/{{ .tools.terraform.version }}/terraform_{{ .tools.terraform.version }}_{{ .chezmoi.os }}_{{ .chezmoi.arch }}.zip"
+  path = "terraform"
+  executable = true
+[".local/bin/terragrunt"]
+  type = "file"
+  url = '{{ gitHubLatestReleaseAssetURL "gruntwork-io/terragrunt" (printf "terragrunt_%s_%s*" .chezmoi.os .chezmoi.arch) }}'
+  executable = true
+[".local/bin/vcluster"]
+  type = "file"
+  url = '{{ gitHubLatestReleaseAssetURL "loft-sh/vcluster" (printf "vcluster-%s-%s*" .chezmoi.os .chezmoi.arch ) }}'
+  executable = true
+{{ end -}} # external_tools

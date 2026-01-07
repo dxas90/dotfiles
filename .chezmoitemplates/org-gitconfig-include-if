@@ -1,0 +1,2 @@
+[includeIf "gitdir/i:{{ .dir_entry -}}"]
+	path = {{ .dir_entry -}}.gitconfig

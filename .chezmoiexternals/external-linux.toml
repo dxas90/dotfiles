@@ -1,0 +1,114 @@
+{{- if .external_tools -}} # external_tools
+{{ if eq .chezmoi.os "linux" -}}
+[".local/bin/jq"]
+  type = "file"
+  refreshPeriod = "168h"
+  url = '{{ gitHubLatestReleaseAssetURL "jqlang/jq" (printf "jq-%s-%s*" .chezmoi.os .chezmoi.arch ) }}'
+  executable = true
+[".local/bin/rclone"]
+  type = "archive-file"
+  refreshPeriod = "168h"
+  url = "https://downloads.rclone.org/v{{ .tools.rclone.version }}/rclone-v{{ .tools.rclone.version }}-{{ .chezmoi.os }}-{{ .chezmoi.arch }}.zip"
+  path = "rclone-v{{ .tools.rclone.version }}-{{ .chezmoi.os }}-{{ .chezmoi.arch }}/rclone"
+  executable = true
+[".local/bin/speedtest"]
+  type = "archive-file"
+  refreshPeriod = "168h"
+  url = "https://install.speedtest.net/app/cli/ookla-speedtest-1.2.0-linux-x86_64.tgz"
+  path = "speedtest"
+  executable = true
+[".local/bin/eza"]
+  type = "archive-file"
+  refreshPeriod = "168h"
+  url = '{{ gitHubLatestReleaseAssetURL "eza-community/eza" (printf "eza_x86_64-unknown-%s-gnu.zip" .chezmoi.os) }}'
+  path = "eza"
+  executable = true
+[".local/bin/rbw"]
+  type = "archive-file"
+  url = '{{ gitHubLatestReleaseAssetURL "doy/rbw" (printf "rbw_*_%s_%s*" .chezmoi.os .chezmoi.arch) }}'
+  path = "rbw"
+  executable = true
+[".local/bin/rbw-agent"]
+  type = "archive-file"
+  url = '{{ gitHubLatestReleaseAssetURL "doy/rbw" (printf "rbw_*_%s_%s*" .chezmoi.os .chezmoi.arch) }}'
+  path = "rbw-agent"
+  executable = true
+
+[".local/bin/k9s"]
+  type = "archive-file"
+  executable = true
+  path = "k9s"
+  url = '{{ gitHubLatestReleaseAssetURL "derailed/k9s" (printf "k9s_Linux_%s*.tar.gz" .chezmoi.arch) }}'
+[".local/bin/age-plugin-yubikey"]
+  type = "archive-file"
+  executable = true
+{{ if not (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
+  url = '{{ gitHubLatestReleaseAssetURL "str4d/age-plugin-yubikey" (printf "age-plugin-yubikey-*-x86_64-%s.tar.gz" .chezmoi.os ) }}'
+  path = "age-plugin-yubikey/age-plugin-yubikey"
+{{ else -}}
+  url = '{{ gitHubLatestReleaseAssetURL "str4d/age-plugin-yubikey" (printf "age-plugin-yubikey-*-x86_64-windows.zip" ) }}'
+  path = "age-plugin-yubikey/age-plugin-yubikey.exe"
+{{ end -}}
+[".local/bin/docker-compose"]
+  type = "file"
+  executable = true
+  url = '{{ gitHubLatestReleaseAssetURL "docker/compose" (printf "docker-compose-%s-x86_64*" .chezmoi.os ) }}'
+[".local/bin/lazygit"]
+  type = "archive-file"
+  executable = true
+  path = "lazygit"
+  url = '{{ gitHubLatestReleaseAssetURL "jesseduffield/lazygit" (printf "*linux_x86_64*" ) }}'
+[".local/bin/bat"]
+  type = "archive-file"
+  {{ $batVersion := (gitHubLatestRelease "sharkdp/bat").TagName }}
+  url = '{{ gitHubLatestReleaseAssetURL "sharkdp/bat" (printf "*x86_64-unknown-%s-gnu*" .chezmoi.os ) }}'
+  path = "bat-{{ $batVersion }}-x86_64-unknown-{{ .chezmoi.os }}-gnu/bat"
+  executable = true
+[".local/bin/fd"]
+  type = "archive-file"
+  executable = true
+  {{ $fdVersion := (gitHubLatestRelease "sharkdp/fd").TagName }}
+  url = '{{ gitHubLatestReleaseAssetURL "sharkdp/fd" (printf "fd-*-x86_64-unknown-%s-gnu*" .chezmoi.os) }}'
+  path = "fd-{{ $fdVersion }}-x86_64-unknown-{{ .chezmoi.os }}-gnu/fd"
+
+[".local/bin/rg"]
+  type = "archive-file"
+  executable = true
+  {{ $rgVersion := (gitHubLatestRelease "BurntSushi/ripgrep").TagName }}
+  url = '{{ gitHubLatestReleaseAssetURL "BurntSushi/ripgrep" (printf "*x86_64-unknown-%s-musl*" .chezmoi.os ) }}'
+  path = "ripgrep-{{ $rgVersion }}-x86_64-unknown-{{ .chezmoi.os }}-musl/rg"
+
+[".local/"]
+  type = "archive"
+  exact = false
+  stripComponents = 1
+  url = '{{ gitHubLatestReleaseAssetURL "neovim/neovim" (printf "nvim-*%s-x86_64.tar.gz" .chezmoi.os) }}'
+
+# curl -LsSf https://astral.sh/uv/install.sh | sh
+[".local/bin/uv"]
+  type = "archive-file"
+  executable = true
+  url = '{{ gitHubLatestReleaseAssetURL "astral-sh/uv" (printf "uv-x86_64-unknown-%s-gnu.tar.gz" .chezmoi.os) }}'
+  path = "uv-x86_64-unknown-{{ .chezmoi.os }}-gnu/uv"
+
+[".local/bin/uvx"]
+  type = "archive-file"
+  executable = true
+  url = '{{ gitHubLatestReleaseAssetURL "astral-sh/uv" (printf "uv-x86_64-unknown-%s-gnu.tar.gz" .chezmoi.os) }}'
+  path = "uv-x86_64-unknown-{{ .chezmoi.os }}-gnu/uvx"
+
+[".local/bin/croc"]
+  type = "archive-file"
+  executable = true
+  path = "croc"
+  url = {{ gitHubLatestReleaseAssetURL "schollz/croc" "croc_v*_Linux-64bit.tar.gz" | quote }}
+
+[".local/bin/glow"]
+    type = "archive-file"
+    executable = true
+    stripComponents = 1
+    path = "glow"
+    url = {{ gitHubLatestReleaseAssetURL "charmbracelet/glow" "glow_*_Linux_x86_64.tar.gz" | quote }}
+
+{{ end -}} # linux-only tools
+{{ end -}} # external_tools

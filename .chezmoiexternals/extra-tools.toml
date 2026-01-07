@@ -1,0 +1,116 @@
+{{- if .external_tools -}} # external_tools
+{{- if .external_tools -}} # extra_tools
+[".linkerd2/bin/linkerd"]
+  type = "file"
+  refreshPeriod = "168h"
+  url = "https://github.com/linkerd/linkerd2/releases/download/edge-{{ .tools.linkerd2.version }}/linkerd2-cli-edge-{{ .tools.linkerd2.version }}-{{ .chezmoi.os }}-{{ .chezmoi.arch }}"
+  executable = true
+[".linkerd2/bin/linkerd-smi"]
+  type = "file"
+  refreshPeriod = "168h"
+  url = '{{ gitHubLatestReleaseAssetURL "linkerd/linkerd-smi" (printf "linkerd-smi-*-%s-%s*" .chezmoi.os .chezmoi.arch ) }}'
+  executable = true
+[".local/bin/bws"]
+  type = "archive-file"
+  path = "bws"
+  refreshPeriod = "168h"
+  executable = true
+{{ if eq .chezmoi.os "darwin" -}}
+  url = 'https://github.com/bitwarden/sdk-sm/releases/download/bws-v{{ .tools.bws.version }}/bws-aarch64-apple-{{ .chezmoi.os }}-{{ .tools.bws.version }}.zip'
+{{ else if eq .chezmoi.os "linux" -}}
+  url = 'https://github.com/bitwarden/sdk-sm/releases/download/bws-v{{ .tools.bws.version }}/bws-x86_64-unknown-{{ .chezmoi.os }}-gnu-{{ .tools.bws.version }}.zip'
+{{ end -}}
+{{ if eq .chezmoi.os "linux" -}}
+[".local/bin/hugo"]
+  type = "archive-file"
+  path = "hugo"
+  refreshPeriod = "168h"
+  url = '{{ gitHubLatestReleaseAssetURL "gohugoio/hugo" (printf "hugo_extended_withdeploy_*%s-%s.tar.gz" .chezmoi.os .chezmoi.arch) }}'
+{{ end -}}
+[".local/bin/autok3s"]
+  type = "file"
+  refreshPeriod = "168h"
+  executable = true
+  url = '{{ gitHubLatestReleaseAssetURL "cnrancher/autok3s" (printf "autok3s_%s_%s*" .chezmoi.os .chezmoi.arch) }}'
+# [".local/bin/cloudflared"]
+#   type = "file"
+#   url = "https://github.com/cloudflare/cloudflared/releases/download/{{ .tools.cloudflared.version }}/cloudflared-{{ .chezmoi.os }}-{{ .chezmoi.arch }}"
+#   executable = true
+[".local/bin/devspace"]
+  type = "file"
+  refreshPeriod = "168h"
+  url = '{{ gitHubLatestReleaseAssetURL "loft-sh/devspace" (printf "devspace-%s-%s*" .chezmoi.os .chezmoi.arch ) }}'
+  executable = true
+[".local/bin/argocd"]
+  type = "file"
+  refreshPeriod = "168h"
+  url = '{{ gitHubLatestReleaseAssetURL "argoproj/argo-cd" (printf "argocd-%s-%s*" .chezmoi.os .chezmoi.arch ) }}'
+  executable = true
+{{ if eq .chezmoi.os "linux" -}}
+[".local/bin/kopia"]
+  type = "archive-file"
+  refreshPeriod = "168h"
+  url = "https://github.com/kopia/kopia/releases/download/v{{ .tools.kopia.version }}/kopia-{{ .tools.kopia.version }}-{{ .chezmoi.os }}-x64.tar.gz"
+  executable = true
+  path = "kopia-{{ .tools.kopia.version }}-{{ .chezmoi.os }}-x64/kopia"
+{{ end -}}
+[".local/bin/git-credential-keepassxc"]
+  type = "archive-file"
+  path = "git-credential-keepassxc"
+  refreshPeriod = "168h"
+{{ if eq .chezmoi.os "darwin" -}}
+  url = '{{ gitHubLatestReleaseAssetURL "Frederick888/git-credential-keepassxc" (printf "*macos*full*") }}'
+{{ else if eq .chezmoi.os "linux" -}}
+  url = '{{ gitHubLatestReleaseAssetURL "Frederick888/git-credential-keepassxc" (printf "*ubuntu*full*") }}'
+{{ end -}}
+[".local/bin/talosctl"]
+  type = "file"
+  executable = true
+  refreshPeriod = "168h"
+  url = '{{ gitHubLatestReleaseAssetURL "siderolabs/talos" (printf "talosctl-%s-%s" .chezmoi.os .chezmoi.arch) }}'
+# [".local/bin/direnv"]
+#   type = "file"
+#   url = "https://github.com/direnv/direnv/releases/download/v{{ .tools.direnv.version }}/direnv.{{ .chezmoi.os }}-{{ .chezmoi.arch }}"
+#   refreshPeriod = "168h"
+#   executable = true
+[".local/bin/task"]
+  type = "archive-file"
+  url = "https://github.com/go-task/task/releases/download/v{{ .tools.go_task.version }}/task_{{ .chezmoi.os }}_{{ .chezmoi.arch }}.tar.gz"
+  path = "task"
+  refreshPeriod = "168h"
+  executable = true
+[".local/bin/zoxide"]
+  type = "archive-file"
+  executable = true
+  path = "zoxide"
+  refreshPeriod = "168h"
+{{ if eq .chezmoi.os "darwin" -}}
+  url = '{{ gitHubLatestReleaseAssetURL "ajeetdsouza/zoxide" (printf "*aarch64-apple-%s.tar.gz" .chezmoi.os) }}'
+{{ else if eq .chezmoi.os "linux" -}}
+  url = '{{ gitHubLatestReleaseAssetURL "ajeetdsouza/zoxide" (printf "*x86_64-unknown-%s-musl*" .chezmoi.os) }}'
+{{ end -}}
+# [".local/bin/vault"]
+#   type = "archive-file"
+#   executable = true
+# {{ $vaultVersionRaw := (gitHubLatestRelease "hashicorp/vault").TagName }}
+# {{ $vaultVersion := trimPrefix "v" $vaultVersionRaw }}
+#   url = 'https://releases.hashicorp.com/vault/{{ $vaultVersion }}/vault_{{ $vaultVersion }}_{{ .chezmoi.os }}_{{ .chezmoi.arch }}.zip'
+#   path = "vault"
+# [".local/bin/helm-operator"]
+#   type = "file"
+#   url = '{{ gitHubLatestReleaseAssetURL "operator-framework/operator-sdk" (printf "helm-operator_%s_%s*" .chezmoi.os .chezmoi.arch) }}'
+#   executable = true
+[".local/google-cloud-sdk"]
+  type = "archive"
+  exact = false
+  refreshPeriod = "168h"
+  stripComponents = 1
+{{ if eq .chezmoi.os "darwin" -}}
+  url = "https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-darwin-arm.tar.gz"
+{{ else if eq .chezmoi.os "linux" -}}
+  url = "https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-x86_64.tar.gz"
+{{ end -}}
+{{ end -}} # HERE extra_tools
+{{ end -}} # HERE external_tools
+
+# ex: ts=4 sw=4 et filetype=toml

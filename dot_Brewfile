@@ -305,7 +305,6 @@ brew zstd
 tap homebrew/services
 
 tap homebrew/cask
-cask alacritty
 cask appcleaner
 cask audacity
 cask audio-hijack

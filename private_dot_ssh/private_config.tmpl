@@ -1,3 +1,9 @@
+Match tagged aws-ssm
+  ProxyCommand       aws ssm start-session --target %h --document-name AWS-StartSSHSession --parameters portNumber=%p
+
+Match tagged tmux-ready
+  RemoteCommand bash -lc 'command -v tmux && tmux new -A -s %h || exec $SHELL'        # Start tmux session if available
+
 # Global settings for all hosts
 Host *
   ServerAliveInterval 30                                     # Keep connections alive every 30 seconds
@@ -17,7 +23,6 @@ Host *
   ConnectionAttempts 3                                       # Retry connection 3 times before failing
   HashKnownHosts yes                                         # Hash entries in known_hosts for privacy
   RequestTTY yes                                             # Request a TTY for all connections
-#  RemoteCommand bash -lc 'command -v tmux && tmux new -A -s %h || exec $SHELL'        # Start tmux session if available
 {{- if (env "XDG_RUNTIME_DIR") }}
   IdentityAgent {{ env "XDG_RUNTIME_DIR" }}/ssh-agent.socket              # Specify custom SSH agent socket for authentication
 {{- end }}
@@ -42,7 +47,6 @@ Host i-* mi-*
   AddressFamily inet                # Use IPv4 exclusively
   PasswordAuthentication no         # Disable password authentication
   IdentitiesOnly yes                # Only use specified identities
-   #ProxyCommand            aws ssm start-session --target %h --document-name AWS-StartSSHSession --parameters portNumber=%p
   ProxyCommand aws ssm start-session --target %h  # Use AWS SSM for proxying
   ControlMaster auto                # Enable multiplexing
   ControlPath ~/.ssh/control:%h:%p:%r  # Path for multiplexing socket
@@ -68,3 +72,6 @@ Host another-server
   User daniel
   Port 2222            # Custom port
   ProxyJump myserver   # Jump through 'myserver' to access this host
+
+Host 10.*
+  Tag tmux-ready
