@@ -1,5 +1,5 @@
 {{- if .external_tools -}} # external_tools
-{{- if .external_tools -}} # extra_tools
+{{- if .extra_tools -}} # extra_tools
 [".linkerd2/bin/linkerd"]
   type = "file"
   refreshPeriod = "168h"

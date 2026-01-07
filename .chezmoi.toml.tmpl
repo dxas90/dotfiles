@@ -1,7 +1,7 @@
 {{- $secrets := promptBool "Do you want to enable secrets 🔐" false -}}
-{{- $secrets_homelab := promptBool "Are you at home 🏡" false -}}
-{{- $external_tools := promptBool "Do you want to enable external tools (requires GITHUB_TOKEN) 🤖" true -}}
-{{- $extra_tools := promptBool "Do you want to enable the other extra tools 🤔" false -}}
+{{- $secrets_homelab := promptBool "Are you at home 🛖" false -}}
+{{- $external_tools := promptBool "Do you want to enable external tools (requires GITHUB_TOKEN) 📌" true -}}
+{{- $extra_tools := promptBool "Do you want to enable the other extra tools 🗜️" false -}}
 
 encryption = "age"
 [age] # yubikey 1 and backup
