@@ -16,6 +16,12 @@
 - `run_onchange_*` → scripts re-run when their content changes
 - `run_once_before_*` → run once before main apply (e.g., key decryption)
 
+**External tools** managed via `.chezmoiexternals/extra-tools.toml`:
+- Downloads latest releases from GitHub automatically
+- Controlled by `external_tools` and `extra_tools` flags in `.chezmoi.toml.tmpl`
+- Includes linkerd, argocd, devspace, talosctl, zoxide, task, etc.
+- Uses `gitHubLatestReleaseAssetURL` template function for dynamic URLs
+
 **Key directories:**
 - `dot_local/bin/` — user executables (9 helper scripts):
   - `executable_custom-bw-login` — Install/login to Bitwarden CLI (`bw`) and `rbw`, handles cross-platform installation
@@ -45,9 +51,11 @@
 
 2. **Password managers** (secret injection):
    - `rbw` (Bitwarden CLI) via `rbwFields` function: `{{ (rbwFields "uuid").FIELD_NAME.value }}`
-   - `keepassxc` via `keepassxcAttachment`: `{{ keepassxcAttachment "path" "filename" }}`
+   - `keepassxc` via `keepassxcAttribute`: `{{ keepassxcAttribute "path" "ATTR_NAME" }}`
+   - `keepassxc` entries: `{{ (keepassxc "path").UserName }}`
    - `bw` (official Bitwarden CLI) installed via `.install-password-manager.sh` hook
    - Database location: `~/Sync/chezmoi.kdbx` (KeePassXC)
+   - Password manager binaries: Installed to `~/.local/bin/` by bootstrap script
 
 3. **Environment flags** (control secret loading):
    - `SECRETS_OFF=off` — skip secret injection (for clean installs without age key)
@@ -78,7 +86,7 @@ sh -c "$(curl -fsLS get.chezmoi.io)" -- -b ${HOME}/.local/bin init --apply dxas9
 
 **Test changes locally:**
 ```bash
-chezmoi apply --dry-run --verbose  # Preview changes
+chezmoi apply --dry-run --verbose   # Preview changes
 chezmoi apply                       # Apply dotfiles
 chezmoi diff                        # See what changed
 ```
@@ -106,6 +114,8 @@ systemctl --user restart ssh-agent.service
 **Adding new packages:**
 1. Edit `.chezmoi.toml.tmpl`, add to `[data.packages.<platform>.<manager>]` section
    - Example: `packages.darwin.brews = ["curl", "git"]` or `packages.ubuntu.apt = ["curl", "git"]`
+   - Supported platforms: `darwin`, `ubuntu`, `arch`, `fedora`, `epam_wsl`
+   - Supported managers: `brews`, `casks` (macOS), `apt` (Debian/Ubuntu), `yay` (Arch), `dnf` (Fedora)
 2. Change triggers `run_onchange_install-packages.sh.tmpl` re-execution (chezmoi tracks script content hash)
 
 **Tool version management:** Uses `mise.toml` (formerly rtx) for declarative tool versions:
@@ -242,6 +252,25 @@ WantedBy=default.target
 - **Minimal dependencies:** Prefer coreutils, bash builtins, common tools
 - **No hardcoded paths:** Use `$HOME`, chezmoi variables, or `joinPath`
 - **Secret safety:** Gate secrets behind `{{ if .secrets }}` checks
+**Bootstrap simplicity:** Use `install.sh` for new systems (fetches password manager, then chezmoi)
+
+## Bootstrap Flow (Critical Understanding)
+
+**New system installation sequence:**
+1. User runs `install.sh` (or shortlink `sh -c "$(curl -L s.5rv.me/d)" | sh`)
+2. Script calls `.install-password-manager.sh` to install `bw` and `rbw`
+3. Script installs chezmoi with `--promptDefaults` or `--prompt` flag
+4. Chezmoi prompts for feature flags: `secrets`, `secrets_homelab`, `external_tools`, `extra_tools`
+5. `run_once_before_decrypt-private-key.sh.tmpl` decrypts age key using Yubikey
+6. `run_onchange_install-packages.sh.tmpl` installs packages based on OS
+7. Templates process with `rbwFields` for Bitwarden or `keepassxc` for KeePassXC
+8. External tools download via `.chezmoiexternals/extra-tools.toml`
+
+**Key bootstrap files:**
+- `install.sh` → orchestrates bootstrap (calls password manager installer, then chezmoi)
+- `.install-password-manager.sh` → installs bw (Bitwarden CLI) and rbw (alternative)
+- `.chezmoi.toml.tmpl` → prompts for feature flags, configures age encryption
+- `run_once_before_decrypt-private-key.sh.tmpl` → decrypts age key from Yubikey
 
 ## Testing Checklist
 
@@ -251,6 +280,7 @@ Before committing changes:
 - [ ] Verify in clean environment if adding dependencies
 - [ ] Check file permissions (private_* files should be 600)
 - [ ] Ensure systemd units are syntactically valid (`systemd-analyze verify`)
+- [ ] Test bootstrap flow: `export SECRETS_OFF=off && curl -L s.5rv.me/d | sh`
 
 ## Reference Files
 
