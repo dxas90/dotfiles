@@ -1,4 +1,10 @@
 #!/bin/sh
+
 {{ if eq (lookPath "starship") "" -}}
 curl -sS https://starship.rs/install.sh | STARSHIP_INSTALL=true sh -s -- -y --bin-dir="$HOME/.local/bin/"
 {{ end -}}
+
+if ! command -v ~/.local/bin/mise &>/dev/null; then
+  echo "mise not found. Installing..."
+  curl -sL https://mise.run | sh
+fi

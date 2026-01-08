@@ -4,36 +4,43 @@
   type = "archive-file"
   executable = true
   path = "k9s"
+  refreshPeriod = "168h"
   url = '{{ gitHubLatestReleaseAssetURL "derailed/k9s" (printf "k9s_Darwin_%s*.tar.gz" .chezmoi.arch) }}'
 [".local/bin/age-plugin-yubikey"]
   type = "archive-file"
   path = "age-plugin-yubikey/age-plugin-yubikey"
+  refreshPeriod = "168h"
   url = '{{ gitHubLatestReleaseAssetURL "str4d/age-plugin-yubikey" (printf "age-plugin-yubikey-*-arm64-%s.tar.gz" .chezmoi.os ) }}'
   executable = true
 [".local/bin/docker-compose"]
   type = "file"
   executable = true
+  refreshPeriod = "168h"
   url = '{{ gitHubLatestReleaseAssetURL "docker/compose" (printf "docker-compose-%s-aarch64*" .chezmoi.os ) }}'
 [".local/bin/lazygit"]
   type = "archive-file"
   executable = true
   path = "lazygit"
+  refreshPeriod = "168h"
   url = '{{ gitHubLatestReleaseAssetURL "jesseduffield/lazygit" (printf "*darwin_x86_64*" ) }}'
 [".local/bin/bat"]
   type = "archive-file"
   {{ $batVersion := (gitHubLatestRelease "sharkdp/bat").TagName }}
   executable = true
+  refreshPeriod = "168h"
   url = '{{ gitHubLatestReleaseAssetURL "sharkdp/bat" (printf "*aarch64-apple-%s*" .chezmoi.os ) }}'
   path = "bat-{{ $batVersion }}-aarch64-apple-{{ .chezmoi.os }}/bat"
 [".local/bin/fd"]
   type = "archive-file"
   executable = true
   {{ $fdVersion := (gitHubLatestRelease "sharkdp/fd").TagName }}
+  refreshPeriod = "168h"
   url = '{{ gitHubLatestReleaseAssetURL "sharkdp/fd" (printf "fd-*-aarch64-apple-%s*" .chezmoi.os) }}'
   path = "fd-{{ $fdVersion }}-aarch64-apple-{{ .chezmoi.os }}/fd"
 [".local/bin/rg"]
   type = "archive-file"
   executable = true
+  refreshPeriod = "168h"
   {{ $rgVersion := (gitHubLatestRelease "BurntSushi/ripgrep").TagName }}
   url = '{{ gitHubLatestReleaseAssetURL "BurntSushi/ripgrep" (printf "*-aarch64-apple-%s*" .chezmoi.os ) }}'
   path = "ripgrep-{{ $rgVersion }}-aarch64-apple-{{ .chezmoi.os }}/rg"
@@ -41,17 +48,20 @@
   type = "archive"
   exact = false
   stripComponents = 1
+  refreshPeriod = "168h"
   url = '{{ gitHubLatestReleaseAssetURL "neovim/neovim" (printf "nvim-macos-*%s.tar.gz" .chezmoi.arch) }}'
 [".local/bin/croc"]
   type = "archive-file"
   executable = true
   path = "croc"
+  refreshPeriod = "168h"
   url = {{ gitHubLatestReleaseAssetURL "schollz/croc" "croc_v*_macOS-ARM64.tar.gz" | quote }}
 [".local/bin/glow"]
-    type = "archive-file"
-    executable = true
-    stripComponents = 1
-    path = "glow"
-    url = {{ gitHubLatestReleaseAssetURL "charmbracelet/glow" "glow_*_Darwin_arm64.tar.gz" | quote }}
+  type = "archive-file"
+  executable = true
+  stripComponents = 1
+  path = "glow"
+  refreshPeriod = "168h"
+  url = {{ gitHubLatestReleaseAssetURL "charmbracelet/glow" "glow_*_Darwin_arm64.tar.gz" | quote }}
 {{ end -}} # darwin-only tools
 {{ end -}} # external_tools

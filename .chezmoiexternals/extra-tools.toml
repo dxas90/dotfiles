@@ -110,6 +110,23 @@
 {{ else if eq .chezmoi.os "linux" -}}
   url = "https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-x86_64.tar.gz"
 {{ end -}}
+[".local/bin/operator-sdk"]
+  type = "file"
+  url = '{{ gitHubLatestReleaseAssetURL "operator-framework/operator-sdk" (printf "operator-sdk_%s_%s*" .chezmoi.os .chezmoi.arch) }}'
+  executable = true
+[".local/bin/terraform"]
+  type = "archive-file"
+  url = "https://releases.hashicorp.com/terraform/{{ .tools.terraform.version }}/terraform_{{ .tools.terraform.version }}_{{ .chezmoi.os }}_{{ .chezmoi.arch }}.zip"
+  path = "terraform"
+  executable = true
+[".local/bin/terragrunt"]
+  type = "file"
+  url = '{{ gitHubLatestReleaseAssetURL "gruntwork-io/terragrunt" (printf "terragrunt_%s_%s*" .chezmoi.os .chezmoi.arch) }}'
+  executable = true
+[".local/bin/vcluster"]
+  type = "file"
+  url = '{{ gitHubLatestReleaseAssetURL "loft-sh/vcluster" (printf "vcluster-%s-%s*" .chezmoi.os .chezmoi.arch ) }}'
+  executable = true
 {{ end -}} # HERE extra_tools
 {{ end -}} # HERE external_tools
 

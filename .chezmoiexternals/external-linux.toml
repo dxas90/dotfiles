@@ -25,11 +25,13 @@
   executable = true
 [".local/bin/rbw"]
   type = "archive-file"
+  refreshPeriod = "168h"
   url = '{{ gitHubLatestReleaseAssetURL "doy/rbw" (printf "rbw_*_%s_%s*" .chezmoi.os .chezmoi.arch) }}'
   path = "rbw"
   executable = true
 [".local/bin/rbw-agent"]
   type = "archive-file"
+  refreshPeriod = "168h"
   url = '{{ gitHubLatestReleaseAssetURL "doy/rbw" (printf "rbw_*_%s_%s*" .chezmoi.os .chezmoi.arch) }}'
   path = "rbw-agent"
   executable = true
@@ -38,10 +40,12 @@
   type = "archive-file"
   executable = true
   path = "k9s"
+  refreshPeriod = "168h"
   url = '{{ gitHubLatestReleaseAssetURL "derailed/k9s" (printf "k9s_Linux_%s*.tar.gz" .chezmoi.arch) }}'
 [".local/bin/age-plugin-yubikey"]
   type = "archive-file"
   executable = true
+  refreshPeriod = "168h"
 {{ if not (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
   url = '{{ gitHubLatestReleaseAssetURL "str4d/age-plugin-yubikey" (printf "age-plugin-yubikey-*-x86_64-%s.tar.gz" .chezmoi.os ) }}'
   path = "age-plugin-yubikey/age-plugin-yubikey"
@@ -52,15 +56,18 @@
 [".local/bin/docker-compose"]
   type = "file"
   executable = true
+  refreshPeriod = "168h"
   url = '{{ gitHubLatestReleaseAssetURL "docker/compose" (printf "docker-compose-%s-x86_64*" .chezmoi.os ) }}'
 [".local/bin/lazygit"]
   type = "archive-file"
   executable = true
   path = "lazygit"
+  refreshPeriod = "168h"
   url = '{{ gitHubLatestReleaseAssetURL "jesseduffield/lazygit" (printf "*linux_x86_64*" ) }}'
 [".local/bin/bat"]
   type = "archive-file"
   {{ $batVersion := (gitHubLatestRelease "sharkdp/bat").TagName }}
+  refreshPeriod = "168h"
   url = '{{ gitHubLatestReleaseAssetURL "sharkdp/bat" (printf "*x86_64-unknown-%s-gnu*" .chezmoi.os ) }}'
   path = "bat-{{ $batVersion }}-x86_64-unknown-{{ .chezmoi.os }}-gnu/bat"
   executable = true
@@ -68,6 +75,7 @@
   type = "archive-file"
   executable = true
   {{ $fdVersion := (gitHubLatestRelease "sharkdp/fd").TagName }}
+  refreshPeriod = "168h"
   url = '{{ gitHubLatestReleaseAssetURL "sharkdp/fd" (printf "fd-*-x86_64-unknown-%s-gnu*" .chezmoi.os) }}'
   path = "fd-{{ $fdVersion }}-x86_64-unknown-{{ .chezmoi.os }}-gnu/fd"
 
@@ -75,6 +83,7 @@
   type = "archive-file"
   executable = true
   {{ $rgVersion := (gitHubLatestRelease "BurntSushi/ripgrep").TagName }}
+  refreshPeriod = "168h"
   url = '{{ gitHubLatestReleaseAssetURL "BurntSushi/ripgrep" (printf "*x86_64-unknown-%s-musl*" .chezmoi.os ) }}'
   path = "ripgrep-{{ $rgVersion }}-x86_64-unknown-{{ .chezmoi.os }}-musl/rg"
 
@@ -82,20 +91,23 @@
   type = "archive"
   exact = false
   stripComponents = 1
+  refreshPeriod = "168h"
   url = '{{ gitHubLatestReleaseAssetURL "neovim/neovim" (printf "nvim-*%s-x86_64.tar.gz" .chezmoi.os) }}'
 
 [".local/bin/croc"]
   type = "archive-file"
   executable = true
   path = "croc"
+  refreshPeriod = "168h"
   url = {{ gitHubLatestReleaseAssetURL "schollz/croc" "croc_v*_Linux-64bit.tar.gz" | quote }}
 
 [".local/bin/glow"]
-    type = "archive-file"
-    executable = true
-    stripComponents = 1
-    path = "glow"
-    url = {{ gitHubLatestReleaseAssetURL "charmbracelet/glow" "glow_*_Linux_x86_64.tar.gz" | quote }}
+  type = "archive-file"
+  executable = true
+  stripComponents = 1
+  path = "glow"
+  refreshPeriod = "168h"
+  url = {{ gitHubLatestReleaseAssetURL "charmbracelet/glow" "glow_*_Linux_x86_64.tar.gz" | quote }}
 
 # [".local/bin/podman"]
 #     type = "archive-file"
