@@ -5,12 +5,17 @@
 #   refreshPeriod = "168h"
 #   url = "https://code.visualstudio.com/sha/download?build=stable&os=linux-x64"
 #   exact = false
-[".local/share/fonts"]
+[".local/share/fonts/Source Code Pro"]
   type = "archive"
   url = '{{ gitHubLatestReleaseAssetURL "adobe-fonts/source-code-pro" (printf "OTF-source-code-pro-*.zip") }}'
   refreshPeriod = "168h"
   exact = false
   stripComponents = 1
+[".local/share/fonts/Hack Nerd Font"]
+  type = "archive"
+  url = '{{ gitHubLatestReleaseAssetURL "ryanoasis/nerd-fonts" (printf "Hack.zip") }}'
+  refreshPeriod = "168h"
+  exact = false
 # [".local/opt/podman-desktop"]
 #   type = "archive"
 #   stripComponents = 1
@@ -33,4 +38,12 @@
 #     executable = true
 #     path = "popeye"
 #     url = {{ gitHubLatestReleaseAssetURL "derailed/popeye" (printf "popeye_%s_%s.tar.gz" .chezmoi.os .chezmoi.arch) | quote }}
+
+[".local/bin/qq"]
+  type = "archive-file"
+  executable = true
+  refreshPeriod = "168h"
+  path = "qq"
+  url = {{ gitHubLatestReleaseAssetURL "JFryy/qq" (printf "qq-*-%s-%s.tar.gz" .chezmoi.os .chezmoi.arch) | quote }}
+
 # ex: ts=4 sw=4 et filetype=toml

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -eufo pipefail
+
+# Script to run after configuring nvim to sync plugins
+# Modified Date: {{ (stat (joinPath .chezmoi.homeDir ".config/nvim")).modTime }}
+nvim --headless "+Lazy! sync" +qa 2>&1

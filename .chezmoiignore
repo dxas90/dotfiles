@@ -1,5 +1,6 @@
 sops_age_keys.txt
 key.txt.age
+install.sh
 .github/*
 *.md
 LICENSE

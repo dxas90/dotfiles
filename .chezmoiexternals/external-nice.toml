@@ -38,6 +38,11 @@
   url = '{{ gitHubLatestReleaseAssetURL "gopasspw/gopass" (printf "gopass-*-%s-%s.tar.gz" .chezmoi.os .chezmoi.arch ) }}'
   path = "gopass"
   executable = true
+[".local/bin/git-credential-gopass"]
+  type = "archive-file"
+  url = {{ gitHubLatestReleaseAssetURL "gopasspw/git-credential-gopass" (printf "git-credential-gopass-*-%s-%s.tar.gz" .chezmoi.os .chezmoi.arch) | quote }}
+  executable = true
+  path = "git-credential-gopass"
 [".local/bin/sops"]
   type = "file"
   refreshPeriod = "168h"

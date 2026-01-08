@@ -1,0 +1,13 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+
+set -eufo pipefail
+
+# Install gpg dependency
+
+if ! command -v gpg &>/dev/null; then
+  echo "[!] 'gpg' is not installed. Start installation."
+  brew install gnupg
+  echo "[+] Successfully installed 'gpg'."
+fi
+{{ end -}}
