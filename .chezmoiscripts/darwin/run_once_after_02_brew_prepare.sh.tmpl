@@ -2,4 +2,9 @@
 #!/bin/sh
 # .Brewfile hash: {{ include (print $.chezmoi.homeDir "/.Brewfile") | sha256sum }}
 brew bundle install --global --cleanup --no-upgrade
+if ! command -v kitty &>/dev/null; then
+  echo "[!] 'kitty' is not installed. Start installation."
+  brew install --cask kitty
+  echo "[+] Successfully installed 'kitty'."
+fi
 {{ end -}}

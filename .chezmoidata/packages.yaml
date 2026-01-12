@@ -3,23 +3,9 @@ packages:
     brews:
     - 'bash'
     - 'bash-completion'
-    - 'btop'
     - 'coreutils'
-    - 'docker'
-    - 'fontconfig'
-    - 'htop'
-    - 'iproute2mac'
-    - 'jq'
-    - 'lsusb'
-    - 'pinentry-mac'
-    - 'pinentry'
-    - 'tcl-tk'
     - 'tmux'
-    casks:
-    - 'font-meslo-lg-nerd-font'
-    - 'google-chrome'
-    - 'iterm2'
-    - 'visual-studio-code'
+    casks: []
   arch:
     yay:
     - 'bash-completion'
