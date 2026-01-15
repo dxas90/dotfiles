@@ -1,8 +1,8 @@
 #!/bin/sh
-{{- if eq .chezmoi.os "darwin" -}}
+{{ if eq .chezmoi.os "darwin" }}
 # .Brewfile hash: {{ include (print $.chezmoi.homeDir "/.Brewfile") | sha256sum }}
 brew bundle install --global --cleanup --no-upgrade
-if ! command -v kitty &>/dev/null; then
+if ! command -v /opt/homebrew/bin/kitty &>/dev/null; then
   echo "[!] 'kitty' is not installed. Start installation."
   brew install --cask kitty
   echo "[+] Successfully installed 'kitty'."
