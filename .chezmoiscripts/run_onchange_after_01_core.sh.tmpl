@@ -1,0 +1,11 @@
+#!/bin/sh
+
+{{ if .external_tools -}}
+{{- if eq (lookPath "kubectl") "" -}}
+  echo "kubectl not found. Installing..."
+  curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/{{ .chezmoi.os }}/{{ .chezmoi.arch }}/kubectl"
+  install -o root -g root -m 0755 kubectl ~/.local/bin/kubectl
+{{ end -}}
+{{ end -}}
+
+# ex: ts=4 sw=4 et filetype=sh

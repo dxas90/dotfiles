@@ -2,12 +2,8 @@
     version = "2025.3.0"
 [tools.bws]
     version = "1.0.0"
-[tools.direnv]
-    version = "2.32.3"
 [tools.kubectl]
-    version = "1.33.2"
-[tools.age]
-    version = "1.2.1"
+    version = "1.35.0"
 [tools.cloudflared]
     version = "2025.9.1"
 [tools.go_task]
@@ -17,12 +13,12 @@
 [tools.rclone]
     version = "1.70.2"
 [tools.kopia]
-    version = "0.20.1"
+    version = "0.22.3"
 [tools.helm]
-    version = "3.17.0"
+    version = "3.19.5"
 [tools.linkerd2]
     version = "25.1.2"
 [tools.terraform]
-    version = "1.12.2"
+    version = "1.14.3"
 [tools.go]
     version = "1.25.5"

@@ -1,5 +1,5 @@
 #!/bin/sh
-{{- if (eq .chezmoi.os "linux") -}}
+{{ if (eq .chezmoi.os "linux") -}}
 {{- if (eq .chezmoi.osRelease.id "ubuntu") -}}
 # This is used on a fresh install to "unsnap" the system
 if command -v snap &> /dev/null
