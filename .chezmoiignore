@@ -1,6 +1,7 @@
 sops_age_keys.txt
 key.txt.age
 install.sh
+.tmux.sh
 .github/*
 *.md
 LICENSE
