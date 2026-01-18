@@ -47,17 +47,20 @@ alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
 alias new_ssh='ssh-keygen -t ed25519 -b 4096 -P "" -f '
 alias newtemp='cd $(mktemp -d)'
 alias now_='date +%Y%m%d_%H%M%S'
-alias owget='/usr/bin/wget -U "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36" -c -k -r -nd -l 4'
+alias owget='wget -U "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36" -c -k -r -nd -l 4'
 function pip-upgrade-all() {
   $UV_IS_HERE pip list --outdated --format=freeze | grep -v "^\-e" | cut -d= -f1 | xargs -n1 $UV_IS_HERE pip install -U
 }
+
+alias curl="curl -H 'Cache-Control: no-cache, no-store' -H 'Pragma: no-cache' -H 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"
+
 alias chzrl='curl -sL https://raw.githubusercontent.com/dxas90/dotfiles/refs/heads/main/dot_local/bin/executable_custom-bw-login | bash -s -- alt ; [ -f ~/.bw_session ] && source ~/.bw_session ; chezmoi init --apply dxas90'
 alias rkwin='DISPLAY=:0 kwin --replace > /tmp/rkwin 2>&1 &'
 alias run_now='systemctl list-units --type=service --state=running'
 alias sepa='find * -maxdepth 0 -type d -exec sh -c "test -e {}.tar.bz || tar cjvf {}.tar.bz {}" \;'
 alias t=task
 alias tama='find * -maxdepth 0 -type f -exec du -sh {} \;'
-alias wget='/usr/bin/wget -U "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36" -c '
+alias wget='wget -U "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36" -c '
 alias youd="yt-dlp --no-playlist -f 'bestvideo[height<=?1080]+bestaudio/best' -o '%(title)s.%(ext)s'"
 
 curl_time() {
