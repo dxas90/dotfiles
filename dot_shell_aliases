@@ -52,7 +52,7 @@ function pip-upgrade-all() {
   $UV_IS_HERE pip list --outdated --format=freeze | grep -v "^\-e" | cut -d= -f1 | xargs -n1 $UV_IS_HERE pip install -U
 }
 
-alias curl="curl -H 'Cache-Control: no-cache, no-store' -H 'Pragma: no-cache' -H 'accept-language: en,es;q=0.9' -H 'user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
+alias curl="curl -H 'Cache-Control: no-cache, no-store' -H 'Pragma: no-cache' -H 'accept-language: en,es;q=0.9' -H 'user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36'"
 
 alias chzrl='curl -sL https://raw.githubusercontent.com/dxas90/dotfiles/refs/heads/main/dot_local/bin/executable_custom-bw-login | bash -s -- alt ; [ -f ~/.bw_session ] && source ~/.bw_session ; chezmoi init --apply dxas90'
 alias rkwin='DISPLAY=:0 kwin --replace > /tmp/rkwin 2>&1 &'
