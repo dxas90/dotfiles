@@ -272,4 +272,6 @@ if gpg -k 843ED4E459C8AA1DD8F0069D1C34EFC6171B5E29 >/dev/null 2>&1 ;then
   export GPGKEY="843ED4E459C8AA1DD8F0069D1C34EFC6171B5E29"
 fi
 
+alias development_clean='find . -type d \( -name node_modules -o -name .terragrunt-cache -o -name .venv -o -name __pycache__ \) -prune -exec rm -rf {} +'
+
 # ex: ts=4 sw=4 et filetype=sh
