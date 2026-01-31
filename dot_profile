@@ -68,4 +68,4 @@ if [[ ! "$SSH_AUTH_SOCK" ]]; then
     source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
 fi
 
-mesg n || true
+# ex: ts=4 sw=4 et filetype=sh
