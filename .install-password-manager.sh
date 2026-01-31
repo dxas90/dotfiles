@@ -5,7 +5,7 @@ OS_TYPE="$(uname -s)"
 BW_VERSION="2025.12.0"
 RBW_VERSION="1.14.1"
 
-set -euo pipefail
+set -eu
 IFS=$'\n\t'
 temp_folder=$(mktemp -d -t tmp.XXXXXXXXXX)
 cd $temp_folder
