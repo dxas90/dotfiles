@@ -8,17 +8,10 @@
         "baseURL": "http://localhost:11434/v1"
       },
       "models": {
-        "llama2": {
-          "name": "Llama 2"
-        },
-        "qwen2.5-coder:14b-instruct-q5_K_M": {
+        "qwen2.5-coder:3b": {
            "name": "qwen2.5-coder"
-        },
-        "codellama:34B": {
-           "name": "codellama"
         }
       }
     }
   }
 }
-

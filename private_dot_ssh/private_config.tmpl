@@ -41,15 +41,14 @@ Host *.onion
 
 # AWS instances (i-* and mi-* naming pattern)
 Host i-* mi-*
-  UserKnownHostsFile /dev/null      # Do not record the host in known_hosts
-  StrictHostKeyChecking no          # Disable strict key checking
-  LogLevel ERROR                    # Suppress logs for these hosts
-  AddressFamily inet                # Use IPv4 exclusively
-  PasswordAuthentication no         # Disable password authentication
-  IdentitiesOnly yes                # Only use specified identities
-  ProxyCommand aws ssm start-session --target %h  # Use AWS SSM for proxying
-  ControlMaster auto                # Enable multiplexing
-  ControlPath ~/.ssh/control:%h:%p:%r  # Path for multiplexing socket
+  UserKnownHostsFile /dev/null                      # Do not record the host in known_hosts
+  StrictHostKeyChecking no                          # Disable strict key checking
+  LogLevel ERROR                                    # Suppress logs for these hosts
+  AddressFamily inet                                # Use IPv4 exclusively
+  PasswordAuthentication no                         # Disable password authentication
+  IdentitiesOnly yes                                # Only use specified identities
+  ProxyCommand aws ssm start-session --target %h    # Use AWS SSM for proxying
+  ControlMaster auto                                # Enable multiplexing
 
 # Port-knocking remote host
 Host knock_remote
