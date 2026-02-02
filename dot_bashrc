@@ -73,6 +73,7 @@ fi
 [ -f ~/.shell_completion ] && source ~/.shell_completion
 
 type starship >/dev/null 2>&1 && source <(starship init bash)
+type mise >/dev/null 2>&1 && eval "$(mise completion bash --include-bash-completion-lib)"
 
 if [ -f ${HOME}/.local/google-cloud-sdk/path.bash.inc ]; then . ${HOME}/.local/google-cloud-sdk/path.bash.inc; fi
 

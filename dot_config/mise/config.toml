@@ -1,5 +1,12 @@
 [tools]
 awscli = { version = "2", symlink_bins = "true" }
-node = "22"
+node = "24"
 python = "3.14"
-yt-dlp = "latest"
+usage = "latest"
+# yt-dlp = "latest"
+
+[settings]
+experimental = true
+
+[env]
+_MISE_ENV_VAR = "mise"
