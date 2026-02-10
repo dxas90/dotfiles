@@ -10,14 +10,15 @@ alias m='mise'
 function fixgpu() {
   echo "Clearing GPU/Shader caches..."
   rm -rf ~/.config/google-chrome/GrShaderCache/* \
-         ~/.config/google-chrome/ShaderCache/* \
-         ~/.steam/steam/config/htmlcache/* \
-         ~/.steam/steam/{shadercache,cached,depotcache,appcache/httpcache}/*
+    ~/.config/google-chrome/ShaderCache/* \
+    ~/.steam/steam/config/htmlcache/* \
+    ~/.steam/steam/{shadercache,cached,depotcache,appcache/httpcache}/*
 }
 
 genpass() {
   local len="${1:-25}"
-  < /dev/urandom tr -dc 'A-Za-z0-9$^!@.-' | head -c"$len"; echo
+  </dev/urandom tr -dc 'A-Za-z0-9$^!@.-' | head -c"$len"
+  echo
 }
 
 # alias keepassxc-cli='flatpak run --command=keepassxc-cli org.keepassxc.KeePassXC "$@"'
@@ -99,7 +100,7 @@ xscp() {
 }
 
 new_ssh_resident_key() {
-  ssh-keygen -t ed25519-sk -O resident  -O verify-required -O application=ssh:y${RANDOM}-${1:-"yk"} -C "New YUBIKEY SSH Key $(date +%Y-%m-%d_%H-%M-%S)" -f "${HOME}/.ssh/id_ed25519_sk_${1:-"yk"}"
+  ssh-keygen -t ed25519-sk -O resident -O verify-required -O application=ssh:y${RANDOM}-${1:-"yk"} -C "New YUBIKEY SSH Key $(date +%Y-%m-%d_%H-%M-%S)" -f "${HOME}/.ssh/id_ed25519_sk_${1:-"yk"}"
 }
 
 new_venv() {
@@ -216,26 +217,26 @@ ef() {
 }
 
 yubikey_hardware_connected() {
-    # returns 0 if there is a YubiKey present
-    case "$(uname)" in
-        Linux)
-            if command -v lsusb >/dev/null 2>&1; then
-                lsusb | grep -qi '1050:' || return 1
-            else
-                # fallback: check /sys/bus/usb/devices
-                grep -qi '1050:' /sys/bus/usb/devices/*/idVendor 2>/dev/null || return 1
-            fi
-            ;;
-        Darwin)
-            ioreg -p IOUSB -l \
-                | grep -Eqi 'YubiKey|Yubico' \
-                || return 1
-            ;;
-        *)
-            return 1
-            ;;
-    esac
-    return 0
+  # returns 0 if there is a YubiKey present
+  case "$(uname)" in
+  Linux)
+    if command -v lsusb >/dev/null 2>&1; then
+      lsusb | grep -qi '1050:' || return 1
+    else
+      # fallback: check /sys/bus/usb/devices
+      grep -qi '1050:' /sys/bus/usb/devices/*/idVendor 2>/dev/null || return 1
+    fi
+    ;;
+  Darwin)
+    ioreg -p IOUSB -l |
+      grep -Eqi 'YubiKey|Yubico' ||
+      return 1
+    ;;
+  *)
+    return 1
+    ;;
+  esac
+  return 0
 }
 
 yubikey_connected() {
@@ -243,35 +244,36 @@ yubikey_connected() {
 }
 
 update_yubikey_env() {
-    if yubikey_connected; then
-        export YUBIKEY_CONNECTED=1
-        git config --global --replace-all user.signingKey 843ED4E459C8AA1DD8F0069D1C34EFC6171B5E29
-        git config --global --replace-all gpg.format "openpgp"
-    else
-        unset YUBIKEY_CONNECTED
-        git config --global --replace-all user.signingKey "~/.ssh/id_rsa.pub"
-        git config --global --replace-all gpg.format "ssh"
-    fi
+  if yubikey_connected; then
+    export YUBIKEY_CONNECTED=1
+    git config --global --replace-all user.signingKey 843ED4E459C8AA1DD8F0069D1C34EFC6171B5E29
+    git config --global --replace-all gpg.format "openpgp"
+  else
+    unset YUBIKEY_CONNECTED
+    git config --global --replace-all user.signingKey "~/.ssh/id_rsa.pub"
+    git config --global --replace-all gpg.format "ssh"
+  fi
 }
 
 # Zsh: run before each prompt
 if [ -n "${ZSH_VERSION:-}" ]; then
-    autoload -Uz add-zsh-hook
-    add-zsh-hook precmd update_yubikey_env
+  autoload -Uz add-zsh-hook
+  add-zsh-hook precmd update_yubikey_env
 # Bash: run before each prompt
 elif [ -n "${BASH_VERSION:-}" ]; then
-    if [[ -z "${PROMPT_COMMAND:-}" ]]; then
-        PROMPT_COMMAND="update_yubikey_env"
-    else
-        PROMPT_COMMAND="update_yubikey_env; ${PROMPT_COMMAND}"
-    fi
+  if [[ -z "${PROMPT_COMMAND:-}" ]]; then
+    PROMPT_COMMAND="update_yubikey_env"
+  else
+    PROMPT_COMMAND="update_yubikey_env; ${PROMPT_COMMAND}"
+  fi
 fi
 
-if gpg -k 843ED4E459C8AA1DD8F0069D1C34EFC6171B5E29 >/dev/null 2>&1 ;then
+if gpg -k 843ED4E459C8AA1DD8F0069D1C34EFC6171B5E29 >/dev/null 2>&1; then
   export GPG_TTY=$(tty)
   export GPGKEY="843ED4E459C8AA1DD8F0069D1C34EFC6171B5E29"
 fi
 
 alias development_clean='find . -type d \( -name node_modules -o -name .terragrunt-cache -o -name .venv -o -name __pycache__ \) -prune -exec rm -rf {} +'
+alias kdbg='kubectl run tmp-shell --rm -i --tty --image nicolaka/netshoot'
 
 # ex: ts=4 sw=4 et filetype=sh
