@@ -276,4 +276,13 @@ fi
 alias development_clean='find . -type d \( -name node_modules -o -name .terragrunt-cache -o -name .venv -o -name __pycache__ \) -prune -exec rm -rf {} +'
 alias kdbg='kubectl run tmp-shell --rm -i --tty --image nicolaka/netshoot'
 
+presentjs() {
+  docker run --name slidev --rm -it \
+    --user node \
+    -v ${PWD}:/slidev \
+    -p 3030:3030 \
+    -e NPM_MIRROR="https://registry.npmmirror.com" \
+    tangramor/slidev:latest
+}
+
 # ex: ts=4 sw=4 et filetype=sh
