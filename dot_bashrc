@@ -51,7 +51,7 @@ shopt -s cmdhist # Save multi-line commands as one command
 shopt -s cdable_vars
 
 alias ...='cd ../..'
-type bat >/dev/null 2>&1 && alias cat='bat -p'
+type bat >/dev/null 2>&1 && alias cat='bat --paging=never'
 alias g=git
 type nvim >/dev/null 2>&1 && alias vim=nvim
 type nvim >/dev/null 2>&1 && export MANPAGER='nvim +Man!' || export MANPAGER='less -s -M +Gg'
