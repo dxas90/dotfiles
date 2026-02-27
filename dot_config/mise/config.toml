@@ -1,6 +1,7 @@
 [tools]
 awscli = { version = "2", symlink_bins = "true" }
 node = "24"
+"npm:@slidev/cli" = "latest"
 python = "3.14"
 usage = "latest"
 # yt-dlp = "latest"
