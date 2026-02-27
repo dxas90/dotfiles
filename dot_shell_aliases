@@ -285,4 +285,19 @@ presentjs() {
     tangramor/slidev:latest
 }
 
+cmp_cmd() {
+  if [ "$#" -ne 3 ]; then
+    echo "Usage: cmp_cmd \"command\" \"args1\" \"args2\""
+    return 1
+  fi
+
+  local cmd="$1"
+  local args1="$2"
+  local args2="$3"
+
+  diff -u \
+    <(eval "$cmd $args1") \
+    <(eval "$cmd $args2")
+}
+
 # ex: ts=4 sw=4 et filetype=sh
