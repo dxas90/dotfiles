@@ -10,30 +10,38 @@ tap "kyounger/file"
 ############################
 # CLI / Core Utilities
 ############################
-brew "bash-completion"
 brew "bash"
+brew "bash-completion"
 brew "btop"
 brew "coreutils"
 brew "curl"
 brew "diffutils"
 brew "docker"
 brew "eza"
+brew "fd"
 brew "fontconfig"
-brew "gardener/tap/gardenlogin"
+brew "fzf"
 brew "gettext"
 brew "git"
 brew "htop"
 brew "jq"
-brew "jsregexp"
-brew "luarocks"
 brew "mc"
 brew "ncurses"
+brew "ripgrep"
 brew "tcl-tk"
 brew "tmux"
-brew "tree-sitter"
-brew "tree-sitter-cli"
 brew "unzip"
 brew "wget"
+
+
+############################
+# Neovim / LazyVim Ecosystem
+############################
+brew "neovim"
+brew "luarocks"
+brew "tree-sitter"        # library
+brew "tree-sitter-cli"    # CLI required by nvim-treesitter
+brew "lazygit"
 
 
 ############################
@@ -42,6 +50,7 @@ brew "wget"
 brew "gh"
 brew "kustomize"
 brew "qemu"
+
 
 ############################
 # Networking & Security
