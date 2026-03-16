@@ -300,4 +300,14 @@ cmp_cmd() {
     <(eval "$cmd $args2")
 }
 
+back_to_main() {
+  for dir in */; do
+    [ -d "$dir/.git" ] && (
+      echo "Updating $dir"
+      cd "$dir" && git reset --hard && git checkout main && git pull
+    ) &
+  done
+  wait
+}
+
 # ex: ts=4 sw=4 et filetype=sh
