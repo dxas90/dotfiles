@@ -5,6 +5,8 @@ alias cm="$HOME/.local/bin/chezmoi"
 alias docwget='/usr/bin/wget -U "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36" -c -k -r '
 alias fix-ssh='killall ssh-agent; SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"; export SSH_AUTH_SOCK; ssh-agent -a $SSH_AUTH_SOCK; ssh-add'
 alias m='mise'
+alias bc='bc -l'
+alias duh='du -h --max-depth=1 2>/dev/null | sort -hr | head -n 20'
 # alias ssh-agent='SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"; ssh-agent -a $SSH_AUTH_SOCK'
 
 function fixgpu() {
@@ -23,19 +25,21 @@ genpass() {
 
 # alias keepassxc-cli='flatpak run --command=keepassxc-cli org.keepassxc.KeePassXC "$@"'
 alias k=kubectl
+alias kx=kubectx
 alias lg='lazygit'
-alias ols='/bin/ls -lCF'
+alias ols='/bin/ls -lasF --color=auto'
 
 if type eza >/dev/null 2>&1; then
-  alias ls="eza --long --header --icons --git"
-  alias ll="eza --long --header --icons --git --git-ignore"
-  alias l="eza --classify"
+  alias ls="eza --long --header --icons --git --group-directories-first"
+  alias ll="eza --long --header --icons --git --git-ignore --group-directories-first"
+  alias l="eza --classify --group-directories-first --icons --git"
 
   # Sorting helpers
-  alias lsn="ls --sort=name"
-  alias lss="ls --sort=size"
-  alias lst="ls --sort=modified"
+  alias lsn="eza --sort=name --group-directories-first"
+  alias lss="eza --sort=size --group-directories-first"
+  alias lst="eza --sort=modified --group-directories-first"
 else
+  alias ls='ls -lAi --group-directories-first --color=always'
   alias l='ls -CF'
   alias ll='ls -la'
 fi
