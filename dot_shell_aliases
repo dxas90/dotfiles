@@ -5,6 +5,7 @@ alias cm="$HOME/.local/bin/chezmoi"
 alias docwget='/usr/bin/wget -U "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36" -c -k -r '
 alias fix-ssh='killall ssh-agent; SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"; export SSH_AUTH_SOCK; ssh-agent -a $SSH_AUTH_SOCK; ssh-add'
 alias m='mise'
+alias mx="mise x --"
 alias bc='bc -l'
 alias duh='du -h --max-depth=1 2>/dev/null | sort -hr | head -n 20'
 # alias ssh-agent='SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"; ssh-agent -a $SSH_AUTH_SOCK'
