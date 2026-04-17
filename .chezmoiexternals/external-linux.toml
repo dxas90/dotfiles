@@ -42,6 +42,7 @@
   path = "k9s"
   refreshPeriod = "168h"
   url = '{{ gitHubLatestReleaseAssetURL "derailed/k9s" (printf "k9s_Linux_%s*.tar.gz" .chezmoi.arch) }}'
+  # age-plugin-yubikey has no Linux release (only macOS/Windows binaries available)
 [".local/bin/age-plugin-yubikey"]
   type = "archive-file"
   executable = true
@@ -50,7 +51,8 @@
   url = '{{ gitHubLatestReleaseAssetURL "str4d/age-plugin-yubikey" (printf "age-plugin-yubikey-*-x86_64-%s.tar.gz" .chezmoi.os ) }}'
   path = "age-plugin-yubikey/age-plugin-yubikey"
 {{ else -}}
-  url = '{{ gitHubLatestReleaseAssetURL "str4d/age-plugin-yubikey" (printf "age-plugin-yubikey-*-x86_64-windows.zip" ) }}'
+  url = 'https://github.com/str4d/age-plugin-yubikey/releases/download/v0.5.0/age-plugin-yubikey-v0.5.0-x86_64-linux.tar.gz'
+  # TODO: url = '{{ gitHubLatestReleaseAssetURL "str4d/age-plugin-yubikey" (printf "age-plugin-yubikey-*-x86_64-windows.zip" ) }}'
   path = "age-plugin-yubikey/age-plugin-yubikey.exe"
 {{ end -}}
 [".local/bin/docker-compose"]
