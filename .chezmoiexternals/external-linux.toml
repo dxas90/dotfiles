@@ -48,11 +48,11 @@
   executable = true
   refreshPeriod = "168h"
 {{ if not (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
-  url = '{{ gitHubLatestReleaseAssetURL "str4d/age-plugin-yubikey" (printf "age-plugin-yubikey-*-x86_64-%s.tar.gz" .chezmoi.os ) }}'
+  url = 'https://github.com/str4d/age-plugin-yubikey/releases/download/v0.5.0/age-plugin-yubikey-v0.5.0-x86_64-linux.tar.gz'
+  # TODO: url = '{{ gitHubLatestReleaseAssetURL "str4d/age-plugin-yubikey" (printf "age-plugin-yubikey-*-x86_64-%s.tar.gz" .chezmoi.os ) }}'
   path = "age-plugin-yubikey/age-plugin-yubikey"
 {{ else -}}
-  url = 'https://github.com/str4d/age-plugin-yubikey/releases/download/v0.5.0/age-plugin-yubikey-v0.5.0-x86_64-linux.tar.gz'
-  # TODO: url = '{{ gitHubLatestReleaseAssetURL "str4d/age-plugin-yubikey" (printf "age-plugin-yubikey-*-x86_64-windows.zip" ) }}'
+  url  = '{{ gitHubLatestReleaseAssetURL "str4d/age-plugin-yubikey" (printf "age-plugin-yubikey-*-x86_64-windows.zip" ) }}'
   path = "age-plugin-yubikey/age-plugin-yubikey.exe"
 {{ end -}}
 [".local/bin/docker-compose"]
