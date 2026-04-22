@@ -118,6 +118,13 @@
   refreshPeriod = "168h"
   url = {{ gitHubLatestReleaseAssetURL "ahmetb/kubectx" (printf "kubectx_*%s_x86_64.tar.gz" .chezmoi.os) | quote }}
 
+[".local/share/platform-tools"]
+  type = "archive"
+  path = "platform-tools"
+  refreshPeriod = "168h"
+  stripComponents = 1
+  url = "https://dl.google.com/android/repository/platform-tools-latest-linux.zip"
+
 # [".local/bin/podman"]
 #     type = "archive-file"
 #     executable = true

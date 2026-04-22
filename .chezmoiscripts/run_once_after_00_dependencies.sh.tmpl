@@ -72,6 +72,9 @@ main() {
   if ! command -v ~/.local/bin/mise &>/dev/null; then
     echo "mise not found. Installing..."
     curl -sL https://mise.run | sh
+  else
+    echo "Quick mise self-update..."
+    mise self-update -y
   fi
   if ! command -v ~/.local/bin/uv &>/dev/null; then
     echo "uv not found. Installing..."
