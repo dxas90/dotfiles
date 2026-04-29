@@ -30,3 +30,10 @@ mcp_servers:
     args:
     - mcp
     type: stdio
+
+  k8sgpt:
+    command: k8sgpt
+    args:
+    - serve
+    - --mcp
+    type: stdio

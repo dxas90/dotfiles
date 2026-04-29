@@ -63,5 +63,13 @@
   path = "glow"
   refreshPeriod = "168h"
   url = {{ gitHubLatestReleaseAssetURL "charmbracelet/glow" "glow_*_Darwin_arm64.tar.gz" | quote }}
+[".local/bin/k8sgpt"]
+  type = "archive"
+  executable = true
+  stripComponents = 1
+  path = "k8sgpt"
+  refreshPeriod = "168h"
+  url = {{ gitHubLatestReleaseAssetURL "k8sgpt-ai/k8sgpt" (printf "k8sgpt_Darwin_arm64.tar.gz") | quote }}
+
 {{ end -}} # darwin-only tools
 {{ end -}} # external_tools
