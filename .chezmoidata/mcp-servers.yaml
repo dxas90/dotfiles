@@ -8,10 +8,8 @@ mcp_servers:
     type: http
 
   context7:
-    command: npx
-    args:
-    - -y
-    - "@upstash/context7-mcp"
+    url: https://mcp.context7.com/mcp
+    type: http
 
   playwright:
     command: npx

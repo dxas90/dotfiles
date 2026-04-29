@@ -119,9 +119,8 @@
   url = {{ gitHubLatestReleaseAssetURL "ahmetb/kubectx" (printf "kubectx_*%s_x86_64.tar.gz" .chezmoi.os) | quote }}
 
 [".local/bin/k8sgpt"]
-  type = "archive"
+  type = "archive-file"
   executable = true
-  stripComponents = 1
   path = "k8sgpt"
   refreshPeriod = "168h"
   url = {{ gitHubLatestReleaseAssetURL "k8sgpt-ai/k8sgpt" (printf "k8sgpt_Linux_x86_64.tar.gz") | quote }}

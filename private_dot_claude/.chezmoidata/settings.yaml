@@ -1,0 +1,54 @@
+claude:
+  alwaysThinkingEnabled: false
+  cleanupPeriodDays: 30
+  enabledPlugins:
+    langchain-skills@langchain-skills: true
+    musketeers@opsy: true
+  env:
+    CLAUDE_CODE_ENABLE_TELEMETRY: "0"
+    OTEL_METRICS_EXPORTER: "otlp"
+    ANTHROPIC_DEFAULT_HAIKU_MODEL: "anthropic--claude-4.5-haiku"
+    ANTHROPIC_DEFAULT_OPUS_MODEL: "anthropic--claude-4.6-opus"
+    ANTHROPIC_DEFAULT_SONNET_MODEL: "anthropic--claude-4.6-sonnet"
+    ANTHROPIC_MODEL: "anthropic--claude-4.6-sonnet"
+    DISABLE_ERROR_REPORTING: "1"
+    DISABLE_TELEMETRY: "1"
+    ENABLE_TOOL_SEARCH: "true"
+  extraKnownMarketplaces:
+    langchain-skills:
+      source:
+        source: "github"
+        repo: "langchain-ai/langchain-skills"
+    opsy:
+      source:
+        source: "github"
+        repo: "dxas90/opsy-bag"
+  gitAttribution: false
+  hooks:
+    PreToolUse:
+    - matcher: Bash
+      hooks:
+      - type: command
+        command: "jq -r '\"\\(.tool_input.command) - \\(.tool_input.description // \"No description\")\"' >> ~/.claude/bash-command-log.txt"
+  includeCoAuthoredBy: false
+  teammateMode: "tmux"
+  permissions:
+    defaultMode: acceptEdits
+    allow:
+    - Bash(cat:*)
+    - Bash(git add:*)
+    - Bash(git checkout:*)
+    - Bash(git commit:*)
+    - Bash(git diff:*)
+    - Bash(git push:*)
+    - Bash(ls:*)
+    - Bash(mv:*)
+    - Bash(npm run lint)
+    - Bash(npm run test:*)
+    - Bash(source:*)
+    - Read(~/.zshrc)
+    - WebFetch(domain:docs.aws.amazon.com)
+    - WebFetch(domain:registry.terraform.io)
+    - WebFetch(domain:developer.hashicorp.com)
+    deny:
+    - Bash(curl:*)
