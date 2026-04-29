@@ -2,7 +2,7 @@
 
 USER_BIN_DIR="${HOME:-/home/daniel}/.local/bin"
 OS_TYPE="$(uname -s)"
-BW_VERSION="2025.12.0"
+BW_VERSION="2026.4.1"
 RBW_VERSION="1.14.1"
 
 set -eu
@@ -17,21 +17,21 @@ function finish {
 trap finish EXIT
 
 function install_password_manager_linux() {
-  type bw >/dev/null 2>&1 && exit
+  type bw >/dev/null 2>&1 && return
   mkdir -p "${USER_BIN_DIR}"
   curl -sSL "https://github.com/bitwarden/clients/releases/download/cli-v${BW_VERSION}/bw-linux-${BW_VERSION}.zip" | funzip > bw
   install -m 0755 bw "${USER_BIN_DIR}/bw"
 }
 
 function install_password_manager_macos() {
-  type bw >/dev/null 2>&1 && exit
+  type bw >/dev/null 2>&1 && return
   mkdir -p "${USER_BIN_DIR}"
   curl -sSL "https://github.com/bitwarden/clients/releases/download/cli-v${BW_VERSION}/bw-macos-${BW_VERSION}.zip" | funzip > bw
   install -m 0755 bw "${USER_BIN_DIR}/bw"
 }
 
 function install_password_manager_backup_linux() {
-  type rbw >/dev/null 2>&1 && exit
+  type rbw >/dev/null 2>&1 && return
   mkdir -p "${USER_BIN_DIR}"
   curl -sSLo rbw.tar.gz "https://github.com/doy/rbw/releases/download/${RBW_VERSION}/rbw_${RBW_VERSION}_linux_amd64.tar.gz"
   tar xzf rbw.tar.gz

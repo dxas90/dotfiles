@@ -1,5 +1,5 @@
 [tools.bw]
-    version = "2025.3.0"
+    version = "2026.4.1"
 [tools.bws]
     version = "1.0.0"
 [tools.kubectl]

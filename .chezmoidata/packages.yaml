@@ -1,10 +1,6 @@
 packages:
   darwin:
-    brews:
-    - 'bash'
-    - 'bash-completion'
-    - 'coreutils'
-    - 'tmux'
+    brews: []
     casks: []
   arch:
     yay:

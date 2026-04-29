@@ -31,7 +31,12 @@ SAVEHIST=100000
 setopt APPEND_HISTORY
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_IGNORE_SPACE
-export HISTIGNORE="ls:ps:history:htop:df:lens:source:lens-desktop:exit:bg:fg:clear"
+setopt HIST_REDUCE_BLANKS
+# Filter unwanted commands from history
+zshaddhistory() {
+  local cmd="${1%%$'\n'}"
+  [[ "$cmd" != (ls|ps|history|htop|df|lens|source|exit|bg|fg|clear)* ]]
+}
 
 # Aliases
 alias ...='cd ../..'
@@ -44,10 +49,8 @@ if type nvim >/dev/null 2>&1; then
 else
   export MANPAGER='less -s -M +Gg'
 fi
-type uv >/dev/null 2>&1 && export UV_IS_HERE="uv" || export UV_IS_HERE=""
 
-# Completion
-autoload -Uz compinit && compinit
+# Completion (compinit is called in dot_shell_completion)
 if [[ -f /opt/homebrew/etc/profile.d/bash_completion.sh ]]; then
   source /opt/homebrew/etc/profile.d/bash_completion.sh
 fi

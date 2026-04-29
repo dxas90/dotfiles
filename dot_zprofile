@@ -1,6 +1,6 @@
 # https://superuser.com/a/183980
 if [ -r ~/.profile ]; then source ~/.profile; fi
-case "$-" in *i*) if [ -r $HOME/.zshrc ]; then source $HOME/.zshrc; fi;; esac
+# Note: .profile already sources .zshrc for interactive sessions
 type pyenv >/dev/null 2>&1 && eval "$(pyenv init - zsh)"
 
 # ex: ts=4 sw=4 et filetype=sh

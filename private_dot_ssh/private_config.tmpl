@@ -8,8 +8,7 @@ Match tagged tmux-ready
 Host *
   ServerAliveInterval 30                                     # Keep connections alive every 30 seconds
   ServerAliveCountMax 120                                    # Disconnect after ~60 minutes of no response
-  # Disable strict key checking (for flexibility)
-  StrictHostKeyChecking no
+  StrictHostKeyChecking accept-new                           # Auto-accept new keys, reject changed keys
   ControlMaster auto                                         # Enable multiplexing
   ControlPath ~/.ssh/control-sockets/%r-%C                   # Path for the multiplexing socket
   ControlPersist 600                                         # Keep multiplexed sessions open for 10 minutes
@@ -22,7 +21,6 @@ Host *
   ConnectTimeout 15                                          # Abort connection attempts after 15 seconds
   ConnectionAttempts 3                                       # Retry connection 3 times before failing
   HashKnownHosts yes                                         # Hash entries in known_hosts for privacy
-  RequestTTY yes                                             # Request a TTY for all connections
 {{- if (env "XDG_RUNTIME_DIR") }}
   IdentityAgent {{ env "XDG_RUNTIME_DIR" }}/ssh-agent.socket              # Specify custom SSH agent socket for authentication
 {{- end }}
