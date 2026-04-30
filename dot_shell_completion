@@ -1,3 +1,10 @@
+# compinit must run before any eval'd completion scripts that use compdef
+if [ -n "$ZSH_VERSION" ]; then
+  autoload -Uz compinit bashcompinit
+  compinit
+  bashcompinit
+fi
+
 type zoxide >/dev/null 2>&1 && eval "$(zoxide init $MY_SHELL)"
 type chezmoi >/dev/null 2>&1 && eval "$(chezmoi completion $MY_SHELL)"
 type kubectl >/dev/null 2>&1 && eval "$(kubectl completion $MY_SHELL)"
@@ -10,15 +17,6 @@ type task >/dev/null 2>&1 && eval "$(task --completion $MY_SHELL)"
 type mise >/dev/null 2>&1 && eval "$(mise activate $MY_SHELL)"
 
 type go >/dev/null 2>&1 && export PATH="$PATH:$(go env GOPATH)/bin"
-
-# Detect shell
-if [ -n "$ZSH_VERSION" ]; then
-  # --- Zsh-specific completion setup ---
-  # Enable completion system
-  autoload -Uz compinit bashcompinit
-  compinit
-  bashcompinit
-fi
 
 complete -F __start_kubectl k
 complete -o default -o nospace -F __start_chezmoi cm
