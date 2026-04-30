@@ -7,10 +7,6 @@ claude:
   env:
     CLAUDE_CODE_ENABLE_TELEMETRY: "0"
     OTEL_METRICS_EXPORTER: "otlp"
-    ANTHROPIC_DEFAULT_HAIKU_MODEL: "anthropic--claude-4.5-haiku"
-    ANTHROPIC_DEFAULT_OPUS_MODEL: "anthropic--claude-4.6-opus"
-    ANTHROPIC_DEFAULT_SONNET_MODEL: "anthropic--claude-4.6-sonnet"
-    ANTHROPIC_MODEL: "anthropic--claude-4.6-sonnet"
     DISABLE_ERROR_REPORTING: "1"
     DISABLE_TELEMETRY: "1"
     ENABLE_TOOL_SEARCH: "true"
