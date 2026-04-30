@@ -631,3 +631,4 @@ Temporary Items
 .apdisk
 
 .vscode/*
+.gitlab-ci-local/*
