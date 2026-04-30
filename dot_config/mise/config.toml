@@ -1,5 +1,6 @@
 [tools]
 awscli = { version = "2", symlink_bins = "true" }
+glab = { version = "latest", exe = "glab" }
 node = "24"
 "npm:@slidev/cli" = "latest"
 python = "3.14"
