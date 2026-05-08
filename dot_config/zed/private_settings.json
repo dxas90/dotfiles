@@ -7,6 +7,44 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "context_servers": {
+    "context7": {
+      "enabled": true,
+      "url": "https://mcp.context7.com/mcp",
+    },
+  },
+  "outline_panel": {
+    "dock": "left",
+  },
+  "collaboration_panel": {
+    "dock": "left",
+  },
+  "agent": {
+    "tool_permissions": {
+      "tools": {
+        "create_directory": {
+          "default": "allow",
+        },
+      },
+    },
+    "default_model": {
+      "provider": "ollama",
+      "model": "granite4.1:8b-q4_K_M",
+      "enable_thinking": false,
+    },
+    "dock": "right",
+    "favorite_models": [
+      {
+        "provider": "ollama",
+        "model": "qwen3.5:latest",
+        "enable_thinking": true,
+      },
+    ],
+    "model_parameters": [],
+  },
+  "git_panel": {
+    "dock": "left",
+  },
   "project_panel": {
     "dock": "left",
   },
@@ -14,7 +52,7 @@
     "provider": "ollama",
     "ollama": {
       "api_url": "http://localhost:11434",
-      "model": "starcoder2:15b",
+      "model": "qwen2.5-coder:7b-instruct-q4_K_M",
       "prompt_format": "infer",
       "max_output_tokens": 64,
     },
@@ -36,6 +74,12 @@
   "base_keymap": "VSCode",
   "ensure_final_newline_on_save": true,
   "agent_servers": {
+    "gemini": {
+      "type": "registry",
+    },
+    "github-copilot-cli": {
+      "type": "registry",
+    },
     "cline": {
       "type": "registry",
     },
