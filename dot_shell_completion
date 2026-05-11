@@ -15,6 +15,7 @@ type task >/dev/null 2>&1 && eval "$(task --completion $MY_SHELL)"
 # type uvx >/dev/null 2>&1 && eval "$(uvx generate-shell-completion $MY_SHELL)"
 
 type mise >/dev/null 2>&1 && eval "$(mise activate $MY_SHELL)"
+type fnox >/dev/null 2>&1 && eval "$(fnox activate $MY_SHELL)"
 
 type go >/dev/null 2>&1 && export PATH="$PATH:$(go env GOPATH)/bin"
 

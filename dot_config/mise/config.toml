@@ -6,9 +6,22 @@ node = "24"
 python = "3.14"
 usage = "latest"
 # yt-dlp = "latest"
+"npm:cline" = "latest"
+fnox = "latest"
+
+[plugins]
+fnox-env = "https://github.com/jdx/mise-env-fnox"
+
+# [tools."http:my-tool"]
+# version = "1.0.0"
+
+# [tools."http:my-tool".platforms]
+# macos-arm64 = { url = "https://example.com/releases/my-tool-v1.0.0-macos-arm64.tar.gz" }
+# linux-x64 = { url = "https://example.com/releases/my-tool-v1.0.0-linux-x64.tar.gz" }
 
 [settings]
 experimental = true
+lockfile = true
 
 [env]
 _MISE_ENV_VAR = "mise"
