@@ -8,9 +8,25 @@
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
   "context_servers": {
+    "mcp-server-playwright": {
+      "enabled": false,
+      "remote": false,
+      "settings": {
+        "browser": "chromium",
+        "headless": false,
+      },
+    },
     "context7": {
       "enabled": true,
       "url": "https://mcp.context7.com/mcp",
+    },
+    "aws-knowledge-mcp-server": {
+      "enabled": true,
+      "url": "https://knowledge-mcp.global.api.aws",
+    },
+    "sequential-thinking": {
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "command": "npx",
     },
   },
   "outline_panel": {
