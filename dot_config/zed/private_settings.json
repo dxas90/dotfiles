@@ -74,6 +74,16 @@
   "base_keymap": "VSCode",
   "ensure_final_newline_on_save": true,
   "agent_servers": {
+    "deepagents": {
+      "type": "custom",
+      "command": "uvx",
+      "args": [
+        "--refresh",
+        "--from",
+        "git+https://github.com/dxas90/opsy-acp",
+        "opsy-acp",
+      ],
+    },
     "gemini": {
       "type": "registry",
     },
@@ -84,6 +94,13 @@
       "type": "registry",
     },
     "claude-acp": {
+      "default_config_options": {
+        "effort": "max",
+        "model": "sonnet[1m]",
+      },
+      "favorite_config_option_values": {
+        "effort": ["max"],
+      },
       "type": "registry",
     },
   },
