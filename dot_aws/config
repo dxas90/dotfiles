@@ -5,4 +5,4 @@ region = us-east-1
 region = us-east-1
 output = json
 endpoint_url = http://localhost:4566
-credential_process = ~/.local.bin/floci_creds
+credential_process = floci_creds
