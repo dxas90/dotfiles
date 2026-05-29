@@ -4,5 +4,5 @@ region = us-east-1
 [profile floci]
 region = us-east-1
 output = json
-endpoint_url = http://localhost:4566
+endpoint_url = http://localhost.floci.io:4566
 credential_process = floci_creds

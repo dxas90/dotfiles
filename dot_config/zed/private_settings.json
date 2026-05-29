@@ -13,83 +13,88 @@
       "remote": false,
       "settings": {
         "browser": "chromium",
-        "headless": false,
-      },
+        "headless": false
+      }
     },
     "context7": {
       "enabled": true,
-      "url": "https://mcp.context7.com/mcp",
+      "url": "https://mcp.context7.com/mcp"
     },
     "aws-knowledge-mcp-server": {
       "enabled": true,
-      "url": "https://knowledge-mcp.global.api.aws",
+      "url": "https://knowledge-mcp.global.api.aws"
     },
     "sequential-thinking": {
       "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
-      "command": "npx",
-    },
+      "command": "npx"
+    }
   },
   "outline_panel": {
-    "dock": "left",
+    "dock": "left"
   },
   "collaboration_panel": {
-    "dock": "left",
+    "dock": "left"
   },
   "agent": {
     "tool_permissions": {
       "tools": {
         "create_directory": {
-          "default": "allow",
-        },
-      },
+          "default": "allow"
+        }
+      }
     },
     "default_model": {
       "provider": "ollama",
-      "model": "granite4.1:8b-q4_K_M",
-      "enable_thinking": false,
+      "model": "qwen3.5:4b",
+      "enable_thinking": false
     },
     "dock": "right",
     "favorite_models": [
       {
         "provider": "ollama",
-        "model": "qwen3.5:latest",
-        "enable_thinking": true,
-      },
+        "model": "qwen3.5:4b",
+        "enable_thinking": true
+      }
     ],
-    "model_parameters": [],
+    "model_parameters": []
   },
   "git_panel": {
-    "dock": "left",
+    "dock": "left"
   },
   "project_panel": {
-    "dock": "left",
+    "dock": "left"
   },
   "edit_predictions": {
     "provider": "ollama",
     "ollama": {
       "api_url": "http://localhost:11434",
-      "model": "qwen2.5-coder:7b-instruct-q4_K_M",
+      "model": "qwen3.5:4b",
       "prompt_format": "infer",
-      "max_output_tokens": 64,
-    },
+      "max_output_tokens": 64
+    }
   },
   "terminal": {
     "shell": {
-      "program": "bash",
-    },
+      "program": "bash"
+    }
   },
   "telemetry": {
     "diagnostics": false,
-    "metrics": false,
+    "metrics": false
   },
   "git": {
     "inline_blame": {
-      "enabled": true,
-    },
+      "enabled": true
+    }
   },
   "base_keymap": "VSCode",
   "ensure_final_newline_on_save": true,
   "agent_servers": {
+    "hermes-agent": {
+      "type": "custom",
+      "command": "hermes",
+      "args": ["acp"]
+    },
     "deepagents": {
       "type": "custom",
       "command": "uvx",
@@ -97,39 +102,39 @@
         "--refresh",
         "--from",
         "git+https://github.com/dxas90/opsy-acp",
-        "opsy-acp",
-      ],
+        "opsy-acp"
+      ]
     },
     "gemini": {
-      "type": "registry",
+      "type": "registry"
     },
     "github-copilot-cli": {
-      "type": "registry",
+      "type": "registry"
     },
     "cline": {
-      "type": "registry",
+      "type": "registry"
     },
     "claude-acp": {
       "default_config_options": {
         "effort": "max",
-        "model": "sonnet[1m]",
+        "model": "sonnet[1m]"
       },
       "favorite_config_option_values": {
-        "effort": ["max"],
+        "effort": ["max"]
       },
-      "type": "registry",
-    },
+      "type": "registry"
+    }
   },
   "icon_theme": {
     "mode": "system",
     "light": "Zed (Default)",
-    "dark": "Catppuccin Mocha",
+    "dark": "Catppuccin Mocha"
   },
   "ui_font_size": 16,
   "buffer_font_size": 15,
   "theme": {
     "mode": "system",
     "light": "One Light",
-    "dark": "One Dark",
-  },
+    "dark": "One Dark"
+  }
 }
