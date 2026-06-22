@@ -209,14 +209,15 @@ cookie() {
 }
 
 new_ansible_role() {
-  mkdir -p "roles/$1/{tasks,handlers,templates,files,vars,defaults,meta}"
-  touch "roles/$1/tasks/main.yml"       #  <-- tasks file can include smaller files if warranted
-  touch "roles/$1/handlers/main.yml"    #  <-- handlers file
-  touch "roles/$1/templates/$1.conf.j2" #  <------- templates end in .j2
-  touch "roles/$1/files/helper.sh"      #  <-- script files for use with the script resource
-  touch "roles/$1/vars/main.yml"        #  <-- variables associated with this role
-  touch "roles/$1/defaults/main.yml"    #  <-- default lower priority variables for this role
-  touch "roles/$1/meta/main.yml"        #  <-- role dependencies
+  local role="roles/$1"
+  mkdir -p "${role}"/{tasks,handlers,templates,files,vars,defaults,meta}
+  touch "${role}/tasks/main.yml"
+  touch "${role}/handlers/main.yml"
+  touch "${role}/templates/$1.conf.j2"
+  touch "${role}/files/helper.sh"
+  touch "${role}/vars/main.yml"
+  touch "${role}/defaults/main.yml"
+  touch "${role}/meta/main.yml"
 }
 
 prepend_path() {

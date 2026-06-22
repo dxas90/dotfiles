@@ -39,8 +39,6 @@ function install_password_manager_backup_linux() {
   install -m 0755 rbw-agent "${USER_BIN_DIR}/rbw-agent"
 }
 
-
-
 function install_or_update_rust() {
   source "$HOME/.cargo/env" >/dev/null 2>&1 || true
   if command -v rustup >/dev/null 2>&1; then
