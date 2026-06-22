@@ -8,7 +8,7 @@ RBW_VERSION="1.14.1"
 set -eu
 IFS=$'\n\t'
 temp_folder=$(mktemp -d -t tmp.XXXXXXXXXX)
-cd $temp_folder
+cd "$temp_folder"
 
 function finish {
     rm -rf "$temp_folder"
@@ -38,6 +38,8 @@ function install_password_manager_backup_linux() {
   install -m 0755 rbw "${USER_BIN_DIR}/rbw"
   install -m 0755 rbw-agent "${USER_BIN_DIR}/rbw-agent"
 }
+
+
 
 function install_or_update_rust() {
   source "$HOME/.cargo/env" >/dev/null 2>&1 || true

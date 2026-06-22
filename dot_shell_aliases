@@ -97,7 +97,7 @@ myrsync() {
   rsync "$1" "$2" -Pahv --prune-empty-dirs --ignore-errors --ignore-existing --exclude="*~" && echo "All OK" || echo "NOOO All OK"
 }
 aget() {
-  apt-get download $(apt-cache depends --recurse --no-recommends --no-suggests --no-conflicts --no-breaks --no-replaces --no-enhances --no-pre-depends $@ | grep "^\w")
+  apt-get download $(apt-cache depends --recurse --no-recommends --no-suggests --no-conflicts --no-breaks --no-replaces --no-enhances --no-pre-depends "$@" | grep "^\w")
 }
 # hazle cat *.yaml
 hazle() {
@@ -122,7 +122,7 @@ new_venv() {
   UV_VENV_CLEAR=1
   # Try to create venv using uv if available
   if type uv >/dev/null 2>&1; then
-    uv venv $@
+    uv venv "$@"
   else
     # If .venv doesn't exist, install it and create it
     echo "uv not found. Installing it..."
@@ -176,9 +176,9 @@ xlab() {
     source ~/C0D3/Python/.venv/bin/activate
   else
     mkdir -p ~/C0D3/Python
-    cd ~/C0D3/Python
+    cd ~/C0D3/Python || return
     new_venv
-    cd -
+    cd - || return
   fi
 }
 
@@ -209,14 +209,14 @@ cookie() {
 }
 
 new_ansible_role() {
-  mkdir -p roles/$1/{tasks,handlers,templates,files,vars,defaults,meta}
-  touch roles/$1/tasks/main.yml       #  <-- tasks file can include smaller files if warranted
-  touch roles/$1/handlers/main.yml    #  <-- handlers file
-  touch roles/$1/templates/$1.conf.j2 #  <------- templates end in .j2
-  touch roles/$1/files/helper.sh      #  <-- script files for use with the script resource
-  touch roles/$1/vars/main.yml        #  <-- variables associated with this role
-  touch roles/$1/defaults/main.yml    #  <-- default lower priority variables for this role
-  touch roles/$1/meta/main.yml        #  <-- role dependencies
+  mkdir -p "roles/$1/{tasks,handlers,templates,files,vars,defaults,meta}"
+  touch "roles/$1/tasks/main.yml"       #  <-- tasks file can include smaller files if warranted
+  touch "roles/$1/handlers/main.yml"    #  <-- handlers file
+  touch "roles/$1/templates/$1.conf.j2" #  <------- templates end in .j2
+  touch "roles/$1/files/helper.sh"      #  <-- script files for use with the script resource
+  touch "roles/$1/vars/main.yml"        #  <-- variables associated with this role
+  touch "roles/$1/defaults/main.yml"    #  <-- default lower priority variables for this role
+  touch "roles/$1/meta/main.yml"        #  <-- role dependencies
 }
 
 prepend_path() {
@@ -228,7 +228,7 @@ prepend_path() {
 }
 
 ef() {
-  env | sort | grep -i -e $1
+  env | sort | grep -i -e "$1"
 }
 
 yubikey_hardware_connected() {
@@ -319,7 +319,7 @@ back_to_main() {
   for dir in */; do
     [ -d "$dir/.git" ] && (
       echo "Updating $dir"
-      cd "$dir" && git reset --hard && git checkout main && git pull
+      cd "$dir" && git fetch --prune && git checkout main && git pull
     ) &
   done
   wait

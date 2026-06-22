@@ -6,7 +6,7 @@ if [ "${MY_DEBUG,,}" == "true" ]; then set -x; elif [ "${MY_DEBUG,,}" == "verbos
 set -euo pipefail
 IFS=$'\n\t'
 temp_folder=$(mktemp -d -t tmp.XXXXXXXXXX)
-cd $temp_folder
+cd "$temp_folder"
 
 function finish {
     rm -rf "$temp_folder"
@@ -35,7 +35,7 @@ function install_password_manager_macos() {
 }
 
 function install_password_manager_backup_linux() {
-  type rbw >/dev/null 2>&1 && exit
+  type rbw >/dev/null 2>&1 && return
   mkdir -p "${USER_BIN_DIR}"
   curl -sLo rbw.tar.gz "https://github.com/doy/rbw/releases/download/${RBW_VERSION}/rbw_${RBW_VERSION}_linux_amd64.tar.gz"
   tar xzf rbw.tar.gz
@@ -106,7 +106,7 @@ function install_oathtool() {
 }
 
 _oathtool() {
-   python3 <(curl -sL "https://raw.githubusercontent.com/dxas90/dotfiles/refs/heads/main/dot_local/bin/executable_oathtool") $@
+   python3 <(curl -sL "https://raw.githubusercontent.com/dxas90/dotfiles/refs/heads/main/dot_local/bin/executable_oathtool") "$@"
 }
 
 # Function to log into Bitwarden and handle session management
@@ -155,7 +155,7 @@ rbw_login() {
     else
       rbw config set base_url "https://vault.bitwarden.com"
     fi
-    rbw config set email ${BW_USER:-dxas90@gmail.com}
+    rbw config set email "${BW_USER:-dxas90@gmail.com}"
     rbw login
     rbw unlock
     rbw sync

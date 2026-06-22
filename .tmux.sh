@@ -45,10 +45,17 @@ download_file() {
     read -r host path <<<"$(get_host_path "$url")"
 
     # --- 4) nc (netcat) ---
+    # NOTE: nc/telnet/dev-tcp only speak plain HTTP; these URLs redirect to HTTPS.
+    # They are retained as last-resort attempts but are unlikely to succeed.
     if command -v nc >/dev/null 2>&1; then
         printf "GET /%s HTTP/1.0\r\nHost: %s\r\n\r\n" "$path" "$host" \
             | nc "$host" 80 \
-            | sed '1,/^\r$/d' > "$output" 2>/dev/null && { echo "✔ nc ok"; return 0; }
+            | sed '1,/^\r$/d' > "$output" 2>/dev/null
+        if grep -q "^<!DOCTYPE\|^<html" "$output" 2>/dev/null; then
+            echo "nc returned HTML (likely redirect), skipping..."
+        else
+            { echo "✔ nc ok"; return 0; }
+        fi
         echo "nc failed, trying next method..."
     fi
 
@@ -59,7 +66,12 @@ download_file() {
             printf "GET /%s HTTP/1.0\r\nHost: %s\r\n\r\n" "$path" "$host"
             sleep 1
         } | telnet "$host" 80 2>/dev/null \
-          | sed '1,/^\r$/d' > "$output" && { echo "✔ telnet ok"; return 0; }
+          | sed '1,/^\r$/d' > "$output"
+        if grep -q "^<!DOCTYPE\|^<html" "$output" 2>/dev/null; then
+            echo "telnet returned HTML (likely redirect), skipping..."
+        else
+            { echo "✔ telnet ok"; return 0; }
+        fi
         echo "telnet failed, trying next method..."
     fi
 
@@ -68,7 +80,12 @@ download_file() {
         {
             printf "GET /%s HTTP/1.0\r\nHost: %s\r\n\r\n" "$path" "$host"
         } >/dev/tcp/"$host"/80 \
-        | sed '1,/^\r$/d' > "$output" 2>/dev/null && { echo "✔ /dev/tcp ok"; return 0; }
+        | sed '1,/^\r$/d' > "$output" 2>/dev/null
+        if grep -q "^<!DOCTYPE\|^<html" "$output" 2>/dev/null; then
+            echo "/dev/tcp returned HTML (likely redirect), skipping..."
+        else
+            { echo "✔ /dev/tcp ok"; return 0; }
+        fi
         echo "/dev/tcp failed..."
     fi
 

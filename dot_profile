@@ -28,7 +28,7 @@ else
   export XDG_RUNTIME_DIR="/run/user/$UID"
 fi
 
-mkdir -p $XDG_RUNTIME_DIR
+mkdir -p "$XDG_RUNTIME_DIR"
 
 export XDG_CONFIG_HOME=${HOME}/.config
 export XDG_CACHE_HOME=${HOME}/.cache
