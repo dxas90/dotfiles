@@ -2,6 +2,7 @@ Match tagged aws-ssm
   ProxyCommand       aws ssm start-session --target %h --document-name AWS-StartSSHSession --parameters portNumber=%p
 
 Match tagged tmux-ready
+  RequestTTY yes
   RemoteCommand bash -lc 'command -v tmux && tmux new -A -s %h || exec $SHELL'        # Start tmux session if available
 
 # Global settings for all hosts
