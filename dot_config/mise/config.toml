@@ -25,4 +25,4 @@ lockfile = true
 
 [env]
 _MISE_ENV_VAR = "mise"
-FNOX_AGE_KEY_FILE = "$HOME/.config/chezmoi/age-yubikey-identity-8241d673.txt"
+# FNOX_AGE_KEY_FILE = "$HOME/.config/chezmoi/age-yubikey-identity-8241d673.txt"
