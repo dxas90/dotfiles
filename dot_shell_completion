@@ -21,7 +21,6 @@ type go >/dev/null 2>&1 && export PATH="$PATH:$(go env GOPATH)/bin"
 
 complete -F __start_kubectl k
 complete -o default -o nospace -F __start_chezmoi cm
-complete -F _task t
 complete -F _mise m
 
 # ex: ts=4 sw=4 et filetype=sh
