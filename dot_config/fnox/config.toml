@@ -2,6 +2,7 @@
 [providers.age]
   type = "age"
   recipients = ["age1yubikey1qtdrpsk4ccyge0us58axjv9ncrenm897540r89fm9zzj6d704vdfq2tgtmd", "age1yubikey1qv7gjvxsdkg5g0sc57pd9xhx7l0d05cwd65gldmcuqpyhnc4kqaxz78apys"]
+  key_file = "~/.config/chezmoi/age-yubikey-identity-8241d673.txt"
 
 [secrets]
 LOG_LEVEL = { default = "info" }
