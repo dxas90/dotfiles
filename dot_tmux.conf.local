@@ -9,6 +9,9 @@
 set-option -g default-command "${SHELL} -l"
 set-option -g status-position top
 
+set -g default-terminal "tmux-256color"
+set -as terminal-features ",xterm-kitty:RGB"
+
 # -- bindings ------------------------------------------------------------------
 
 # preserve tmux stock bindings,

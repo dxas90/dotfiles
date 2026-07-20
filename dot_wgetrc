@@ -58,6 +58,6 @@ timestamping = on
 trust_server_names = on
 
 # Define user agent identification header, like `--user-agent=string`.
-user_agent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"
+user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
 
 # ex: ts=4 sw=4 et filetype=wgetrc

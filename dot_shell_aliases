@@ -1,13 +1,14 @@
 alias aliases='alias | grep'
-alias aria2c='/usr/bin/aria2c --summary-interval 0 -x 10 -c -s 10 -k 1M -j 10 -U "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36" --save-cookies=/tmp/aria2c_cookies '
+alias aria2c='aria2c --summary-interval 0 -x 10 -c -s 10 -k 1M -j 10 -U "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36" --save-cookies=/tmp/aria2c_cookies '
 alias cls="printf '\33c\e[3J'" # This is equivalent to clear && printf '\e[3J'
 alias cm="$HOME/.local/bin/chezmoi"
-alias docwget='/usr/bin/wget -U "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36" -c -k -r '
+alias docwget='wget -U "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36" -c -k -r '
 alias fix-ssh='killall ssh-agent; SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"; export SSH_AUTH_SOCK; ssh-agent -a $SSH_AUTH_SOCK; ssh-add'
 alias m='mise'
 alias mx="mise x --"
 alias bc='bc -l'
 alias duh='du -h --max-depth=1 2>/dev/null | sort -hr | head -n 20'
+alias t='tmux new-session -A -s main'
 # alias ssh-agent='SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"; ssh-agent -a $SSH_AUTH_SOCK'
 
 function fixgpu() {
@@ -48,12 +49,12 @@ fi
 alias la='ls -A'
 alias lst='ls -R | grep ":$" | sed -e '"'"'s/:$//'"'"' -e '"'"'s/[^-][^\/]*\//--/g'"'"' -e '"'"'s/^/   /'"'"' -e '"'"'s/-/|/'"'"
 alias make_pass='pwgen -N 1 -y -n -s 17 5 | awk "{print $1}"'
-alias minicom='/bin/minicom -w -t xterm -l -R UTF-8'
+alias minicom='minicom -w -t xterm -l -R UTF-8'
 alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
 alias new_ssh='ssh-keygen -t ed25519 -P "" -f '
 alias newtemp='cd $(mktemp -d)'
 alias now_='date +%Y%m%d_%H%M%S'
-alias owget='wget -U "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36" -c -k -r -nd -l 4'
+alias owget='wget -U "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36" -c -k -r -nd -l 4'
 # Wrapper: use `uv pip` if available, otherwise fall back to `pip`
 pipw() {
   if command -v uv >/dev/null 2>&1; then
@@ -75,7 +76,7 @@ alias run_now='systemctl list-units --type=service --state=running'
 alias sepa='find * -maxdepth 0 -type d -exec sh -c "test -e {}.tar.bz || tar cjvf {}.tar.bz {}" \;'
 alias t=task
 alias tama='find * -maxdepth 0 -type f -exec du -sh {} \;'
-alias wget='wget -U "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36" -c '
+alias wget='wget -U "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36" -c '
 alias youd="yt-dlp --no-playlist -f 'bestvideo[height<=?1080]+bestaudio/best' -o '%(title)s.%(ext)s'"
 alias mcpi="npx -y @modelcontextprotocol/inspector"
 
