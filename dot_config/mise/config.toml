@@ -2,11 +2,11 @@
 awscli = { version = "2", symlink_bins = "true" }
 glab = { version = "latest", exe = "glab" }
 node = "24"
-"npm:@slidev/cli" = "latest"
+# "npm:@slidev/cli" = "latest"
 python = "3.14"
 usage = "latest"
 # yt-dlp = "latest"
-"npm:cline" = "latest"
+# "npm:cline" = "latest"
 fnox = "latest"
 
 [plugins]
@@ -25,3 +25,4 @@ lockfile = true
 
 [env]
 _MISE_ENV_VAR = "mise"
+FNOX_AGE_KEY_FILE = "$HOME/.config/chezmoi/age-yubikey-identity-8241d673.txt"
