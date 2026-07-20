@@ -8,7 +8,6 @@ alias m='mise'
 alias mx="mise x --"
 alias bc='bc -l'
 alias duh='du -h --max-depth=1 2>/dev/null | sort -hr | head -n 20'
-alias t='tmux new-session -A -s main'
 # alias ssh-agent='SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"; ssh-agent -a $SSH_AUTH_SOCK'
 
 function fixgpu() {
@@ -74,7 +73,7 @@ alias chzrl='curl -sL https://raw.githubusercontent.com/dxas90/dotfiles/refs/hea
 alias rkwin='DISPLAY=:0 kwin --replace > /tmp/rkwin 2>&1 &'
 alias run_now='systemctl list-units --type=service --state=running'
 alias sepa='find * -maxdepth 0 -type d -exec sh -c "test -e {}.tar.bz || tar cjvf {}.tar.bz {}" \;'
-alias t=task
+alias t='tmux new-session -A -s main'
 alias tama='find * -maxdepth 0 -type f -exec du -sh {} \;'
 alias wget='wget -U "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36" -c '
 alias youd="yt-dlp --no-playlist -f 'bestvideo[height<=?1080]+bestaudio/best' -o '%(title)s.%(ext)s'"
