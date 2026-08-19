@@ -32,13 +32,13 @@ alias ols='/bin/ls -lasF --color=auto'
 
 if type eza >/dev/null 2>&1; then
   alias ls="eza --long --header --icons --git --group-directories-first"
-  alias ll="eza --long --header --icons --git --git-ignore --group-directories-first"
+  alias ll="eza --long --header --icons --git --git-ignore --group-directories-first --octal-permissions"
   alias l="eza --classify --group-directories-first --icons --git"
 
   # Sorting helpers
   alias lsn="eza --sort=name --group-directories-first"
   alias lss="eza --sort=size --group-directories-first"
-  alias lst="eza --sort=modified --group-directories-first"
+  alias lsm="eza --sort=modified --group-directories-first"
 else
   alias ls='ls -lAi --group-directories-first --color=always'
   alias l='ls -CF'
