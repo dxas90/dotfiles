@@ -9,6 +9,7 @@ mise.toml
 test/
 login-with-password-manager
 renovate.json
+quick.sh
 # https://www.chezmoi.io/user-guide/manage-machine-to-machine-differences/#use-completely-different-dotfiles-on-different-machines
 {{ if ne .chezmoi.os "darwin" -}}
 private_Library
