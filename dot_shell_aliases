@@ -183,11 +183,19 @@ xlab() {
 }
 
 new_kustomize() {
-  cookie gh:dxas90/cookiecutter-templates --directory=k8s/kustomize $@
+  if [ type uvx >/dev/null 2>&1 ]; then
+    uvx cookiecutter gh:dxas90/cookiecutter-templates -f --directory=k8s/kustomize $@
+  else
+    cookie gh:dxas90/cookiecutter-templates -f --directory=k8s/kustomize $@
+  fi
 }
 
 new_helm_chart() {
-  cookie gh:dxas90/cookiecutter-templates --directory=k8s/chart $@
+  if [ type uvx >/dev/null 2>&1 ]; then
+    uvx cookiecutter gh:dxas90/cookiecutter-templates -f --directory=k8s/chart $@
+  else
+    cookie gh:dxas90/cookiecutter-templates -f --directory=k8s/chart $@
+  fi
 }
 
 new_godot_standard_project() {
@@ -204,7 +212,7 @@ cookie() {
     cookiecutter "$@"
   else
     echo "cookiecutter not found — installing temporarily..."
-    pipw install cookiecutter && cookiecutter "$@"
+    uv tool install cookiecutter && cookiecutter "$@"
   fi
 }
 
