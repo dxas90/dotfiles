@@ -2,8 +2,8 @@
 
 USER_BIN_DIR="${HOME:-/home/daniel}/.local/bin"
 OS_TYPE="$(uname -s)"
-BW_VERSION="2026.4.1"
-RBW_VERSION="1.14.1"
+BW_VERSION="2026.9.1"
+RBW_VERSION="1.15.0"
 
 set -eu
 IFS=$'\n\t'
