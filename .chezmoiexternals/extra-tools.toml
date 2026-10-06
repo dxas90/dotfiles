@@ -73,12 +73,12 @@
 #   url = "https://github.com/direnv/direnv/releases/download/v{{ .tools.direnv.version }}/direnv.{{ .chezmoi.os }}-{{ .chezmoi.arch }}"
 #   refreshPeriod = "168h"
 #   executable = true
-[".local/bin/task"]
-  type = "archive-file"
-  url = "https://github.com/go-task/task/releases/download/v{{ .tools.go_task.version }}/task_{{ .chezmoi.os }}_{{ .chezmoi.arch }}.tar.gz"
-  path = "task"
-  refreshPeriod = "168h"
-  executable = true
+# [".local/bin/task"]
+#   type = "archive-file"
+#   url = "https://github.com/go-task/task/releases/download/v{{ .tools.go_task.version }}/task_{{ .chezmoi.os }}_{{ .chezmoi.arch }}.tar.gz"
+#   path = "task"
+#   refreshPeriod = "168h"
+#   executable = true
 [".local/bin/zoxide"]
   type = "archive-file"
   executable = true

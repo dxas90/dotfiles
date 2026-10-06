@@ -8,7 +8,7 @@ fi
 type zoxide >/dev/null 2>&1 && eval "$(zoxide init $MY_SHELL)"
 type chezmoi >/dev/null 2>&1 && eval "$(chezmoi completion $MY_SHELL)"
 type kubectl >/dev/null 2>&1 && eval "$(kubectl completion $MY_SHELL)"
-type task >/dev/null 2>&1 && eval "$(task --completion $MY_SHELL)"
+# type task >/dev/null 2>&1 && eval "$(task --completion $MY_SHELL)"
 # type flux >/dev/null 2>&1 && eval "$(flux completion $MY_SHELL)"  # 13k lines
 # type vcluster >/dev/null 2>&1 && eval "$(vcluster completion $MY_SHELL)"
 # type uv >/dev/null 2>&1 && eval "$(uv generate-shell-completion $MY_SHELL)"
