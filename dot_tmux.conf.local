@@ -21,6 +21,8 @@ set -as terminal-features ",xterm-kitty:RGB"
 #   - false (default)
 tmux_conf_preserve_stock_bindings=false
 
+bind -r C-h select-window -t :-
+bind -r C-l select-window -t :+
 
 # -- session creation ----------------------------------------------------------
 
