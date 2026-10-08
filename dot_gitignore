@@ -632,3 +632,5 @@ Temporary Items
 
 .vscode/*
 .gitlab-ci-local/*
+
+-**/.claude/settings.local.json
