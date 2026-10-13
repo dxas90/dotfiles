@@ -2,6 +2,8 @@
 
 My personal dotfiles managed using [chezmoi](https://github.com/twpayne/chezmoi)
 
+> “No” is no to one thing. “Yes” is no to a lot of things. (37signals)
+
 ## 🚀 Usage
 
 ```shell
