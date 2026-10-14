@@ -7,10 +7,8 @@ python = "3.14"
 usage = "latest"
 # yt-dlp = "latest"
 # "npm:cline" = "latest"
+"npm:@tobilu/qmd" = "latest"
 fnox = "latest"
-
-[plugins]
-fnox-env = "https://github.com/jdx/mise-env-fnox"
 
 # [tools."http:my-tool"]
 # version = "1.0.0"
