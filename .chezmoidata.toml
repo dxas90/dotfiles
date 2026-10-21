@@ -15,7 +15,7 @@
 [tools.kopia]
     version = "0.23.1"
 [tools.helm]
-    version = "3.19.5"
+    version = "3.22.1"
 [tools.linkerd2]
     version = "25.1.2"
 [tools.terraform]
