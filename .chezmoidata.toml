@@ -5,7 +5,7 @@
 [tools.kubectl]
     version = "1.37.1"
 [tools.cloudflared]
-    version = "2025.11.1"
+    version = "2026.10.2"
 [tools.go_task]
     version = "3.54.0"
 [tools.vagrant]
