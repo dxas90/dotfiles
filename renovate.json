@@ -1,32 +1,24 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended",
-    ":automergeAll"
-  ],
+  "extends": ["config:recommended"],
   "dependencyDashboard": true,
   "dependencyDashboardTitle": "Renovate Dashboard 🤖",
-  "suppressNotifications": [
-    "prEditedNotification",
-    "prIgnoreNotification"
-  ],
+  "suppressNotifications": ["prEditedNotification", "prIgnoreNotification"],
   "rebaseWhen": "conflicted",
   "schedule": ["before 5:30am"],
-  "automerge": true,
+  "automerge": false,
   "automergeType": "pr",
   "pruneStaleBranches": true,
-
-  "regexManagers": [
+  "customManagers": [
     {
-      "fileMatch": ["(^|/)\\.chezmoidata\\.toml$"],
+      "customType": "regex",
+      "managerFilePatterns": ["/(^|\/)\\.chezmoidata\\.toml$/"],
       "matchStrings": [
         "\\[tools\\.(?<depName>[a-zA-Z0-9_\\-]+)\\][\\s\\S]*?version\\s*=\\s*\"(?<currentValue>[^\"]+)\""
       ],
-      "datasourceTemplate": "github-releases",
-      "depNameTemplate": "{{depName}}"
+      "datasourceTemplate": "github-releases"
     }
   ],
-
   "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch"],
@@ -34,76 +26,82 @@
       "automergeType": "pr"
     },
     {
-      "matchPackageNames": ["go"],
-      "datasource": "golang-version"
+      "matchManagers": ["custom.regex"],
+      "matchDepNames": ["go"],
+      "overrideDatasource": "golang-version",
+      "overridePackageName": "go"
     },
     {
-      "matchPackageNames": ["terraform"],
-      "datasource": "terraform-version"
+      "matchManagers": ["custom.regex"],
+      "matchDepNames": ["terraform"],
+      "overrideDatasource": "terraform-version",
+      "overridePackageName": "terraform"
     },
     {
-      "matchPackageNames": ["kubectl"],
-      "datasource": "github-releases",
-      "depNameTemplate": "kubernetes/kubectl"
+      "matchManagers": ["custom.regex"],
+      "matchDepNames": ["kubectl"],
+      "overrideDatasource": "github-releases",
+      "overridePackageName": "kubernetes/kubernetes"
     },
     {
-      "matchPackageNames": ["flux"],
-      "datasource": "github-releases",
-      "depNameTemplate": "fluxcd/flux2"
+      "matchManagers": ["custom.regex"],
+      "matchDepNames": ["flux"],
+      "overridePackageName": "fluxcd/flux2"
     },
     {
-      "matchPackageNames": ["linkerd2"],
-      "datasource": "github-releases",
-      "depNameTemplate": "linkerd/linkerd2"
+      "matchManagers": ["custom.regex"],
+      "matchDepNames": ["linkerd2"],
+      "overridePackageName": "linkerd/linkerd2"
     },
     {
-      "matchPackageNames": ["helm"],
-      "datasource": "helm"
+      "matchManagers": ["custom.regex"],
+      "matchDepNames": ["helm"],
+      "overridePackageName": "helm/helm"
     },
     {
-      "matchPackageNames": ["rclone"],
-      "datasource": "github-releases",
-      "depNameTemplate": "rclone/rclone"
+      "matchManagers": ["custom.regex"],
+      "matchDepNames": ["rclone"],
+      "overridePackageName": "rclone/rclone"
     },
     {
-      "matchPackageNames": ["kopia"],
-      "datasource": "github-releases",
-      "depNameTemplate": "kopia/kopia"
+      "matchManagers": ["custom.regex"],
+      "matchDepNames": ["kopia"],
+      "overridePackageName": "kopia/kopia"
     },
     {
-      "matchPackageNames": ["cloudflared"],
-      "datasource": "github-releases",
-      "depNameTemplate": "cloudflare/cloudflared"
+      "matchManagers": ["custom.regex"],
+      "matchDepNames": ["cloudflared"],
+      "overridePackageName": "cloudflare/cloudflared"
     },
     {
-      "matchPackageNames": ["direnv"],
-      "datasource": "github-releases",
-      "depNameTemplate": "direnv/direnv"
+      "matchManagers": ["custom.regex"],
+      "matchDepNames": ["direnv"],
+      "overridePackageName": "direnv/direnv"
     },
     {
-      "matchPackageNames": ["go_task"],
-      "datasource": "github-releases",
-      "depNameTemplate": "go-task/task"
+      "matchManagers": ["custom.regex"],
+      "matchDepNames": ["go_task"],
+      "overridePackageName": "go-task/task"
     },
     {
-      "matchPackageNames": ["vagrant"],
-      "datasource": "github-releases",
-      "depNameTemplate": "hashicorp/vagrant"
+      "matchManagers": ["custom.regex"],
+      "matchDepNames": ["vagrant"],
+      "overridePackageName": "hashicorp/vagrant"
     },
     {
-      "matchPackageNames": ["age"],
-      "datasource": "github-releases",
-      "depNameTemplate": "FiloSottile/age"
+      "matchManagers": ["custom.regex"],
+      "matchDepNames": ["age"],
+      "overridePackageName": "FiloSottile/age"
     },
     {
-      "matchPackageNames": ["bw"],
-      "datasource": "github-releases",
-      "depNameTemplate": "bitwarden/clients"
+      "matchManagers": ["custom.regex"],
+      "matchDepNames": ["bw"],
+      "overridePackageName": "bitwarden/clients"
     },
     {
-      "matchPackageNames": ["bws"],
-      "datasource": "github-releases",
-      "depNameTemplate": "bitwarden/sdk"
+      "matchManagers": ["custom.regex"],
+      "matchDepNames": ["bws"],
+      "overridePackageName": "bitwarden/sdk"
     }
   ]
 }
