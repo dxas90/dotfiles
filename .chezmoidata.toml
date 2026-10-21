@@ -7,7 +7,7 @@
 [tools.cloudflared]
     version = "2025.9.1"
 [tools.go_task]
-    version = "3.41.0"
+    version = "3.54.0"
 [tools.vagrant]
     version = "2.4.5"
 [tools.rclone]
