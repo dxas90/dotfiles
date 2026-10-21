@@ -9,7 +9,7 @@
 [tools.go_task]
     version = "3.41.0"
 [tools.vagrant]
-    version = "2.4.5"
+    version = "2.4.9"
 [tools.rclone]
     version = "1.70.2"
 [tools.kopia]
