@@ -11,7 +11,7 @@
 [tools.vagrant]
     version = "2.4.5"
 [tools.rclone]
-    version = "1.70.2"
+    version = "1.75.2"
 [tools.kopia]
     version = "0.23.1"
 [tools.helm]
