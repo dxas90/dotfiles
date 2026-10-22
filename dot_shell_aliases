@@ -78,6 +78,7 @@ alias tama='find * -maxdepth 0 -type f -exec du -sh {} \;'
 alias wget='wget -U "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36" -c '
 alias youd="yt-dlp --no-playlist -f 'bestvideo[height<=?1080]+bestaudio/best' -o '%(title)s.%(ext)s'"
 alias mcpi="npx -y @modelcontextprotocol/inspector"
+alias smb_share_me='docker run -it --rm --name samba -p 445:445 -e "NAME=Shared" -e "USER=samba" -e "PASS=secret" -v "${PWD:-.}:/shared" docker.io/dockurr/samba'
 
 curl_time() {
   curl -so /dev/null -w "\
