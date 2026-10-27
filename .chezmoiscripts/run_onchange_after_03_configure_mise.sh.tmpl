@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -eufo pipefail
+
+# Script to run after configuring mise to sync packages
+# Modified Date: {{ (stat (joinPath .chezmoi.homeDir ".config/mise/config.toml")).modTime }}
+if command -v mise &> /dev/null
+then
+    echo "Running mise install..."
+    mise install --cd $HOME -q 2>&1
+    mise cache clear -q 2>&1
+fi
+
+# ex: ts=4 sw=4 et filetype=sh
