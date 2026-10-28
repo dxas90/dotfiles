@@ -75,5 +75,6 @@ if true then
       default_bindings = true,    -- use default <leader>A keybindings
       debug = false,              -- enable debug logging
     },
- },
+  },
+  }
 end
