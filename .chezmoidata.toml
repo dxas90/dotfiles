@@ -19,6 +19,6 @@
 [tools.linkerd2]
     version = "25.1.2"
 [tools.terraform]
-    version = "1.17.0"
+    version = "1.17.1"
 [tools.go]
     version = "1.27.3"
