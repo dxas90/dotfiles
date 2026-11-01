@@ -7,6 +7,55 @@ set -eufo pipefail
 if command -v nvim &> /dev/null
 then
     nvim --headless "+Lazy! sync" +qa 2>&1
+
+    # Lazy sync exits before async installs (mason, treesitter, markdown-preview)
+    # finish, so run a second pass that blocks until they are done
+    bootstrap="$(mktemp "${TMPDIR:-/tmp}/nvim-bootstrap.XXXXXX")"
+    trap 'rm -f "$bootstrap"' EXIT
+    cat > "$bootstrap" <<'EOF'
+local timeout = 10 * 60 * 1000
+local lazy = require("lazy")
+local plugins = require("lazy.core.config").plugins
+
+if plugins["mason.nvim"] then
+  lazy.load({ plugins = { "mason.nvim" } })
+  local mr = require("mason-registry")
+  local tools = LazyVim.opts("mason.nvim").ensure_installed or {}
+  local refreshed = false
+  -- LazyVim queues installs in its own refresh callback, which runs before ours
+  mr.refresh(function()
+    refreshed = true
+  end)
+  vim.wait(timeout, function()
+    if not refreshed then
+      return false
+    end
+    for _, name in ipairs(tools) do
+      local ok, p = pcall(mr.get_package, name)
+      if ok and p:is_installing() then
+        return false
+      end
+    end
+    return true
+  end, 500)
+end
+
+if plugins["nvim-treesitter"] then
+  lazy.load({ plugins = { "nvim-treesitter" } })
+  local ok, ts = pcall(require, "nvim-treesitter")
+  if ok and ts.install then
+    pcall(function()
+      ts.install(LazyVim.opts("nvim-treesitter").ensure_installed or {}, { summary = true }):wait(timeout)
+    end)
+  end
+end
+
+if plugins["markdown-preview.nvim"] then
+  lazy.load({ plugins = { "markdown-preview.nvim" } })
+  vim.fn["mkdp#util#install_sync"](true)
+end
+EOF
+    nvim --headless "+luafile $bootstrap" +qa 2>&1
 fi
 
 # ex: ts=4 sw=4 et filetype=sh
