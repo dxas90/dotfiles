@@ -1,10 +1,12 @@
 {{ if and (eq .chezmoi.os "linux") (ne (env "XDG_SESSION_TYPE") "") -}} # VSCode-linux
-# [".local/opt/VSCode-linux-x64"]
-#   type = "archive"
-#   stripComponents = 1
-#   refreshPeriod = "168h"
-#   url = "https://code.visualstudio.com/sha/download?build=stable&os=linux-x64"
-#   exact = false
+[".local/opt/VSCode"]
+  type = "archive"
+  stripComponents = 1
+  refreshPeriod = "48h"
+  {{ $codeVersion := (gitHubLatestRelease "microsoft/vscode").TagName }}
+  url = "https://update.code.visualstudio.com/{{ $codeVersion }}/linux-x64/stable"
+  exact = false
+
 [".local/share/fonts/Source Code Pro"]
   type = "archive"
   url = '{{ gitHubLatestReleaseAssetURL "adobe-fonts/source-code-pro" (printf "OTF-source-code-pro-*.zip") }}'
