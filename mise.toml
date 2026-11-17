@@ -1,9 +1,7 @@
 [tools]
-age = "latest"
-chezmoi = "latest"
-python = { version='3' }
-sops = "latest"
-uv = "latest"
+age = { version = "latest" }
+chezmoi = { version = "latest" }
+sops = { version = "latest" }
 
 [settings]
 experimental = true

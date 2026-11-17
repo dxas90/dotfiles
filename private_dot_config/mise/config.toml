@@ -2,14 +2,10 @@
 awscli = { version = "2", symlink_bins = "true" }
 glab = { version = "latest" }
 gh = { version = "latest" }
-node = "26"
+node = { version = "26" }
+usage = { version = "latest" }
+fnox = { version = "latest" }
 # "npm:@slidev/cli" = "latest"
-python = "3.15.2"
-usage = "latest"
-# yt-dlp = "latest"
-# "npm:cline" = "latest"
-"npm:@tobilu/qmd" = "latest"
-fnox = "latest"
 
 # [tools."http:my-tool"]
 # version = "1.0.0"
