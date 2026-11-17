@@ -25,7 +25,7 @@
   type = "archive-file"
   path = "hugo"
   refreshPeriod = "168h"
-  url = '{{ gitHubLatestReleaseAssetURL "gohugoio/hugo" (printf "hugo_extended_withdeploy_*%s-%s.tar.gz" .chezmoi.os .chezmoi.arch) }}'
+  url = '{{ gitHubLatestReleaseAssetURL "gohugoio/hugo" (printf "hugo_*_%s-%s.tar.gz" .chezmoi.os .chezmoi.arch) }}'
 {{ end -}}
 [".local/bin/autok3s"]
   type = "file"
@@ -68,17 +68,6 @@
   executable = true
   refreshPeriod = "168h"
   url = '{{ gitHubLatestReleaseAssetURL "siderolabs/talos" (printf "talosctl-%s-%s" .chezmoi.os .chezmoi.arch) }}'
-# [".local/bin/direnv"]
-#   type = "file"
-#   url = "https://github.com/direnv/direnv/releases/download/v{{ .tools.direnv.version }}/direnv.{{ .chezmoi.os }}-{{ .chezmoi.arch }}"
-#   refreshPeriod = "168h"
-#   executable = true
-# [".local/bin/task"]
-#   type = "archive-file"
-#   url = "https://github.com/go-task/task/releases/download/v{{ .tools.go_task.version }}/task_{{ .chezmoi.os }}_{{ .chezmoi.arch }}.tar.gz"
-#   path = "task"
-#   refreshPeriod = "168h"
-#   executable = true
 [".local/bin/zoxide"]
   type = "archive-file"
   executable = true
