@@ -1,0 +1,26 @@
+[Desktop Entry]
+Actions=new-empty-window;
+Categories=TextEditor;Development;IDE;
+Comment[en_US]=Code Editing. Redefined.
+Comment=Code Editing. Redefined.
+Exec=/home/daniel/.local/opt/VSCode/bin/code %F
+GenericName[en_US]=Text Editor
+GenericName=Text Editor
+Icon=/home/daniel/.local/opt/VSCode/resources/app/resources/linux/code.png
+Keywords=vscode;
+MimeType=
+Name[en_US]=Visual Studio Code
+Name=Visual Studio Code
+Path=
+StartupNotify=false
+StartupWMClass=com.microsoft.VSCode
+Terminal=false
+TerminalOptions=
+Type=Application
+X-KDE-SubstituteUID=false
+X-KDE-Username=
+
+[Desktop Action new-empty-window]
+Exec=/home/daniel/.local/opt/VSCode/bin/code --new-window %F
+Icon=vscode
+Name=New Empty Window

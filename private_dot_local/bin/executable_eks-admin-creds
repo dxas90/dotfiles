@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+FILE="$HOME/.config/floci/eks-admin-credentials.json"
+ROTATE="$HOME/.local/bin/rotate-eks-admin-key"
+
+if [[ ! -s "$FILE" ]]; then
+  echo "Credentials missing; rotating eks-admin key..." >&2
+  "$ROTATE"
+
+  if [[ ! -s "$FILE" ]]; then
+    echo "Error: rotation did not create $FILE" >&2
+    exit 1
+  fi
+fi
+
+jq -e '{
+  Version: 1,
+  AccessKeyId: .AccessKey.AccessKeyId,
+  SecretAccessKey: .AccessKey.SecretAccessKey
+} | select(.AccessKeyId != null and .SecretAccessKey != null)' "$FILE"

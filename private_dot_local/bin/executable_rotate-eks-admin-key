@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+set -euo pipefail
+umask 077
+
+ENDPOINT="http://localhost.floci.io:4566"
+REGION="us-east-1"
+USER_NAME="eks-admin"
+CREDENTIALS_FILE="$HOME/.config/floci/eks-admin-credentials.json"
+
+export AWS_ENDPOINT_URL="$ENDPOINT"
+export AWS_DEFAULT_REGION="$REGION"
+export AWS_ACCESS_KEY_ID="test"
+export AWS_SECRET_ACCESS_KEY="test"
+unset AWS_PROFILE
+
+mkdir -p "$(dirname "$CREDENTIALS_FILE")"
+chmod 700 "$(dirname "$CREDENTIALS_FILE")"
+
+if ! aws iam get-user --user-name "$USER_NAME" >/dev/null 2>&1; then
+  echo "Creating IAM user $USER_NAME..." >&2
+  aws iam create-user --user-name "$USER_NAME" >/dev/null
+fi
+
+# List keys and select at most one, oldest first.
+KEYS=$(aws iam list-access-keys --user-name "$USER_NAME" --output json)
+OLD_KEY=$(printf '%s' "$KEYS" | jq -r '[.AccessKeyMetadata[]] | sort_by(.CreateDate) | .[0].AccessKeyId // empty')
+
+# Delete one key only when one exists.
+if [[ -n "$OLD_KEY" && "$OLD_KEY" != "None" ]]; then
+  aws iam delete-access-key --user-name "$USER_NAME" --access-key-id "$OLD_KEY"
+fi
+
+# Create replacement and store the secret returned by IAM.
+TMP=$(mktemp)
+trap 'rm -f "$TMP"' EXIT
+aws iam create-access-key --user-name "$USER_NAME" --output json > "$TMP"
+jq '{AccessKey: .AccessKey}' "$TMP" > "$CREDENTIALS_FILE"
+chmod 600 "$CREDENTIALS_FILE"
+
+echo "Saved replacement credentials to $CREDENTIALS_FILE" >&2
