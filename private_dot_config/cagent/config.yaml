@@ -1,0 +1,28 @@
+version: v1
+settings:
+  theme: tokyo-night
+  lean: false
+  expand_thinking: false
+  split_diff_view: true
+  render_images: true
+  show_banner: true
+  fade_scroll_edges: true
+  hide_tool_results: false
+  sound: true
+  sound_threshold: 10
+  snapshot: true
+  cache_stable_prompts: true
+  background_compaction: true
+  background_compaction_threshold: 70
+  warn_on_cache_miss: true
+  busy_send_mode: queue
+  interrupt_confirmation: double-tap
+  restore_tabs: true
+  tab_title_max_length: 24
+  hooks:
+    session_start:
+      - type: command
+        command: "pwd"
+  keybindings:
+    - action: "commands"
+      keys: ["f2", "ctrl+k"]
