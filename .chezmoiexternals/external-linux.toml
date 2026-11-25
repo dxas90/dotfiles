@@ -146,6 +146,15 @@
 #   url = 'https://gitlab.com/virtio-fs/virtiofsd/-/jobs/artifacts/main/download?job=publish'
 #   path = "target/x86_64-unknown-{{ .chezmoi.os }}-musl/release/virtiofsd"
 #   executable = true
-
+[".local/bin"]
+  type = "archive"
+  refreshPeriod = "168h"
+  {{ if eq .chezmoi.arch "amd64" -}}
+  url = '{{ gitHubLatestReleaseAssetURL "dondai44423/donsetch" (printf "donsetch-%s-x64*" .chezmoi.os ) }}'
+  {{ else if eq .chezmoi.arch "arm64" -}}
+  url = '{{ gitHubLatestReleaseAssetURL "dondai44423/donsetch" (printf "donsetch-%s-arm64*" .chezmoi.os ) }}'
+  {{ end -}}
+  executable = true
+  exact = false
 {{ end -}} # linux-only tools
 {{ end -}} # external_tools

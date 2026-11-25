@@ -77,4 +77,9 @@
   url = "https://go.dev/dl/go{{ .tools.go.version }}.{{ .chezmoi.os }}-{{ .chezmoi.arch }}.tar.gz"
   exact = false
   stripComponents = 1
+[".docker/cli-plugins/docker-agent"]
+  type = "file"
+  refreshPeriod = "168h"
+  url = '{{ gitHubLatestReleaseAssetURL "docker/docker-agent" (printf "docker-agent-%s-%s*" .chezmoi.os .chezmoi.arch ) }}'
+  executable = true
 {{ end -}} # external_tools
