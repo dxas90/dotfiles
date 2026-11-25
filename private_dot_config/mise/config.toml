@@ -5,6 +5,7 @@ gh = { version = "latest" }
 node = { version = "26" }
 usage = { version = "latest" }
 fnox = { version = "latest" }
+yazi = { version = "latest", symlink_bins = "true" }
 # "npm:@slidev/cli" = "latest"
 
 # [tools."http:my-tool"]

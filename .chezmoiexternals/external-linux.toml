@@ -156,5 +156,16 @@
   {{ end -}}
   executable = true
   exact = false
+[".local/bin/resvg"]
+  type = "archive-file"
+  refreshPeriod = "168h"
+  executable = true
+  path = "resvg"
+  {{ if eq .chezmoi.arch "amd64" -}}
+  url = '{{ gitHubLatestReleaseAssetURL "linebender/resvg" (printf "resvg-%s-x86_64*" .chezmoi.os ) }}'
+  {{ else if eq .chezmoi.arch "arm64" -}}
+  url = '{{ gitHubLatestReleaseAssetURL "linebender/resvg" (printf "resvg-%s-aarch64*" .chezmoi.os ) }}'
+  {{ end -}}
+
 {{ end -}} # linux-only tools
 {{ end -}} # external_tools
