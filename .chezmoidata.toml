@@ -3,7 +3,7 @@
 [tools.bws]
     version = "1.0.0"
 [tools.kubectl]
-    version = "1.37.2"
+    version = "1.37.3"
 [tools.cloudflared]
     version = "2026.11.1"
 [tools.go_task]
