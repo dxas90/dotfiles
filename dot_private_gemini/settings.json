@@ -1,0 +1,9 @@
+{
+  "privacy": {
+    "usageStatisticsEnabled": false
+  },
+  "telemetry": {
+    "enabled": false,
+    "logPrompts": false
+  }
+}
